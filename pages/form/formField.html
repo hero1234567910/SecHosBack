@@ -111,7 +111,7 @@
                         return;
                     }
                     $.ajax({
-                        url: 'http://127.0.0.1:9090/sys/form/parameter/deleteTableField/' + params,
+                        url: '/sys/form/parameter/deleteTableField/' + params,
                         contentType: 'application/json;charset=utf-8',
                         method: 'post',
                         data: JSON.stringify(map),
@@ -147,7 +147,7 @@
                         console.log(data.rowId);
                         $.ajax({
                             data: {"rowId": data.rowId},
-                            url: 'http://127.0.0.1:9090/sys/form/parameter/deleteTableField/' + data.rowId,
+                            url: '/sys/form/parameter/deleteTableField/' + data.rowId,
                             type: 'POST',
                             dataType: 'json',
                             success: function (data) {
