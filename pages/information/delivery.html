@@ -106,8 +106,9 @@
 	});
     
     formSelects.data('xmselect', 'server', {
+        radio:true,
 		type:'post',
-	    url: '/sys/informationcategory/getAllCategory'
+	    url: '/sys/informationcategory/getAllCategory'    
 	});
 	
     //server模式
@@ -200,6 +201,7 @@
         form.on('submit(formDemo)', function(data){
         	var params = {};
         	var categoryGuids = data.field.categoryGuid.split(',');
+            console.log(categoryGuids);
         	var obj = formSelects.value('xmselect');
         	params['status'] = 1;
         	for (var i=0;i<obj.length;i++) {

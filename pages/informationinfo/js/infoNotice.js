@@ -109,7 +109,7 @@ layui.use('table', function () {
             var params = new Array;
             $.each(cache.testReload, function (index, value) {
                 if (value.LAY_CHECKED != undefined && value.LAY_CHECKED == true) {
-                    params.push(value.rowId);
+                    params.push(value.categoryGuid);
                 }
             });
             if (params.length == 0) {
