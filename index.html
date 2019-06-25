@@ -263,30 +263,9 @@ function playSound(){
             roles: [],
         },
         created() {
-            this.getMenu(),
-            this.getReciveOrder()
+            this.getMenu()
         },
         methods: {
-        	//查询订单接收状态
-        	getReciveOrder(){
-        		let self = this;
-        		$.ajax({
-                    url: '/sys/config/queryReceiveOrder',
-                    contentType: 'application/json;charset=utf-8',
-                    method: 'get',
-                    dataType: 'JSON',
-                    success: function (res) {
-                        if (res.code == '0') {
-                           	if(res.data.configValue == 0){
-                           		$('#ms').text('【已关闭接单】');
-                           	}
-                           	if(res.data.configValue == 1){
-                           		$('#ms').text('【正在接单中】');
-                           	}
-                        }
-                    }
-                });
-        	},
             getMenu() {
                 let self = this;
                 //获取用户对象
