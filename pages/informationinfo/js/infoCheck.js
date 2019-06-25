@@ -157,7 +157,7 @@ layui.use('table', function () {
                     body.find("#title").val(value.title);
                     body.find("#infoDate").val(layui.laytpl.toDateString(value.infoDate, "yyyy-MM-dd"));
                     body.find("#createUserName").val(value.createUserName);
-                    body.find("#content").val(value.content);
+                    body.find("#infoContent").append(value.content);
                     body.find("#attachGuid").val(value.attachGuid);
                     body.find("#status").val(value.status);
                 },
