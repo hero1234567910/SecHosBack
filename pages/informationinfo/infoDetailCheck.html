@@ -66,7 +66,7 @@
                     for(var i=0;i<res.data.length;i++){
                         var mdata = res.data;
                         var last = mdata[i].contentType.substr('1',mdata[i].contentType.length);
-                		$('#ulAttachList').append("<li><a href="+mdata[i].url+" download="+mdata[i].attachName+"><em><img class='m-img' src='../../../Content/images/uploadico/"+last+".png' /></em>"+mdata[i].attachName+"</a></li>");
+                		$('#ulAttachList').append("<li><a href="+mdata[i].url+" download="+mdata[i].attachName+"><em><img class='m-img' src='../../Content/images/uploadico/"+last+".png' /></em>"+mdata[i].attachName+"</a></li>");
                     }
 
                 }
