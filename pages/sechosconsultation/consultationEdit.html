@@ -16,55 +16,61 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">咨询时间</label>
+                <label class="layui-form-label">咨询标题:</label>
+                <div class="layui-input-block">
+                    <input style="font-size: large;text-align: center;padding: 0px;border: none;" type="text" name="consultationTitle" id="consultationTitle" lay-verify="required"
+                        lay-verify="consultationTitle" placeholder="咨询标题" autocomplete="off" class="layui-input"
+                        readonly="readonly" />
+                </div>
+            </div>
+            
+        <div class="layui-form-item">
+            <label class="layui-form-label">咨询时间:</label>
             <div class="layui-input-block">
-                <input type="text" name="consultationTime" id="consultationTime" lay-verify="consultationTime"
-                    placeholder="" autocomplete="off" class="layui-input" disabled />
+                <input style="border: none;" type="text" name="consultationTime" id="consultationTime"
+                    lay-verify="consultationTime" placeholder="" autocomplete="off" class="layui-input" disabled />
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">回复时间</label>
+            <label class="layui-form-label">回复时间:</label>
             <div class="layui-input-block">
-                <input type="text" name="replyTime" id="replyTime" lay-verify="replyTime" placeholder="根据回复时间自动生成"
-                    autocomplete="off" class="layui-input" readonly="readonly" />
+                <input type="text" style="border: none;" name="replyTime" id="replyTime" lay-verify="replyTime"
+                    placeholder="根据回复时间自动生成" autocomplete="off" class="layui-input" readonly="readonly" />
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">咨询人姓名:</label>
+            <div class="layui-input-block">
+                <input type="text" style="border: none;" name="consultationName" id="consultationName"
+                    lay-verify="required" lay-verify="consultationName" placeholder="咨询人姓名" autocomplete="off"
+                    class="layui-input" disabled />
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">咨询标题</label>
+            <label class="layui-form-label">咨询人手机号:</label>
             <div class="layui-input-block">
-                <input type="text" name="consultationTitle" id="consultationTitle" lay-verify="required"
-                    lay-verify="consultationTitle" placeholder="咨询标题" autocomplete="off" class="layui-input"
-                    readonly="readonly" />
+                <input type="text" style="border: none;" name="consultationMobile" id="consultationMobile"
+                    lay-verify="required" lay-verify="consultationMobile" placeholder="请输入咨询人手机号" autocomplete="off"
+                    class="layui-input" disabled />
             </div>
         </div>
+
         <div class="layui-form-item">
-            <label class="layui-form-label">咨询内容</label>
+            <label class="layui-form-label">咨询内容:</label>
             <div class="layui-input-block">
-                <input type="text" name="consultationContent" id="consultationContent" lay-verify="required"
-                    lay-verify="consultationContent" placeholder="咨询内容" autocomplete="off" class="layui-input"
-                    readonly="readonly" />
+                <textarea class="layui-textarea" name="consultationContent" id="consultationContent"
+                    lay-verify="required" lay-verify="consultationContent" placeholder="咨询内容" autocomplete="off"
+                    class="layui-input" readonly="readonly"></textarea>
             </div>
         </div>
+
         <div class="layui-form-item">
-            <label class="layui-form-label">咨询人姓名</label>
-            <div class="layui-input-block">
-                <input type="text" name="consultationName" id="consultationName" lay-verify="required"
-                    lay-verify="consultationName" placeholder="咨询人姓名" autocomplete="off" class="layui-input" disabled />
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">咨询人手机号</label>
-            <div class="layui-input-block">
-                <input type="text" name="consultationMobile" id="consultationMobile" lay-verify="required"
-                    lay-verify="consultationMobile" placeholder="请输入咨询人手机号" autocomplete="off" class="layui-input"
-                    disabled />
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">回复内容<font color="red">*</font></label>
+            <label class="layui-form-label">回复内容:<font color="red">*</font></label>
             <div class="layui-input-block">
                 <textarea placeholder="请输入回复内容内容" id="replyContent" name="replyContent" class="layui-textarea"
-                    name="description"></textarea>
+                    maxlength="300"></textarea>
+                <span class="counts">已写</span><span id="num">0</span><span>/300字</span>
             </div>
         </div>
         <div class="layui-form-item">
@@ -92,6 +98,17 @@
             }
         });
 
+        $().ready(function () {
+            $("#replyContent").on('input focus keyup', function (e) {
+                $("#num").html(e.target.value.length);
+            });
+        });
+        // window.onload = function(){
+        //     $("#replyContent").on('input focus keyup',function(e){
+        //         $("#num").html(e.target.value.length);
+        //     });
+        // }
+
         //接受父组件的值
         function inputDataHandle(data) {
             var m_url =
@@ -114,14 +131,8 @@
                             dataType: "JSON",
                             success: function (res) {
                                 if (res.code == "0") {
-                                    layer.msg('回复成功', {
-                                        icon: 1,
-                                        time: 1000 //2秒关闭（如果不配置，默认是3秒）
-                                    }, function () {
-                                        var index = parent.layer.getFrameIndex(window.name);
-                                        //parent.location.reload(); //刷新父页面
-                                        parent.layer.close(index);
-                                    });
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
                                 }
                                 if (res.code == "500") {
                                     layer.msg(res.msg);
@@ -150,7 +161,8 @@
                             dataType: "JSON",
                             success: function (res) {
                                 if (res.code == "0") {
-                                    parent.layer.close(parent.layer.index);
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
                                 }
                                 if (res.code == "500") {
                                     layer.msg(res.msg);
@@ -273,6 +285,14 @@
             font-size: 13px;
             margin-left: 10px;
             margin-top: 10px;
+        }
+
+        .counts {
+            margin-left: 70%;
+        }
+
+        #num {
+            color: red;
         }
     </style>
 </body>

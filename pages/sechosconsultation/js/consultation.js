@@ -188,7 +188,7 @@ layui.use('table', function(){
                     title: '门诊咨询回复',
                     maxmin: true,
                     shadeClose: true, //点击遮罩关闭层
-                    area: ['550px', '500px'],
+                    area: ['550px', '550px'],
                     content: 'consultationEdit.html',
                     success: function (layero, index) {
                         var body = layer.getChildFrame('body', index);
