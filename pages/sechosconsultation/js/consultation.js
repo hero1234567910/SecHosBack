@@ -10,6 +10,31 @@ $.ajaxSetup({
 	}
 });
 
+$().ready(function (){
+    var m_url = location.protocol + '\\\\' + location.hostname + ':' + (location.port == '' ? 80 : location.port);
+    $.ajax({
+        async: false,
+        url:m_url+'/sys/sechosconsultation/getReplyCount',
+        contentType: 'application/json;charset=utf-8',
+        method: 'get',
+        dataType:'JSON',
+        success:function(res){
+            if(res.code == '0'){
+                if(res.data>99){
+                    $(".layui-badge").append("99+");
+                }else{
+                    $(".layui-badge").append( res.data);
+                }
+            }
+            if(res.code == '500'){
+                layer.msg(res.code);
+            }
+        }
+    });
+
+})
+
+
 layui.use('table', function(){
         var table = layui.table;
          var m_url = location.protocol + '\\\\' + location.hostname + ':' + (location.port == '' ? 80 : location.port);
@@ -29,7 +54,7 @@ layui.use('table', function(){
                                 ,{field:'consultationTitle', width:80, title: '咨询标题', sort: true,}
                                 ,{field:'consultationContent', width:80, title: '咨询内容', sort: true}
                                 ,{field:'consultationName', width:80, title: '咨询人姓名', sort: true}
-                                ,{field:'sortSq', width:60, title: '排序号', sort: true}
+                                // ,{field:'sortSq', width:60, title: '排序号', sort: true}
                                 ,{field:'right',title:'操作',toolbar:'#barDemo',width:80}
             ]]
             , page: true
@@ -42,10 +67,13 @@ layui.use('table', function(){
         var $ = layui.$, active = {
             reload: function () {
                 var keyword = $('#keyword');
-
+                var startTime = $('#start_time').val();
+                var endTime = $('#end_time').val();
                 table.reload('testReload', {
                     where: {
-                        'consultationTitleVague': keyword.val()
+                        'consultationTitleVague': keyword.val(),
+                        startTime: startTime,
+                        endTime: endTime
                     }
                 });
             }
@@ -54,6 +82,33 @@ layui.use('table', function(){
         $('#consultationFind').on('click', function () {
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
+        });
+
+        //刷新
+        $("#allReply").on('click',function(data){
+            table.reload('testReload', {
+                where: {
+                    replyStatus:""
+                }
+            });
+        });
+        
+        //获取已回复信息
+        $("#replyed").on('click',function(data){
+            table.reload('testReload', {
+                where: {
+                    replyStatus:1
+                }
+            });
+        });
+        
+        //获取未回复信息
+        $("#noReply").on('click',function(data){
+            table.reload('testReload', {
+                where: {
+                    replyStatus:0
+                }
+            });
         });
 
 
@@ -158,6 +213,7 @@ layui.use('table', function(){
     });
 
 });
+
 
 layui.use(['laydate'], function () {
     var $ = layui.$;

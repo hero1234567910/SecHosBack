@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../../Scripts/layui/css/layui.css" media="all" />
-    <title>${column.comments}编辑</title>
+    <title></title>
 </head>
 
 <body>
@@ -12,8 +12,7 @@
         <div class="layui-form-item" style="display: none">
             <label class="layui-form-label"></label>
             <div class="layui-input-block">
-                <input type="text" name="rowGuid" id="rowGuid" 
-                    placeholder="" autocomplete="off" class="layui-input" />
+                <input type="text" name="rowGuid" id="rowGuid" placeholder="" autocomplete="off" class="layui-input" />
             </div>
         </div>
         <div class="layui-form-item">
@@ -115,8 +114,14 @@
                             dataType: "JSON",
                             success: function (res) {
                                 if (res.code == "0") {
-                                    
-                                    parent.layer.close(parent.layer.index);
+                                    layer.msg('回复成功', {
+                                        icon: 1,
+                                        time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                                    }, function () {
+                                        var index = parent.layer.getFrameIndex(window.name);
+                                        //parent.location.reload(); //刷新父页面
+                                        parent.layer.close(index);
+                                    });
                                 }
                                 if (res.code == "500") {
                                     layer.msg(res.msg);
@@ -144,7 +149,6 @@
                             data: JSON.stringify(data.field),
                             dataType: "JSON",
                             success: function (res) {
-                                console.log(res.code);
                                 if (res.code == "0") {
                                     parent.layer.close(parent.layer.index);
                                 }
