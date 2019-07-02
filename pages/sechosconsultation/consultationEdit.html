@@ -58,7 +58,7 @@
 
         <div class="layui-form-item">
             <label class="layui-form-label">咨询内容:</label>
-            <div class="layui-input-block">
+            <div class="layui-input-block1">
                 <textarea class="layui-textarea" name="consultationContent" id="consultationContent"
                     lay-verify="required" lay-verify="consultationContent" placeholder="咨询内容" autocomplete="off"
                     class="layui-input" readonly="readonly"></textarea>
@@ -67,7 +67,7 @@
 
         <div class="layui-form-item">
             <label class="layui-form-label">回复内容:<font color="red">*</font></label>
-            <div class="layui-input-block">
+            <div class="layui-input-block1">
                 <textarea placeholder="请输入回复内容" id="replyContent" name="replyContent" class="layui-textarea"
                     maxlength="300"></textarea>
                 <span class="counts">已写</span><span id="num">0</span><span>/300字</span>
@@ -242,6 +242,16 @@
             margin-left: 120px;
             min-height: 36px;
             width: 350px;
+        }
+        .layui-input-block1 {
+            margin-left: 120px;
+            min-height: 50px;
+            width: 400px;
+        }
+        .layui-textarea {
+            display: block;
+            padding-left: 10px;
+            width: 100%;
         }
 
         .layui-form-label {
