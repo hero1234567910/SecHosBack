@@ -51,10 +51,11 @@
         }
     });
 
-    $().ready(function(){
-        //获取附件url
+    var Guid;
+    function inputDataHandle(attachGuid){
+        Guid = attachGuid;
         var param = {};
-        param['guid'] = $('#attachGuid').val();
+        param['guid'] = Guid;
         $.ajax({
             url: '/sys/frameAttach/getAttachList',
             contentType: 'application/json;charset=utf-8',
@@ -62,20 +63,20 @@
             data: param,
             dataType: 'JSON',
             success: function (res) {
-                if (res.code == '0' && res.data.length > 0) {
-                    for(var i=0;i<res.data.length;i++){
-                        var mdata = res.data;
-                        var last = mdata[i].contentType.substr('1',mdata[i].contentType.length);
+                if (res.code = '0' && res.data.length > 0) {
+                	for(var i=0;i<res.data.length;i++){
+                		var mdata = res.data;
+                		var last = mdata[i].contentType.substr('1',mdata[i].contentType.length);
                 		$('#ulAttachList').append("<li><a href="+mdata[i].url+" download="+mdata[i].attachName+"><em><img class='m-img' src='../../Content/images/uploadico/"+last+".png' /></em>"+mdata[i].attachName+"</a></li>");
-                    }
-
+                	}
+					 
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
 
             }
         });
-    });
+    }
 
 
     $('#infoPass').on('click',function () {

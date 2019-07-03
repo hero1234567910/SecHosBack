@@ -161,9 +161,8 @@ layui.use('table', function () {
                     content: 'infoDetailCheck.html',
                     success: function (layero, index) {
                         var body = layer.getChildFrame('body', index);
-                        //var iframeWin = window[layero.find('iframe')[0]['name']];
-                        //console.log(value.rowGuid);
-                        //iframeWin.inputDataHandle(data);
+                        var iframeWin = window[layero.find('iframe')[0]['name']];
+                        iframeWin.inputDataHandle(value.attachGuid);
                         body.find("#rowId").val(value.rowId);
                         body.find("#rowGuid").val(value.rowGuid);
                         body.find("#title").val(value.title);

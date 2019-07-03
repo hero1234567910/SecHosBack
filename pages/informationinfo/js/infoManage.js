@@ -219,14 +219,16 @@ $('#InfoDel').on('click', function () {
                     content: 'infoDetail.html',
                     success: function (layero, index) {
                         var body = layer.getChildFrame('body', index);
-//                      var iframeWin = window[layero.find('iframe')[0]['name']];
+                        var iframeWin = window[layero.find('iframe')[0]['name']];
+                        iframeWin.inputDataHandle(value.attachGuid);
                         body.find("#rowId").val(value.rowId);
                         body.find("#rowGuid").val(value.rowGuid);
                         body.find("#title").val(value.title);
+						body.find("#attachGuid").val(value.attachGuid);
                         body.find("#infoDate").val(layui.laytpl.toDateString(value.infoDate, "yyyy-MM-dd"));
                         body.find("#createUserName").val(value.createUserName);
-                        body.find("#infoContent").append(value.content);
-                        body.find("#attachGuid").val(value.attachGuid);
+                        body.find("#infoContent").append(value.content);                     
+						console.log(value.attachGuid);
                     },
                     end: function () {
                     }

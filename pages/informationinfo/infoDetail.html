@@ -34,12 +34,14 @@
 	            window.top.location.href = '../../login.html';
 	        }
 	    }
-	});
-	$().ready(function(){
-		//获取附件url
-		var param = {};
-		param['guid'] = $('#attachGuid').val();
-		$.ajax({
+    });
+     
+    var Guid;
+    function inputDataHandle(attachGuid){
+        Guid = attachGuid;
+        var param = {};
+        param['guid'] = Guid;
+        $.ajax({
             url: '/sys/frameAttach/getAttachList',
             contentType: 'application/json;charset=utf-8',
             method: 'get',
@@ -59,6 +61,9 @@
 
             }
         });
+    }
+	$().ready(function(){
+		
 	})
 </script>
 </body>
@@ -92,6 +97,6 @@
 
     #ulAttachList {
         list-style-type: none;
-        line-height: 25px;
+        line-height: 30px;
     }
 </style>
