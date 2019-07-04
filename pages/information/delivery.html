@@ -117,6 +117,9 @@
 	    url: '/sys/codeValue/getCodeByValue',
 	    data:{'codeName':'信息类别'}
 	});
+	formSelects.render("xmselect", {
+            radio: true //是否设置为单选模式
+    });
     //富文本编辑器
     KindEditor.ready(function(K) {
         window.editor = K.create('#editor_id', {

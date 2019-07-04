@@ -267,7 +267,8 @@ $('#InfoDel').on('click', function () {
                     var body = layer.getChildFrame('body', index);
                     var iframeWin = window[layero.find('iframe')[0]['name']];
                     var rowIds = value.rowId;
-                    iframeWin.inputDataHandle(value.infoType,value.content);
+                    var flag = "true";
+                    iframeWin.inputDataHandle(value.infoType,value.content,value.categoryGuid,flag);
                     body.find("#rowId").val(value.rowId);
                     body.find("#attachGuid").val(value.attachGuid);
                     body.find("#categoryGuid").val(value.categoryGuid);

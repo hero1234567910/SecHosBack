@@ -1,8 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="en"> 
-<head> 
+<html lang="en">
+
+<head>
     <meta charset="UTF-8">
-    <title>二院后台管理系统</title>
+    <title>张家港二院后台管理系统</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,345 +11,350 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <!-- load css -->
-    <link href="Scripts/layui/css/layui.css" rel="stylesheet"/>
-    <link href="Content/global.css" rel="stylesheet" media="all"/>
+    <link href="Scripts/layui/css/layui.css" rel="stylesheet" />
+    <link href="Content/global.css" rel="stylesheet" media="all" />
+    <link href="Content/index.css" rel="stylesheet"/>
 </head>
+
 <body>
-<div class="layui-layout layui-layout-admin" id="layui_layout">
-    <!-- 顶部区域 -->
-    <div class="layui-header header header-demo">
-        <div class="layui-main">
-            <!-- logo区域 -->
-            <div class="admin-logo-box">
-                <a class="logo" href="#">二院后台管理系统</a>
-                <div class="larry-side-menu">
-                    <i class="fa fa-bars" aria-hidden="true"></i>
+    <div class="layui-layout layui-layout-admin" id="layui_layout">
+        <!-- 顶部区域 -->
+        <div class="layui-header header header-demo">
+            <div class="layui-main">
+                <!-- logo区域 -->
+                <div class="admin-logo-box">
+                    <a class="logo" href="#">张家港二院后台管理系统</a>
+                    <div class="larry-side-menu">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div id="s"
+                    style="width:100%;position:absolute; white-space:nowrap; overflow:hidden; height:20px;top: 50px;">
+                    <div id="noticeList" style="position:absolute; top:0; height:20px;"><span id="ms"></span></div>
+                </div>
+                <div class="pf-user">
+                    <div class="pf-user-photo">
+                        <img src="Scripts/layui/images/face/user.png" width="40">
+                    </div>
+                    <h4 class="pf-user-name ellipsis">管理员</h4>
+                    <i style="font-size: 5px" class="layui-icon">&#xe61a;</i>
+
+                    <div class="pf-user-panel">
+                        <ul class="pf-user-opt">
+                            <li onclick="userInfo()">
+                                <a href="javascript:;">
+                                    <img src="Scripts/layui/images/face/admin.png" width="18">
+                                    <i class="fa fa-user " style="margin-left:10px"></i>个人资料
+                                </a>
+                            </li>
+                            <li onclick="changePwd()">
+                                <a href="javascript:;">
+                                    <img src="Scripts/layui/images/face/lock.png" width="18">
+                                    <i class="fa fa-lock " style="margin-right:10px"></i>修改密码
+                                </a>
+                            </li>
+                            <li onclick="logOut()">
+                                <a href="javascript:;">
+                                    <img src="Scripts/layui/images/face/exit.png" width="18">
+                                    <i class="fa fa-sign-out " style="margin-right:10px"></i>退出系统
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div id="s" style="width:100%;position:absolute; white-space:nowrap; overflow:hidden; height:20px;top: 50px;"> 
-				<div id="noticeList" style="position:absolute; top:0; height:20px;"><span id="ms"></span></div> 
-			</div>
-            <div class="pf-user">
-                <div class="pf-user-photo">
-                    <img src="Scripts/layui/images/face/user.png" width="40">
-                </div>
-                <h4 class="pf-user-name ellipsis">管理员</h4>
-                <i style="font-size: 5px" class="layui-icon">&#xe61a;</i>
+        </div>
+        <!-- 左侧侧边导航开始 -->
+        <div class="layui-side layui-side-bg layui-larry-side" id="larry-side" style="top: 65px;">
+            <div class="layui-side-scroll" id="larry-nav-side" lay-filter="side">
 
-                <div class="pf-user-panel">
-                    <ul class="pf-user-opt">
-                        <li onclick="userInfo()">
-                            <a href="javascript:;">
-                                <img src="Scripts/layui/images/face/admin.png" width="18">
-                                <i class="fa fa-user " style="margin-left:10px"></i>个人资料
-                            </a>
-                        </li>
-                        <li onclick="changePwd()">
-                            <a href="javascript:;">
-                                <img src="Scripts/layui/images/face/lock.png" width="18">
-                                <i class="fa fa-lock " style="margin-right:10px"></i>修改密码
-                            </a>
-                        </li>
-                        <li onclick="logOut()">
-                            <a href="javascript:;">
-                                <img src="Scripts/layui/images/face/exit.png" width="18">
-                                <i class="fa fa-sign-out " style="margin-right:10px"></i>退出系统
-                            </a>
-                        </li>
-                    </ul>
+                <!-- 左侧菜单 -->
+                <ul class="layui-nav layui-nav-tree" id="vueConfig" v-cloak>
+                    <li class="layui-nav-item layui-this" v-for="item in roles">
+                        <a href="javascript:;" data-url="main.html">
+                            <i class="iconfont" :class="item.smallIcon" data-icon='icon-home1'></i>
+                            <span>{{item.title}}</span>
+                            <em class="layui-nav-more"></em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd v-for="menu in item.data">
+                                <a href="javascript:;" :data-url="menu.url">
+                                    <i class="iconfont" :class="menu.smallIcon" :data-icon="menu.smallIcon"></i>
+                                    <span>{{menu.title}}</span>
+                                </a>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 左侧侧边导航结束 -->
+        <!-- 右侧主体内容 -->
+        <div class="layui-body" id="larry-body" style="bottom: 0;">
+            <div class="layui-tab layui-tab-card larry-tab-box" id="larry-tab" lay-filter="demo" lay-allowclose="true">
+                <div class="go-left key-press pressKey" id="titleLeft" title="滚动至最右侧"><i
+                        class="larry-icon larry-weibiaoti6-copy"></i></div>
+                <ul class="layui-tab-title">
+                    <li class="layui-this" id="admin-home"><i class="iconfont icon-diannao1"></i><em>后台首页</em></li>
+                </ul>
+                <div class="go-right key-press pressKey" id="titleRight" title="滚动至最左侧"><i
+                        class="larry-icon larry-right"></i></div>
+                <ul class="layui-nav closeBox">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="iconfont icon-caozuo"></i> 页面操作</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" onclick="refresh()" class="refresh refreshThis"><i
+                                        class="layui-icon">&#x1002;</i>
+                                    刷新当前</a></dd>
+                            <!-- <dd><a href="javascript:;" onclick="ceshi()">dayin</a></dd>-->
+                        </dl>
+                    </li>
+                </ul>
+                <div class="layui-tab-content" style="min-height: 150px; ">
+                    <div class="layui-tab-item layui-show">
+                        <iframe class="larry-iframe" data-id='0' src="pages/home/console.html"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- 左侧侧边导航开始 -->
-    <div class="layui-side layui-side-bg layui-larry-side" id="larry-side" style="top: 65px;">
-        <div class="layui-side-scroll" id="larry-nav-side" lay-filter="side">
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="Scripts/layui/layui.js"></script>
+    <script type="text/javascript" src="Scripts/larry.js"></script>
+    <script type="text/javascript" src="Scripts/index.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="Scripts/vue.js"></script>
+    <script language="javascript" src="Scripts/lodop/LodopFuncs.js"></script>
+    <script src="Scripts/textScroll.js"></script>
+    <object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+        <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+    </object>
+    <script src="Scripts/local.js"></script>
+    <script>
+        var lockReconnect = false;  //避免ws重复连接
+        var ws = null;          // 判断当前浏览器是否支持WebSocket
+        var wsUrl = "ws://ey.nxjnjc.com/websocket/20".replace("http", "ws");
+        createWebSocket(wsUrl);   //连接ws
 
-            <!-- 左侧菜单 -->
-            <ul class="layui-nav layui-nav-tree" id="vueConfig" v-cloak>
-                <li class="layui-nav-item layui-this" v-for="item in roles">
-                    <a href="javascript:;" data-url="main.html">
-                        <i class="iconfont" :class="item.smallIcon" data-icon='icon-home1'></i>
-                        <span>{{item.title}}</span>
-                        <em class="layui-nav-more"></em>
-                    </a>
-                    <dl class="layui-nav-child">
-                        <dd v-for="menu in item.data">
-                            <a href="javascript:;" :data-url="menu.url">
-                                <i class="iconfont" :class="menu.smallIcon" :data-icon="menu.smallIcon"></i>
-                                <span>{{menu.title}}</span>
-                            </a>
-                        </dd>
-                    </dl>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 左侧侧边导航结束 -->
-    <!-- 右侧主体内容 -->
-    <div class="layui-body" id="larry-body" style="bottom: 0;">
-        <div class="layui-tab layui-tab-card larry-tab-box" id="larry-tab" lay-filter="demo" lay-allowclose="true">
-            <div class="go-left key-press pressKey" id="titleLeft" title="滚动至最右侧"><i
-                    class="larry-icon larry-weibiaoti6-copy"></i></div>
-            <ul class="layui-tab-title">
-                <li class="layui-this" id="admin-home"><i class="iconfont icon-diannao1"></i><em>后台首页</em></li>
-            </ul>
-            <div class="go-right key-press pressKey" id="titleRight" title="滚动至最左侧"><i
-                    class="larry-icon larry-right"></i></div>
-            <ul class="layui-nav closeBox">
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="iconfont icon-caozuo"></i> 页面操作</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" onclick="refresh()" class="refresh refreshThis"><i class="layui-icon">&#x1002;</i>
-                            刷新当前</a></dd>
-                      <!-- <dd><a href="javascript:;" onclick="ceshi()">dayin</a></dd>-->
-                    </dl>
-                </li>
-            </ul>
-            <div class="layui-tab-content" style="min-height: 150px; ">
-                <div class="layui-tab-item layui-show">
-                    <iframe class="larry-iframe" data-id='0' src="pages/home/console.html"></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 加载js文件-->
-<script type="text/javascript" src="Scripts/layui/layui.js"></script>
-<script type="text/javascript" src="Scripts/larry.js"></script>
-<script type="text/javascript" src="Scripts/index.js"></script>
-<script type="text/javascript" src="Scripts/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="Scripts/vue.js"></script>
-<script language="javascript" src="Scripts/lodop/LodopFuncs.js"></script>
-<script src="Scripts/textScroll.js"></script>
-<object  id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
-       <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
-</object>
-<script src="Scripts/local.js"></script>
-<script> 
-var lockReconnect = false;  //避免ws重复连接
-var ws = null;          // 判断当前浏览器是否支持WebSocket
-var wsUrl = "ws://ey.nxjnjc.com/websocket/20".replace("http","ws");
-createWebSocket(wsUrl);   //连接ws
-
-function createWebSocket(url) {
-    try{
-        if('WebSocket' in window){
-            ws = new WebSocket(url);
-        }else if('MozWebSocket' in window){  
-            ws = new MozWebSocket(url);
-        }else{
-            layui.use(['layer'],function(){
-               var layer = layui.layer;
-              layer.alert("您的浏览器不支持websocket协议,建议使用新版谷歌、火狐等浏览器，请勿使用IE10以下浏览器，360浏览器请使用极速模式，不要使用兼容模式！"); 
-            });
-        }
-        initEventHandle();
-    }catch(e){
-        reconnect(url);
-        console.log(e);
-    }     
-}
-
-function initEventHandle() {
-    ws.onclose = function () {
-        reconnect(wsUrl);
-        console.log("ws连接关闭!"+new Date().toUTCString());
-    };
-    ws.onerror = function () {
-        reconnect(wsUrl);
-        console.log("ws连接错误!");
-    };
-    ws.onopen = function () {
-        heartCheck.reset().start();      //心跳检测重置
-        console.log("ws连接成功!"+new Date().toUTCString());
-    };
-    ws.onmessage = function (event) {    //如果获取到消息，心跳检测重置
-        heartCheck.reset().start();      //拿到任何消息都说明当前连接是正常的
-        console.log(event.data);
-        if(event.data.substring(0,6) == '您有新的订单'){
-        	playSound();
-        	layui.use(['layer'],function(){
-               var layer = layui.layer;
-              layer.msg("您有新的订单");
-              //调用打印机去打印订单
-              var ele = JSON.parse(event.data.substring(6));
-                myPrint(ele);
-            });
-        }
-    };
-}
-// 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
-window.onbeforeunload = function() {
-    ws.close();
-}  
-
-function reconnect(url) {
-    if(lockReconnect) return;
-    lockReconnect = true;
-    setTimeout(function () {     //没连接上会一直重连，设置延迟避免请求过多
-        createWebSocket(url);
-        lockReconnect = false;
-    }, 2000);
-}
-
-//心跳检测
-var heartCheck = {
-    timeout: 540000,        //9分钟发一次心跳
-    timeoutObj: null,
-    serverTimeoutObj: null,
-    reset: function(){
-        clearTimeout(this.timeoutObj);
-        clearTimeout(this.serverTimeoutObj);
-        return this;
-    },
-    start: function(){
-        var self = this;
-        this.timeoutObj = setTimeout(function(){
-            //这里发送一个心跳，后端收到后，返回一个心跳消息，
-            //onmessage拿到返回的心跳就说明连接正常
-            ws.send("ping");
-            self.serverTimeoutObj = setTimeout(function(){//如果超过一定时间还没重置，说明后端主动断开了
-                ws.close();     //如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
-            }, self.timeout)
-        }, this.timeout)
-    }
-}
-
-//声音提示
-function playSound(){
-     var borswer = window.navigator.userAgent.toLowerCase();
-     if ( borswer.indexOf( "ie" ) >= 0 ){
-       //IE内核浏览器
-       var strEmbed = '<embed name="embedPlay" src="Content/dingdong.mp3" autostart="true" hidden="true" loop="false"></embed>';
-       if ( $( "body" ).find( "embed" ).length <= 0 )
-         $( "body" ).append( strEmbed );
-       var embed = document.embedPlay;
-
-       //浏览器不支持 audion，则使用 embed 播放
-       embed.volume = 100;
-       //embed.play();这个不需要
-     } else{
-       //非IE内核浏览器
-       var strAudio = "<audio id='audioPlay' src='Content/dingdong.mp3' hidden='true'>";
-       if ( $( "body" ).find( "audio" ).length <= 0 )
-         $( "body" ).append( strAudio );
-       var audio = document.getElementById( "audioPlay" );
-
-       //浏览器支持 audion
-       audio.play();
-     }
-   }
-</script>
-
-<script>
-    $.ajaxSetup({
-        beforeSend: function(xhr){
-        	xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
-        	xhr.setRequestHeader("token", window.localStorage.getItem('m_token')); 
-        },
-        complete: function (res) {
-            if (JSON.parse(res.responseText).code == '401') {
-                window.top.location.href = 'login.html';
+        function createWebSocket(url) {
+            try {
+                if ('WebSocket' in window) {
+                    ws = new WebSocket(url);
+                } else if ('MozWebSocket' in window) {
+                    ws = new MozWebSocket(url);
+                } else {
+                    layui.use(['layer'], function () {
+                        var layer = layui.layer;
+                        layer.alert("您的浏览器不支持websocket协议,建议使用新版谷歌、火狐等浏览器，请勿使用IE10以下浏览器，360浏览器请使用极速模式，不要使用兼容模式！");
+                    });
+                }
+                initEventHandle();
+            } catch (e) {
+                reconnect(url);
+                console.log(e);
             }
         }
-    });
-	
-	//创建vue实例化对象
-    var vm = new Vue({
-        el: '#vueConfig',
-        data: {
-            // 数据创建
-            roles: [],
-        },
-        created() {
-            this.getMenu()
-        },
-        methods: {
-            getMenu() {
-                let self = this;
-                //获取用户对象
-                var rowGuid = JSON.parse(window.localStorage.getItem('m_user_rowGuid'))
-                if (rowGuid == null) {
+
+        function initEventHandle() {
+            ws.onclose = function () {
+                reconnect(wsUrl);
+                console.log("ws连接关闭!" + new Date().toUTCString());
+            };
+            ws.onerror = function () {
+                reconnect(wsUrl);
+                console.log("ws连接错误!");
+            };
+            ws.onopen = function () {
+                heartCheck.reset().start();      //心跳检测重置
+                console.log("ws连接成功!" + new Date().toUTCString());
+            };
+            ws.onmessage = function (event) {    //如果获取到消息，心跳检测重置
+                heartCheck.reset().start();      //拿到任何消息都说明当前连接是正常的
+                console.log(event.data);
+                if (event.data.substring(0, 6) == '您有新的订单') {
+                    playSound();
+                    layui.use(['layer'], function () {
+                        var layer = layui.layer;
+                        layer.msg("您有新的订单");
+                        //调用打印机去打印订单
+                        var ele = JSON.parse(event.data.substring(6));
+                        myPrint(ele);
+                    });
+                }
+            };
+        }
+        // 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+        window.onbeforeunload = function () {
+            ws.close();
+        }
+
+        function reconnect(url) {
+            if (lockReconnect) return;
+            lockReconnect = true;
+            setTimeout(function () {     //没连接上会一直重连，设置延迟避免请求过多
+                createWebSocket(url);
+                lockReconnect = false;
+            }, 2000);
+        }
+
+        //心跳检测
+        var heartCheck = {
+            timeout: 540000,        //9分钟发一次心跳
+            timeoutObj: null,
+            serverTimeoutObj: null,
+            reset: function () {
+                clearTimeout(this.timeoutObj);
+                clearTimeout(this.serverTimeoutObj);
+                return this;
+            },
+            start: function () {
+                var self = this;
+                this.timeoutObj = setTimeout(function () {
+                    //这里发送一个心跳，后端收到后，返回一个心跳消息，
+                    //onmessage拿到返回的心跳就说明连接正常
+                    ws.send("ping");
+                    self.serverTimeoutObj = setTimeout(function () {//如果超过一定时间还没重置，说明后端主动断开了
+                        ws.close();     //如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+                    }, self.timeout)
+                }, this.timeout)
+            }
+        }
+
+        //声音提示
+        function playSound() {
+            var borswer = window.navigator.userAgent.toLowerCase();
+            if (borswer.indexOf("ie") >= 0) {
+                //IE内核浏览器
+                var strEmbed = '<embed name="embedPlay" src="Content/dingdong.mp3" autostart="true" hidden="true" loop="false"></embed>';
+                if ($("body").find("embed").length <= 0)
+                    $("body").append(strEmbed);
+                var embed = document.embedPlay;
+
+                //浏览器不支持 audion，则使用 embed 播放
+                embed.volume = 100;
+                //embed.play();这个不需要
+            } else {
+                //非IE内核浏览器
+                var strAudio = "<audio id='audioPlay' src='Content/dingdong.mp3' hidden='true'>";
+                if ($("body").find("audio").length <= 0)
+                    $("body").append(strAudio);
+                var audio = document.getElementById("audioPlay");
+
+                //浏览器支持 audion
+                audio.play();
+            }
+        }
+    </script>
+
+    <script>
+        $.ajaxSetup({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+                xhr.setRequestHeader("token", window.localStorage.getItem('m_token'));
+            },
+            complete: function (res) {
+                if (JSON.parse(res.responseText).code == '401') {
                     window.top.location.href = 'login.html';
                 }
-                //根据用户行标获取角色权限菜单
-                $.ajax({
-                    async: false,
-                    url: '/sys/user/getMenuByUserGuid?userGuid=' + rowGuid,
-                    contentType: 'application/json;charset=utf-8',
-                    method: 'get',
-                    dataType: 'JSON',
-                    success: function (res) {
-                        if (res.code == '0') {
-                            self.roles = res.data;
-                        }
+            }
+        });
+
+        //创建vue实例化对象
+        var vm = new Vue({
+            el: '#vueConfig',
+            data: {
+                // 数据创建
+                roles: [],
+            },
+            created() {
+                this.getMenu()
+            },
+            methods: {
+                getMenu() {
+                    let self = this;
+                    //获取用户对象
+                    var rowGuid = JSON.parse(window.localStorage.getItem('m_user_rowGuid'))
+                    if (rowGuid == null) {
+                        window.top.location.href = 'login.html';
                     }
-                });
+                    //根据用户行标获取角色权限菜单
+                    $.ajax({
+                        async: false,
+                        url: '/sys/user/getMenuByUserGuid?userGuid=' + rowGuid,
+                        contentType: 'application/json;charset=utf-8',
+                        method: 'get',
+                        dataType: 'JSON',
+                        success: function (res) {
+                            if (res.code == '0') {
+                                self.roles = res.data;
+                            }
+                        }
+                    });
+                }
+            }
+
+        })
+
+        goScroll();
+        function goScroll() {
+            //横向滚动
+            $("#s").textScroll();
+        }
+
+        function changePwd() {
+            var data = 'change';
+            layer.open({
+                type: 2,
+                title: '修改密码',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area: ['400px', '250px'],
+                content: 'changePassWord.html',
+                success: function (layero, index) {
+                    var body = layer.getChildFrame('body', index);
+                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                },
+                end: function () {
+                    //刷新页面
+                }
+            });
+        }
+
+        function userInfo() {
+            var data = 'edit';
+            layer.open({
+                type: 2,
+                title: '个人资料',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area: ['400px', '310px'],
+                content: 'userInfo.html',
+                success: function (layero, index) {
+                    var body = layer.getChildFrame('body', index);
+                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                },
+                end: function () {
+                    //刷新页面
+                    //window.location.reload()
+                }
+            });
+        }
+
+        function refresh() {
+            //获取当前iframe并刷新
+            var iframe = document.getElementsByClassName('layui-tab-item layui-show');
+            if (iframe != undefined) {
+                iframe[0].firstElementChild.contentWindow.location.reload(true);
             }
         }
 
-    })
-	
-	goScroll();
-	function goScroll(){
-		//横向滚动
-		$("#s").textScroll();
-	}
-	
-    function changePwd() {
-        var data = 'change';
-        layer.open({
-            type: 2,
-            title: '修改密码',
-            maxmin: true,
-            shadeClose: true, //点击遮罩关闭层
-            area: ['400px', '250px'],
-            content: 'changePassWord.html',
-            success: function (layero, index) {
-                var body = layer.getChildFrame('body', index);
-                var iframeWin = window[layero.find('iframe')[0]['name']];
-            },
-            end: function () {
-                //刷新页面
-            }
-        });
-    }
-
-    function userInfo() {
-        var data = 'edit';
-        layer.open({
-            type: 2,
-            title: '个人资料',
-            maxmin: true,
-            shadeClose: true, //点击遮罩关闭层
-            area: ['400px', '310px'],
-            content: 'userInfo.html',
-            success: function (layero, index) {
-                var body = layer.getChildFrame('body', index);
-                var iframeWin = window[layero.find('iframe')[0]['name']];
-            },
-            end: function () {
-                //刷新页面
-                //window.location.reload()
-            }
-        });
-    }
-	
-	function refresh(){
-		//获取当前iframe并刷新
-		var iframe = document.getElementsByClassName('layui-tab-item layui-show');
-		if(iframe != undefined){
-			iframe[0].firstElementChild.contentWindow.location.reload(true);
-		}
-	}
-	
-    function logOut() {
-        //清除token
-        window.localStorage.removeItem('m_token');
-        location.href = "login.html";
-    }
-</script>
+        function logOut() {
+            //清除token
+            window.localStorage.removeItem('m_token');
+            location.href = "login.html";
+        }
+    </script>
 </body>
+
 </html>
