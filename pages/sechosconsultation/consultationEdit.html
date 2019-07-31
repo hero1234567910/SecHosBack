@@ -1,310 +1,395 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../../Scripts/layui/css/layui.css" media="all" />
+    <link
+      rel="stylesheet"
+      href="../../Scripts/layui/css/layui.css"
+      media="all"
+    />
     <title></title>
-</head>
+  </head>
 
-<body>
+  <body>
     <form class="layui-form" action="" lay-filter="layform">
-        <div class="layui-form-item" style="display: none">
-            <label class="layui-form-label"></label>
-            <div class="layui-input-block">
-                <input type="text" name="rowGuid" id="rowGuid" placeholder="" autocomplete="off" class="layui-input" />
-            </div>
+      <div class="layui-form-item" style="display: none">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-block">
+          <input
+            type="text"
+            name="rowGuid"
+            id="rowGuid"
+            placeholder=""
+            autocomplete="off"
+            class="layui-input"
+          />
         </div>
-        <div class="layui-form-item">
-                <label class="layui-form-label">咨询标题:</label>
-                <div class="layui-input-block">
-                    <input style="font-size: large;text-align: center;padding: 0px;border: none;" type="text" name="consultationTitle" id="consultationTitle" lay-verify="required"
-                        lay-verify="consultationTitle" placeholder="咨询标题" autocomplete="off" class="layui-input"
-                        readonly="readonly" />
-                </div>
-            </div>
-            
-        <div class="layui-form-item">
-            <label class="layui-form-label">咨询时间:</label>
-            <div class="layui-input-block">
-                <input style="border: none;" type="text" name="consultationTime" id="consultationTime"
-                    lay-verify="consultationTime" placeholder="" autocomplete="off" class="layui-input" disabled />
-            </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">咨询标题:</label>
+        <div class="layui-input-block">
+          <input
+            style="font-size: large;text-align: center;padding: 0px;border: none;"
+            type="text"
+            name="consultationTitle"
+            id="consultationTitle"
+            lay-verify="required"
+            lay-verify="consultationTitle"
+            placeholder="咨询标题"
+            autocomplete="off"
+            class="layui-input"
+            readonly="readonly"
+          />
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">回复时间:</label>
-            <div class="layui-input-block">
-                <input type="text" style="border: none;" name="replyTime" id="replyTime" lay-verify="replyTime"
-                    placeholder="根据回复时间自动生成" autocomplete="off" class="layui-input" readonly="readonly" />
-            </div>
-        </div>
+      </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">咨询人姓名:</label>
-            <div class="layui-input-block">
-                <input type="text" style="border: none;" name="consultationName" id="consultationName"
-                    lay-verify="required" lay-verify="consultationName" placeholder="咨询人姓名" autocomplete="off"
-                    class="layui-input" disabled />
-            </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">咨询时间:</label>
+        <div class="layui-input-block">
+          <input
+            style="border: none;"
+            type="text"
+            name="consultationTime"
+            id="consultationTime"
+            lay-verify="consultationTime"
+            placeholder=""
+            autocomplete="off"
+            class="layui-input"
+            disabled
+          />
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">咨询人手机号:</label>
-            <div class="layui-input-block">
-                <input type="text" style="border: none;" name="consultationMobile" id="consultationMobile"
-                    lay-verify="required" lay-verify="consultationMobile" placeholder="请输入咨询人手机号" autocomplete="off"
-                    class="layui-input" disabled />
-            </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">回复时间:</label>
+        <div class="layui-input-block">
+          <input
+            type="text"
+            style="border: none;"
+            name="replyTime"
+            id="replyTime"
+            lay-verify="replyTime"
+            placeholder="根据回复时间自动生成"
+            autocomplete="off"
+            class="layui-input"
+            readonly="readonly"
+          />
         </div>
+      </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">咨询内容:</label>
-            <div class="layui-input-block1">
-                <textarea class="layui-textarea" name="consultationContent" id="consultationContent"
-                    lay-verify="required" lay-verify="consultationContent" placeholder="咨询内容" autocomplete="off"
-                    class="layui-input" readonly="readonly"></textarea>
-            </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">咨询人姓名:</label>
+        <div class="layui-input-block">
+          <input
+            type="text"
+            style="border: none;"
+            name="consultationName"
+            id="consultationName"
+            lay-verify="required"
+            lay-verify="consultationName"
+            placeholder="咨询人姓名"
+            autocomplete="off"
+            class="layui-input"
+            disabled
+          />
         </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">咨询人手机号:</label>
+        <div class="layui-input-block">
+          <input
+            type="text"
+            style="border: none;"
+            name="consultationMobile"
+            id="consultationMobile"
+            lay-verify="required"
+            lay-verify="consultationMobile"
+            placeholder="请输入咨询人手机号"
+            autocomplete="off"
+            class="layui-input"
+            disabled
+          />
+        </div>
+      </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">回复内容:<font color="red">*</font></label>
-            <div class="layui-input-block1">
-                <textarea placeholder="请输入回复内容" id="replyContent" name="replyContent" class="layui-textarea"
-                    maxlength="300"></textarea>
-                <span class="counts">已写</span><span id="num">0</span><span>/300字</span>
-            </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">咨询内容:</label>
+        <div class="layui-input-block1">
+          <textarea
+            class="layui-textarea"
+            name="consultationContent"
+            id="consultationContent"
+            lay-verify="required"
+            lay-verify="consultationContent"
+            placeholder="咨询内容"
+            autocomplete="off"
+            class="layui-input"
+            readonly="readonly"
+          ></textarea>
         </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit style="margin-left: 21%" lay-filter="formDemo">
-                    立即提交
-                </button>
-            </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label"
+          >回复内容:<font color="red">*</font></label
+        >
+        <div class="layui-input-block1">
+          <textarea
+            placeholder="请输入回复内容"
+            id="replyContent"
+            name="replyContent"
+            class="layui-textarea"
+            maxlength="300"
+            lay-verify="replyContent"
+          ></textarea>
+          <span class="counts">已写</span><span id="num">0</span
+          ><span>/300字</span>
         </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button
+            class="layui-btn"
+            lay-submit
+            style="margin-left: 21%"
+            lay-filter="formDemo"
+          >
+            立即提交
+          </button>
+        </div>
+      </div>
     </form>
 
-    <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
-    <script src="../../Scripts/layui/layui.all.js" charset="utf-8"></script>
+    <script
+      type="text/javascript"
+      src="../../Scripts/jquery-3.3.1.min.js"
+    ></script>
+    <!-- <script src="../../Scripts/layui/layui.all.js" charset="utf-8"></script> -->
     <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
     <script>
-        $.ajaxSetup({
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-                token: window.localStorage.getItem("m_token")
-            },
-            complete: function (res) {
-                if (JSON.parse(res.responseText).code == "401") {
-                    window.top.location.href = "../../login.html";
-                }
-            }
-        });
-
-        $().ready(function () {
-            $("#replyContent").on('input focus keyup', function (e) {
-                $("#num").html(e.target.value.length);
-            });
-        });
-        // window.onload = function(){
-        //     $("#replyContent").on('input focus keyup',function(e){
-        //         $("#num").html(e.target.value.length);
-        //     });
-        // }
-
-        //接受父组件的值
-        function inputDataHandle(data) {
-            var m_url =
-                location.protocol +
-                "\\\\" +
-                location.hostname +
-                ":" +
-                (location.port == "" ? 80 : location.port);
-            //新增
-            if (data == "add") {
-                layui.use("form", function () {
-                    var form = layui.form();
-                    //监听提交
-                    form.on("submit(formDemo)", function (data) {
-                        $.ajax({
-                            url: m_url + "/sys/sechosconsultation/add",
-                            contentType: "application/json;charset=utf-8",
-                            method: "post",
-                            data: JSON.stringify(data.field),
-                            dataType: "JSON",
-                            success: function (res) {
-                                if (res.code == "0") {
-                                    var index = parent.layer.getFrameIndex(window.name);
-                                    parent.layer.close(index);
-                                }
-                                if (res.code == "500") {
-                                    layer.msg(res.msg);
-                                }
-                            },
-                            error: function (data) {
-                                if (data.status == 0) {
-                                    parent.layer.close(parent.layer.index);
-                                }
-                            }
-                        });
-                    });
-                });
-            }
-            //编辑
-            if (data == "edit") {
-                layui.use("form", function () {
-                    var form = layui.form();
-                    //监听提交
-                    form.on("submit(formDemo)", function (data) {
-                        $.ajax({
-                            url: m_url + "/sys/sechosconsultation/reply",
-                            contentType: "application/json;charset=utf-8",
-                            method: "put",
-                            data: JSON.stringify(data.field),
-                            dataType: "JSON",
-                            success: function (res) {
-                                if (res.code == "0") {
-                                    var index = parent.layer.getFrameIndex(window.name);
-                                    parent.layer.close(index);
-                                }
-                                if (res.code == "500") {
-                                    layer.msg(res.msg);
-                                }
-                            },
-                            //谷歌浏览器出现Provisional headers are shown警告
-                            error: function (data) {
-                                if (data.status == 0) {
-                                    parent.layer.close(parent.layer.index);
-                                }
-                            }
-                        });
-                    });
-                });
-            }
+      $.ajaxSetup({
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          token: window.localStorage.getItem("m_token")
+        },
+        complete: function(res) {
+          if (JSON.parse(res.responseText).code == "401") {
+            window.top.location.href = "../../login.html";
+          }
         }
-        layui.use(["form", "layedit", "laydate"], function () {
-            var form = layui.form(),
-                layer = layui.layer,
-                layedit = layui.layedit,
-                laydate = layui.laydate;
+      });
 
-            //创建一个编辑器
-            // var editIndex = layedit.build('LAY_demo_editor');
+      $().ready(function() {
+        $("#replyContent").on("input focus keyup", function(e) {
+          $("#num").html(e.target.value.length);
+        });
+      });
+      // window.onload = function(){
+      //     $("#replyContent").on('input focus keyup',function(e){
+      //         $("#num").html(e.target.value.length);
+      //     });
+      // }
 
-            //自定义验证规则
-            form.verify({
-                /* name: function (value) {
+      //接受父组件的值
+      function inputDataHandle(data) {
+        var m_url =
+          location.protocol +
+          "\\\\" +
+          location.hostname +
+          ":" +
+          (location.port == "" ? 80 : location.port);
+        //新增
+        if (data == "add") {
+          layui.use("form", function() {
+            var form = layui.form();
+            //监听提交
+            form.on("submit(formDemo)", function(data) {
+              $.ajax({
+                url: m_url + "/sys/sechosconsultation/add",
+                contentType: "application/json;charset=utf-8",
+                method: "post",
+                data: JSON.stringify(data.field),
+                dataType: "JSON",
+                success: function(res) {
+                  if (res.code == "0") {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                  }
+                  if (res.code == "500") {
+                    layer.msg(res.msg);
+                  }
+                },
+                error: function(data) {
+                  if (data.status == 0) {
+                    parent.layer.close(parent.layer.index);
+                  }
+                }
+              });
+            });
+          });
+        }
+        //编辑
+        if (data == "edit") {
+          layui.use("form", function() {
+            var form = layui.form();
+            //监听提交
+            form.on("submit(formDemo)", function(data) {
+              $.ajax({
+                async: false,
+                url: m_url + "/sys/sechosconsultation/reply",
+                contentType: "application/json;charset=utf-8",
+                method: "put",
+                data: JSON.stringify(data.field),
+                dataType: "JSON",
+                success: function(res) {
+                  if (res.code == '0') {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                  }
+                  if (res.code == "500") {
+                    layer.msg(res.msg);
+                  }
+                },
+                //谷歌浏览器出现Provisional headers are shown警告
+                error: function(data) {
+                //   if (data.status == 0) {
+                //     parent.layer.close(parent.layer.index);
+                //   }
+                }
+              });
+            });
+          });
+        }
+      }
+      layui.use(["form", "layedit", "laydate"], function() {
+        var form = layui.form(),
+          layer = layui.layer,
+          layedit = layui.layedit,
+          laydate = layui.laydate;
+
+        //创建一个编辑器
+        // var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        form.verify({
+          replyContent: function(value) {
+            if (value.length < 1) {
+              return "请输入回复内容";
+            }
+          }
+          /* name: function (value) {
                              if (value.length < 3) {
                                  return '名字至少得3个字符啊';
                              }
                          }*/
-            });
         });
+      });
     </script>
     <style>
-        .layui-input,
-        .layui-textarea {
-            display: block;
-            /* width: 50%; */
-            padding-left: 10px;
-        }
+      .layui-input,
+      .layui-textarea {
+        display: block;
+        /* width: 50%; */
+        padding-left: 10px;
+      }
 
-        .layui-form-checked i {
-            margin-right: 10px;
-            float: left;
-            text-align: center;
-        }
+      .layui-form-checked i {
+        margin-right: 10px;
+        float: left;
+        text-align: center;
+      }
 
-        .layui-table td,
-        .layui-table th {
-            padding: 2px 8px;
-            min-height: 20px;
-            line-height: 20px;
-            border: 1px solid #e2e2e2;
-            font-size: 14px;
-        }
+      .layui-table td,
+      .layui-table th {
+        padding: 2px 8px;
+        min-height: 20px;
+        line-height: 20px;
+        border: 1px solid #e2e2e2;
+        font-size: 14px;
+      }
 
-        .layui-form-checked[lay-skin="primary"] i {
-            background-color: #01aaed;
-            color: white;
-        }
+      .layui-form-checked[lay-skin="primary"] i {
+        background-color: #01aaed;
+        color: white;
+      }
 
-        .layui-table-cell {
-            height: auto;
-            line-height: 20px;
-        }
+      .layui-table-cell {
+        height: auto;
+        line-height: 20px;
+      }
 
-        .layui-input,
-        .layui-textarea {
-            display: block;
-            padding-left: 10px;
-            width: 100%;
-        }
+      .layui-input,
+      .layui-textarea {
+        display: block;
+        padding-left: 10px;
+        width: 100%;
+      }
 
-        .layui-input-block {
-            margin-left: 120px;
-            min-height: 36px;
-            width: 350px;
-        }
-        .layui-input-block1 {
-            margin-left: 120px;
-            min-height: 50px;
-            width: 400px;
-        }
-        .layui-textarea {
-            display: block;
-            padding-left: 10px;
-            width: 100%;
-        }
+      .layui-input-block {
+        margin-left: 120px;
+        min-height: 36px;
+        width: 350px;
+      }
+      .layui-input-block1 {
+        margin-left: 120px;
+        min-height: 50px;
+        width: 400px;
+      }
+      .layui-textarea {
+        display: block;
+        padding-left: 10px;
+        width: 100%;
+      }
 
-        .layui-form-label {
-            width: 90px;
-        }
+      .layui-form-label {
+        width: 90px;
+      }
 
-        .layui-form-item {
-            margin-top: 3px;
-            margin-left: 3px;
-            margin-bottom: 0px;
-        }
+      .layui-form-item {
+        margin-top: 3px;
+        margin-left: 3px;
+        margin-bottom: 0px;
+      }
 
-        .layui-form-pane {
-            flex: 1;
-        }
+      .layui-form-pane {
+        flex: 1;
+      }
 
-        .layui-form-button {
-            margin-top: 8px;
-        }
+      .layui-form-button {
+        margin-top: 8px;
+      }
 
-        ::-webkit-scrollbar {
-            width: 1px;
-            height: 1px;
-        }
+      ::-webkit-scrollbar {
+        width: 1px;
+        height: 1px;
+      }
 
-        .layui-btn {
-            font-size: 14px;
-            background-color: #3398e5;
-            color: #fff;
-            white-space: nowrap;
-            text-align: center;
-            font-size: 14px;
-            border: none;
-            border-radius: 2px;
-            cursor: pointer;
-            opacity: 0.9;
-            width: 100px;
-            height: 50px;
-            line-height: 30px;
-            padding: 0 10px;
-            font-size: 13px;
-            margin-left: 10px;
-            margin-top: 10px;
-        }
+      .layui-btn {
+        font-size: 14px;
+        background-color: #3398e5;
+        color: #fff;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 14px;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        opacity: 0.9;
+        width: 100px;
+        height: 50px;
+        line-height: 30px;
+        padding: 0 10px;
+        font-size: 13px;
+        margin-left: 10px;
+        margin-top: 10px;
+      }
 
-        .counts {
-            margin-left: 70%;
-        }
+      .counts {
+        margin-left: 70%;
+      }
 
-        #num {
-            color: red;
-        }
+      #num {
+        color: red;
+      }
     </style>
-</body>
-
+  </body>
 </html>
