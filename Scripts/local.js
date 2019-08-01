@@ -105,3 +105,6 @@ function needCLodop(){
         return false;
     } catch(err) {return true;};
 };
+
+//全局变量
+var prUrl = 'http://172.25.110.122';
