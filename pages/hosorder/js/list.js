@@ -173,7 +173,7 @@ layui.use('table', function() {
 		$.ajax({
 				url:prUrl+'/sys/hosorder/updateOrderStatus',
 				contentType: 'application/json;charset=utf-8',
-				method: 'put',
+				method: 'post',
 				data: JSON.stringify(params),
 				dataType: 'JSON',
 				success: function(res) {

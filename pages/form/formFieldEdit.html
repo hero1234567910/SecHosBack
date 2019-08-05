@@ -173,7 +173,7 @@
                         async:false,
                         url:prUrl+'/sys/form/parameter/updateTableField/'+data.field.rowId,
                         contentType: 'application/json;charset=utf-8',
-                        method:'put',
+                        method:'post',
                         data:JSON.stringify(map),
                         dataType:'JSON',
                         success:function(res){
