@@ -107,4 +107,4 @@ function needCLodop(){
 };
 
 //全局变量
-var prUrl = 'http://172.25.110.122';
+var prUrl = 'https://p.zjgwsjk.com/2ysechosback';
