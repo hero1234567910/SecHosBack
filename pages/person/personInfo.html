@@ -75,6 +75,7 @@
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 
 <script type="text/html" id="checkForbid">
@@ -101,7 +102,7 @@
 
     $().ready(function () {
         $.ajax({
-            url: '/sys/dept/getDeptTrees',
+            url: prUrl+'/sys/dept/getDeptTrees',
             contentType: 'application/json;charset=utf-8',
             method: 'post',
             dataType: 'JSON',
@@ -143,7 +144,7 @@
             , even: true
             , sort: true
             , height: 'full-130'
-            , url: '/sys/user/getAll'
+            , url: prUrl+ '/sys/user/getAll'
             , toolbar: '#toolbarDemo'
             , method: 'get'
             , cols: [[
@@ -258,7 +259,7 @@
                     return;
                 }
                 $.ajax({
-                    url: '/sys/user/deleteUser/' + params,
+                    url: prUrl+'/sys/user/deleteUser/' + params,
                     contentType: 'application/json;charset=utf-8',
                     method: 'post',
                     data: JSON.stringify(params),
@@ -300,7 +301,7 @@
                     return;
                 }
                 $.ajax({
-                    url: '/sys/user/enableUser/' + params,
+                    url: prUrl+'/sys/user/enableUser/' + params,
                     contentType: 'application/json;charset=utf-8',
                     method: 'post',
                     data: JSON.stringify(params),
@@ -338,7 +339,7 @@
                     return;
                 }
                 $.ajax({
-                    url: '/sys/user/forbidUser/' + params,
+                    url:prUrl+ '/sys/user/forbidUser/' + params,
                     contentType: 'application/json;charset=utf-8',
                     method: 'post',
                     data: JSON.stringify(params),
@@ -376,7 +377,7 @@
                     return;
                 }
                 $.ajax({
-                    url: '/sys/user/resetPassword/' + params,
+                    url: prUrl+'/sys/user/resetPassword/' + params,
                     contentType: 'application/json;charset=utf-8',
                     method: 'post',
                     data: JSON.stringify(params),
@@ -417,7 +418,7 @@
                 }
                 //传参保存
                 $.ajax({
-                    url: '/sys/user/saveSortSq/' + params + "/" + param1,
+                    url: prUrl+'/sys/user/saveSortSq/' + params + "/" + param1,
                     contentType: 'application/json;charset=utf-8',
                     method: 'post',
                     data: JSON.stringify(params, param1),

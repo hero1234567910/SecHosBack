@@ -12,7 +12,7 @@ var vm = new Vue({
       getRthing(){
       	let self = this;
       	$.ajax({
-			url:'/sys/hosorder/statistical',
+			url:prUrl+'/sys/hosorder/statistical',
 			contentType: 'application/json;charset=utf-8',
 			method: 'get',
 			dataType: 'JSON',
@@ -32,7 +32,7 @@ var vm = new Vue({
 //改变接单状态
 function changeOrder(ele){
 	$.ajax({
-		url:'/sys/config/changeAccept',
+		url:prUrl+'/sys/config/changeAccept',
 		contentType: 'application/json;charset=utf-8',
 		method: 'post',
 		data: ele+'',

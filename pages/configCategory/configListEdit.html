@@ -75,6 +75,7 @@
 </form>
 
 <script type="text/javascript" src="../../Scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js" charset="UTF-8"></script>
 <script>
@@ -102,7 +103,7 @@
                 form.on('submit(demo1)', function (data) {
                     console.log(data.field)
                     $.ajax({
-                        url: '/sys/config/insertConfig',
+                        url: prUrl+'/sys/config/insertConfig',
                         contentType: 'application/json;charset=utf-8',
                         method: 'post',
                         data: JSON.stringify(data.field),
@@ -132,13 +133,13 @@
                 //监听提交
                 form.on('submit(demo1)', function (data) {
                     $.ajax({
-                        url: '/sys/config/updateConfig/' + data.field.rowId,
+                        url: prUrl+'/sys/config/updateConfig/' + data.field.rowId,
                         contentType: 'application/json;charset=utf-8',
                         method: 'put',
                         data: JSON.stringify(data.field),
                         dataType: 'JSON',
                         success: function (res) {
-                            console.log(data.field.rowId);
+                            //console.log(data.field.rowId);
                             console.log("updateConfig");
                             if (res.code = '0') {
                                 parent.layer.close(parent.layer.index);
@@ -146,7 +147,7 @@
                                 alert(res.msg);
                         },
                         error: function (data) {
-                            console.log(data);
+                            //console.log(data);
                             parent.layer.close(parent.layer.index);
                         }
                     });
@@ -167,7 +168,7 @@
             //$("select[name=categoryGuid]").empty();
             $.ajax({
                 async: 'false',
-                url: '/sys/configCategory/getAllCategory',
+                url: prUrl+'/sys/configCategory/getAllCategory',
                 contentType: 'application/json;charset=utf-8',
                 method: 'get',
                 data: {},
@@ -205,7 +206,7 @@
                     return '参数名不能有特殊字符';
                 }
                 $.ajax({
-                    url: '/sys/config/checkConfigName',
+                    url: prUrl+'/sys/config/checkConfigName',
                     contentType: 'application/json;charset=utf-8',
                     type: 'post',
                     data: JSON.stringify(param),

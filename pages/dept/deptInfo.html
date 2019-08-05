@@ -44,6 +44,7 @@
 
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js" charset="utf-8"></script>
 <script>
@@ -63,7 +64,7 @@
 
     $().ready(function () {
         $.ajax({
-            url: '/sys/dept/getDeptTrees',
+            url: prUrl+'/sys/dept/getDeptTrees',
             contentType: 'application/json;charset=utf-8',
             method: 'post',
             dataType: 'JSON',
@@ -76,7 +77,7 @@
                             , children: res.data
                         }]
                         , click: function (node) {
-                            console.log(node) //node即为当前点击的节点数据
+                            //console.log(node) //node即为当前点击的节点数据
                             layui.table.reload('testReload', {
                                 where: {
                                     pdeptCode: node.deptCode
@@ -105,7 +106,7 @@
             elem: '#deptTable'
             , even: true
             ,height:'full-115'
-            , url: '/sys/dept/getDept'
+            , url: prUrl+'/sys/dept/getDept'
             , toolbar: '#toolbarDemo'
             , method: 'get'
 //			,height:'420px'
@@ -167,7 +168,7 @@
             var value = obj.data;
             var DeptCode = [];
             $.ajax({
-                url: '/sys/dept/getByDeptCode/' + value.pdeptCode,
+                url: prUrl+'/sys/dept/getByDeptCode/' + value.pdeptCode,
                 contentType: 'application/json;charset=utf-8',
                 method: 'get',
                 data: JSON.stringify(value.pdeptCode),
@@ -263,7 +264,7 @@
                     return;
                 }
                 $.ajax({
-                    url: '/sys/dept/deleteDept/' + params,
+                    url:prUrl+ '/sys/dept/deleteDept/' + params,
                     contentType: 'application/json;charset=utf-8',
                     method: 'post',
                     data: JSON.stringify(params),

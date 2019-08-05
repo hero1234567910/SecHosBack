@@ -11,6 +11,7 @@
 <script type="text/javascript" src="../../Scripts/jquery-1.11.3.min.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -27,7 +28,7 @@
     function brotherInvokeMethod(data){
     		$().ready(function () {
 		        $.ajax({
-		            url: '/sys/modular/getTrees',
+		            url: prUrl+ '/sys/modular/getTrees',
 		            contentType: 'application/json;charset=utf-8',
 		            method: 'get',
 		            dataType: 'JSON',

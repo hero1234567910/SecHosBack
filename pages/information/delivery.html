@@ -70,6 +70,7 @@
 
 <script type="text/javascript" src="../../Scripts/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../../Content/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js"></script>
 <script src="../../Content/kindeditor/kindeditor-all-min.js"></script>
@@ -108,13 +109,13 @@
     formSelects.data('xmselect', 'server', {
         radio:true,
 		type:'post',
-	    url: '/sys/informationcategory/getAllCategory'    
+	    url: prUrl+'/sys/informationcategory/getAllCategory'    
 	});
 	
     //server模式
 	formSelects.data('categoryselect', 'server', {
 		type:'get',
-	    url: '/sys/codeValue/getCodeByValue',
+	    url: prUrl+'/sys/codeValue/getCodeByValue',
 	    data:{'codeName':'信息类别'}
 	});
 	formSelects.render("xmselect", {
@@ -124,8 +125,8 @@
     KindEditor.ready(function(K) {
         window.editor = K.create('#editor_id', {
             afterBlur: function () { this.sync(); },
-             uploadJson : '/sys/uploadJson',
-             fileManagerJson : '/sys/fileManagerJson',
+             uploadJson : prUrl+'/sys/uploadJson',
+             fileManagerJson : prUrl+'/sys/fileManagerJson',
 				allowFileManager : true,
 				afterCreate : function() {
 					var self = this;
@@ -146,7 +147,7 @@
 	$(function() {  
        $("#uploadFile").uploadify({  
            'swf'           : '../../Content/uploadify/uploadify.swf',  
-           'uploader'      : '/sys/common/uploadFile',  //服务器端方法
+           'uploader'      : prUrl+'/sys/common/uploadFile',  //服务器端方法
            'fileSizeLimit' : '10MB',//接受一个单位（B,KB,MB,GB）。如果是数字则默认单位为KB。设置为0时表示不限制  
            'simUploadLimit'  : 5, //一次同步上传的文件数目  
            'onUploadSuccess' : function(file, data, response) { //上传成功  
@@ -183,7 +184,7 @@
 		guids.push(ele.id)
 		$.ajax({
         	async:true,
-            url:'/sys/frameAttach/delete',
+            url:prUrl+'/sys/frameAttach/delete',
             contentType: 'application/json;charset=utf-8',
             method:'post',
             data:JSON.stringify(guids),
@@ -219,7 +220,7 @@
         form.on('submit(formDemo)', function(data){
         	var params = {};
         	var categoryGuids = data.field.categoryGuid.split(',');
-            console.log(categoryGuids);
+            //console.log(categoryGuids);
         	var obj = formSelects.value('xmselect');
         	params['status'] = 1;
         	for (var i=0;i<obj.length;i++) {
@@ -227,7 +228,7 @@
         			params['status'] = 2
         		}
         	}
-        	console.log(JSON.parse(window.localStorage.getItem('m_user_userName')));
+        	//console.log(JSON.parse(window.localStorage.getItem('m_user_userName')));
         	var html = $('#editor_id').val();
         	
         	params['content'] = html;
@@ -243,7 +244,7 @@
         	params['createDeptGuid'] = JSON.parse(window.localStorage.getItem('m_deptGuid'));
             $.ajax({
             	async:false,
-                url:'/sys/informationinfo/add',
+                url:prUrl+'/sys/informationinfo/add',
                 contentType: 'application/json;charset=utf-8',
                 method:'post',
                 data:JSON.stringify(params),

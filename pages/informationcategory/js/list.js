@@ -12,7 +12,7 @@ $.ajaxSetup({
 var m_url = location.protocol + '\\\\' + location.hostname + ':' + (location.port == '' ? 80 : location.port);
 $().ready(function () {
     $.ajax({
-        url: m_url+'/sys/informationcategory/getCategoryTrees',
+        url: prUrl+'/sys/informationcategory/getCategoryTrees',
         contentType: 'application/json;charset=utf-8',
         method: 'post',
         dataType: 'JSON',
@@ -47,7 +47,7 @@ layui.use('table', function(){
             elem: '#table'
             ,height: 'full-130'
             ,even:true
-            ,url:m_url+'/sys/informationcategory/listData'
+            ,url:prUrl+'/sys/informationcategory/listData'
             ,method:'get'
             ,cols: [[
                 {checkbox:true}
@@ -108,7 +108,7 @@ layui.use('table', function(){
                     return;
                 }
                 $.ajax({
-                    url:m_url+'/sys/informationcategory/delete',
+                    url:prUrl+'/sys/informationcategory/delete',
                     contentType: 'application/json;charset=utf-8',
                     method:'post',
                     data:JSON.stringify(params),

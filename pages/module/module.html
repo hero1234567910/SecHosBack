@@ -51,6 +51,7 @@
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -66,7 +67,7 @@
     })
     $().ready(function () {
         $.ajax({
-            url: '/sys/modular/getTrees',
+            url: prUrl+'/sys/modular/getTrees',
             method: 'get',
             dataType: 'JSON',
             success: function (res) {
@@ -102,7 +103,7 @@
                 elem: '#modularTable'
                 , even:true
                 , height:'full-130'
-                , url: '/sys/modular/getModular'
+                , url: prUrl+'/sys/modular/getModular'
                 , toolbar: '#toolbarDemo'
                 , method: 'get'
                 //			,height:'420px'
@@ -162,7 +163,7 @@
                 var value = obj.data;
                 var ModuleCode = [];
                 $.ajax({
-                    url: '/sys/modular/getByModuleCode/' + value.pmoduleCode,
+                    url: prUrl+ '/sys/modular/getByModuleCode/' + value.pmoduleCode,
                     contentType: 'application/json;charset=utf-8',
                     method: 'get',
                     data: JSON.stringify(value.pmoduleCode),
@@ -248,7 +249,7 @@
                         return;
                     }
                     $.ajax({
-                        url: '/sys/modular/deleteModule/' + params,
+                        url: prUrl+'/sys/modular/deleteModule/' + params,
                         contentType: 'application/json;charset=utf-8',
                         method: 'post',
                         data: JSON.stringify(params),
@@ -458,7 +459,7 @@
     }
     .layui-table tr {
         transition: all .3s;
-        -webkit-transition: all .3s
+        -webkit-transition: all .3s;
         height:26px;
     }
 </style>

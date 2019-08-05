@@ -87,6 +87,7 @@
 		</form>
 
 		<script type="text/javascript" src="../../Scripts/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="../../Scripts/local.js"></script>
 		<script type="text/javascript" src="../../Content/uploadify/jquery.uploadify.min.js"></script>
 		<script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 		<script type="text/javascript">
@@ -116,7 +117,7 @@
 			$(function() {
 				$("#uploadFile").uploadify({
 					'swf': '../../Content/uploadify/uploadify.swf',
-					'uploader': '/sys/common/uploadFile', //服务器端方法
+					'uploader': prUrl+'/sys/common/uploadFile', //服务器端方法
 					'fileTypeExts': '*.jpg;*.jpge;*.png',
 					'buttonText': '选择图片',
 					'fileSizeLimit': '10MB', //接受一个单位（B,KB,MB,GB）。如果是数字则默认单位为KB。设置为0时表示不限制  
@@ -161,7 +162,7 @@
 				guids.push(ele.id)
 				$.ajax({
 					async: true,
-					url: '/sys/frameAttach/delete',
+					url: prUrl+'/sys/frameAttach/delete',
 					contentType: 'application/json;charset=utf-8',
 					method: 'post',
 					data: JSON.stringify(guids),
@@ -195,7 +196,7 @@
 							data.field['uploadImgGuid'] = local_data_attachGuids[0];
 							$.ajax({
 								async: false,
-								url: m_url + '/sys/hosgoods/add',
+								url: prUrl + '/sys/hosgoods/add',
 								contentType: 'application/json;charset=utf-8',
 								method: 'post',
 								data: JSON.stringify(data.field),
@@ -230,7 +231,7 @@
 						form.on('submit(formDemo)', function(data) {
 							$.ajax({
 								async: false,
-								url: m_url + '/sys/hosgoods/update',
+								url: prUrl + '/sys/hosgoods/update',
 								contentType: 'application/json;charset=utf-8',
 								method: 'put',
 								data: JSON.stringify(data.field),
@@ -275,7 +276,7 @@
 						param['goodsName'] = value;
 						if (value !== GoodsName) {
 							$.ajax({
-								url: '/sys/hosgoods/checkGoods',
+								url: prUrl+'/sys/hosgoods/checkGoods',
 								contentType: 'application/json;charset=utf-8',
 								type: 'post',
 								data: JSON.stringify(param),

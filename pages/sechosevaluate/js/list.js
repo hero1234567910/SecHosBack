@@ -22,7 +22,7 @@ layui.use("table", function() {
     elem: "#table",
     height: "full-130",
     even: true,
-    url: m_url + "/sys/sechosevaluate/listData",
+    url: prUrl + "/sys/sechosevaluate/listData",
     method: "get",
     cols: [
       [
@@ -101,7 +101,7 @@ layui.use("table", function() {
         return;
       }
       $.ajax({
-        url: m_url + "/sys/sechosevaluate/delete",
+        url: prUrl + "/sys/sechosevaluate/delete",
         contentType: "application/json;charset=utf-8",
         method: "post",
         data: JSON.stringify(params),
@@ -144,7 +144,7 @@ layui.use("table", function() {
     var patAddress;
     var patMobile;
     $.ajax({
-      url: m_url + "/sys/patient/getPatientByGuid/" + value.patientRowGuid,
+      url: prUrl + "/sys/patient/getPatientByGuid/" + value.patientRowGuid,
       contentType: "application/json;charset=utf-8",
       method: "get",
       data: JSON.stringify(value.patientRowGuid),

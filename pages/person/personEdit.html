@@ -109,6 +109,7 @@
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="../../Scripts/vue.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -128,7 +129,7 @@
         //获取
         $.ajax({
             async: false,
-            url: '/sys/role/getAllRole',
+            url: prUrl+'/sys/role/getAllRole',
             contentType: 'application/json;charset=utf-8',
             method: 'get',
             dataType: 'JSON',
@@ -176,7 +177,7 @@
                     param['roles'] = arr;
                     $.ajax({
                         async: false,
-                        url: '/sys/user/add',
+                        url: prUrl+'/sys/user/add',
                         contentType: 'application/json;charset=utf-8',
                         method: 'post',
                         data: JSON.stringify(param),
@@ -209,7 +210,7 @@
                     $("#sex1").attr("checked",true);
                 $.ajax({
                     async: false,
-                    url: '/sys/user/getCheckedRole?userGuid=' + rowGuid,
+                    url: prUrl+'/sys/user/getCheckedRole?userGuid=' + rowGuid,
                     contentType: 'application/json;charset=utf-8',
                     method: 'get',
 //		                    data: value.rowGuid,
@@ -248,7 +249,7 @@
                     
                     $.ajax({
                         async: false,
-                        url: '/sys/user/update',
+                        url: prUrl+'/sys/user/update',
                         contentType: 'application/json;charset=utf-8',
                         method: 'put',
                         data: JSON.stringify(params),
@@ -325,7 +326,7 @@
 				param['loginId'] = value;
 				if (value !== LoginId) {
 				    $.ajax({
-				        url: '/sys/user/checkUser',
+				        url: prUrl+'/sys/user/checkUser',
 				        contentType: 'application/json;charset=utf-8',
 				        type: 'post',
 				        data: JSON.stringify(param),

@@ -47,6 +47,7 @@
 </form>
 
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script>
 
@@ -73,7 +74,7 @@
                 form.on('submit(demo1)', function(data){
                     $.ajax({
                     	async:false,
-                        url:'/sys/codes/insertCodes',
+                        url:prUrl+'/sys/codes/insertCodes',
                         contentType: 'application/json;charset=utf-8',
                         method:'post',
                         data:JSON.stringify(data.field),
@@ -102,7 +103,7 @@
                 form.on('submit(demo1)', function (data) {
                     $.ajax({
                     	async:false,
-                        url: '/sys/codes/updateCodes/' + data.field.rowId,
+                        url: prUrl+'/sys/codes/updateCodes/' + data.field.rowId,
                         contentType: 'application/json;charset=utf-8',
                         method: 'put',
                         data: JSON.stringify(data.field),
@@ -150,7 +151,7 @@
                     return '代码名不能有特殊字符';
                 }
                 $.ajax({
-                    url: '/sys/codes/checkCodeName',
+                    url: prUrl+'/sys/codes/checkCodeName',
                     contentType: 'application/json;charset=utf-8',
                     type: 'post',
                     data: JSON.stringify(param),

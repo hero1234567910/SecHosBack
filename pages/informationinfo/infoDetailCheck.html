@@ -33,10 +33,12 @@
     <button id="infoUnPass" class="layui-btn layui-btn-normal" data-type="close">审核不通过</button>
 </div>
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js" charset="utf-8"></script>
 <script src="../../Content/kindeditor/kindeditor-all-min.js"></script>
 <script src="../../Content/kindeditor/lang/zh-CN.js"></script>
+
 <script>
     $.ajaxSetup({
         headers: {
@@ -57,7 +59,7 @@
         var param = {};
         param['guid'] = Guid;
         $.ajax({
-            url: '/sys/frameAttach/getAttachList',
+            url: prUrl+'/sys/frameAttach/getAttachList',
             contentType: 'application/json;charset=utf-8',
             method: 'get',
             data: param,
@@ -82,7 +84,7 @@
     $('#infoPass').on('click',function () {
         var guid =$('#rowGuid').val();
         $.ajax({
-            url:'/sys/informationinfo/auditPassInfo/'+guid,
+            url: prUrl+'/sys/informationinfo/auditPassInfo/'+guid,
             contentType: 'application/json;charset=utf-8',
             method: 'post',
             data: JSON.stringify(guid),
@@ -108,7 +110,7 @@
     $('#infoUnPass').on('click',function () {
         var guid =$('#rowGuid').val();
         $.ajax({
-            url:'/sys/informationinfo/auditFailInfo/'+guid,
+            url:prUrl+'/sys/informationinfo/auditFailInfo/'+guid,
             contentType: 'application/json;charset=utf-8',
             method: 'post',
             data: JSON.stringify(guid),

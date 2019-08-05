@@ -42,6 +42,7 @@
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script>
 
     $.ajaxSetup({
@@ -67,7 +68,7 @@
             elem: '#roleTable'
             ,height: 'full-130'
             ,even:true
-            , url: '/sys/role/getRole'
+            , url: prUrl+'/sys/role/getRole'
             , method: 'get'
             , cols: [[
                 {checkbox: true}
@@ -151,7 +152,7 @@
                     return;
                 }
                 $.ajax({
-                    url: '/sys/role/deleteRole',
+                    url: prUrl+'/sys/role/deleteRole',
                     contentType: 'application/json;charset=utf-8',
                     method: 'post',
                     data: JSON.stringify(params),

@@ -53,6 +53,7 @@
 </form>
 
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script>
 	$.ajaxSetup({
@@ -91,7 +92,7 @@
                     map['goodsTypeCode'] = $("#goodsTypeCode").val();
                     $.ajax({
 						async: false,
-                        url:m_url+'/sys/hosgoodstype/add',
+                        url:prUrl+'/sys/hosgoodstype/add',
                         contentType: 'application/json;charset=utf-8',
                         method:'post',
                         data:JSON.stringify(map),
@@ -122,7 +123,7 @@
                 form.on('submit(formDemo)', function(data){
                     $.ajax({
 						async: false,
-                        url:m_url+'/sys/hosgoodstype/update',
+                        url:prUrl+'/sys/hosgoodstype/update',
                         contentType: 'application/json;charset=utf-8',
                         method:'put',
                         data:JSON.stringify(data.field),
@@ -166,7 +167,7 @@
                         param['rowGuid'] = param2;
                         if (value !== GoodsTypeCode) {
                             $.ajax({
-                                url: '/sys/hosgoodstype/checkGoodsType',
+                                url: prUrl+'/sys/hosgoodstype/checkGoodsType',
                                 contentType: 'application/json;charset=utf-8',
                                 type: 'post',
                                 data: JSON.stringify(param),
@@ -201,7 +202,7 @@
                         }
                         if (value !== GoodsTypeName) {
                             $.ajax({
-                                url: '/sys/hosgoodstype/checkGoodsType',
+                                url: prUrl+'/sys/hosgoodstype/checkGoodsType',
                                 contentType: 'application/json;charset=utf-8',
                                 type: 'post',
                                 data: JSON.stringify(param),

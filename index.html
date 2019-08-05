@@ -125,6 +125,7 @@
     <script type="text/javascript" src="Scripts/index.js"></script>
     <script type="text/javascript" src="Scripts/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="Scripts/vue.js"></script>
+    <script type="text/javascript" src="Scripts/local.js"></script>
     <script language="javascript" src="Scripts/lodop/LodopFuncs.js"></script>
     <script src="Scripts/textScroll.js"></script>
     <object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
@@ -282,7 +283,7 @@
                     //根据用户行标获取角色权限菜单
                     $.ajax({
                         async: false,
-                        url: '/sys/user/getMenuByUserGuid?userGuid=' + rowGuid,
+                        url: prUrl+'/sys/user/getMenuByUserGuid?userGuid=' + rowGuid,
                         contentType: 'application/json;charset=utf-8',
                         method: 'get',
                         dataType: 'JSON',

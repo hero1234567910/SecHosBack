@@ -12,7 +12,7 @@ $.ajaxSetup({
 $().ready(function() {
 	var m_url = location.protocol + '\\\\' + location.hostname + ':' + (location.port == '' ? 80 : location.port);
 	$.ajax({
-		url: m_url + '/sys/hosgoodstype/getGoodsTypeTrees',
+		url: prUrl + '/sys/hosgoodstype/getGoodsTypeTrees',
 		contentType: 'application/json;charset=utf-8',
 		method: 'post',
 		dataType: 'JSON',
@@ -52,7 +52,7 @@ layui.use('table', function() {
 		elem: '#table',
 		height: 'full-130',
 		even: true,
-		url: m_url + '/sys/hosgoods/listData',
+		url: prUrl + '/sys/hosgoods/listData',
 		method: 'get',
 		cols: [
 			[{
@@ -189,7 +189,7 @@ layui.use('table', function() {
 				return;
 			}
 			$.ajax({
-				url: m_url + '/sys/hosgoods/delete',
+				url: prUrl + '/sys/hosgoods/delete',
 				contentType: 'application/json;charset=utf-8',
 				method: 'post',
 				data: JSON.stringify(params),
@@ -229,7 +229,7 @@ layui.use('table', function() {
 				return;
 			}
 			$.ajax({
-				url: m_url + '/sys/hosgoods/goodsUpShelf',
+				url: prUrl + '/sys/hosgoods/goodsUpShelf',
 				contentType: 'application/json;charset=utf-8',
 				method: 'post',
 				data: JSON.stringify(params),
@@ -269,7 +269,7 @@ layui.use('table', function() {
 				return;
 			}
 			$.ajax({
-				url: m_url + '/sys/hosgoods/goodsDownShelf',
+				url: prUrl + '/sys/hosgoods/goodsDownShelf',
 				contentType: 'application/json;charset=utf-8',
 				method: 'post',
 				data: JSON.stringify(params),
@@ -303,7 +303,7 @@ layui.use('table', function() {
 		var value = obj.data;
 		var GoodsTypeName = "";
 		$.ajax({
-			url: m_url + '/sys/hosgoods/getTypeNameByGuid/' + value.goodsTypeGuid,
+			url: prUrl + '/sys/hosgoods/getTypeNameByGuid/' + value.goodsTypeGuid,
 			contentType: 'application/json;charset=utf-8',
 			method: 'get',
 			data: JSON.stringify(value.goodsTypeGuid),

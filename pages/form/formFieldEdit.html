@@ -106,6 +106,7 @@
 </form>
 
 <script type="text/javascript" src="../../Scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js" charset="UTF-8"></script>
 <script>
@@ -139,7 +140,7 @@
                     map['rowGuid'] = rowGuid;
                     $.ajax({
                         async:false,
-                        url:'/sys/form/parameter/add',
+                        url:prUrl+'/sys/form/parameter/add',
                         contentType: 'application/json;charset=utf-8',
                         method:'post',
                         data:JSON.stringify(map),
@@ -170,7 +171,7 @@
                     map['field'] = data.field;
                     $.ajax({
                         async:false,
-                        url:'/sys/form/parameter/updateTableField/'+data.field.rowId,
+                        url:prUrl+'/sys/form/parameter/updateTableField/'+data.field.rowId,
                         contentType: 'application/json;charset=utf-8',
                         method:'put',
                         data:JSON.stringify(map),
@@ -201,7 +202,7 @@
         $().ready(function () {
             $.ajax({
                 async:'true',
-                url:'/sys/codes/getAllCodes',
+                url:prUrl+'/sys/codes/getAllCodes',
                 contentType: 'application/json;charset=utf-8',
                 method: 'get',
                 data:{},

@@ -24,7 +24,7 @@ function getCodeValue(){
 	par['codeName'] = '信息类别';
 	$.ajax({
 		async:false,
-        url: '/sys/codeValue/getCodeValueToMap',
+        url: prUrl+'/sys/codeValue/getCodeValueToMap',
         contentType: 'application/json;charset=utf-8',
         method: 'get',
         data: par,
@@ -49,7 +49,7 @@ layui.use('table', function () {
         elem: '#table'
         , height: 'full-130'
         , even: true
-        , url: m_url + '/sys/informationinfo/listData'
+        , url: prUrl + '/sys/informationinfo/listData'
         , method: 'get'
         , cols: [[
             {width: 18, title: '',align:'center' ,templet:'#indexTpl'} ,
@@ -117,7 +117,7 @@ layui.use('table', function () {
                 return;
             }
             $.ajax({
-                url: '/sys/informationinfo/deleteInfo/'+params,
+                url: prUrl+'/sys/informationinfo/deleteInfo/'+params,
                 contentType: 'application/json;charset=utf-8',
                 method: 'post',
                 data: JSON.stringify(params),
@@ -186,7 +186,7 @@ layui.use('table', function () {
             param['guid'] = value.attachGuid;
             $.ajax({
             	async:false,
-                url: '/sys/frameAttach/getAttachList',
+                url: prUrl+'/sys/frameAttach/getAttachList',
                 contentType: 'application/json;charset=utf-8',
                 method: 'get',
                 data: param,

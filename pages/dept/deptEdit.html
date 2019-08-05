@@ -88,6 +88,7 @@
 </form>
 
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script>
     $.ajaxSetup({
@@ -115,7 +116,7 @@
                 form.on('submit(formDemo)', function (data) {
                     $.ajax({
                         async: false,
-                        url: '/sys/dept/add',
+                        url: prUrl+'/sys/dept/add',
                         contentType: 'application/json;charset=utf-8',
                         method: 'post',
                         data: JSON.stringify(data.field),
@@ -146,7 +147,7 @@
                 form.on('submit(formDemo)', function (data) {
                     $.ajax({
                         async: false,
-                        url: '/sys/dept/updateDept/' + data.field.rowId,
+                        url: prUrl+'/sys/dept/updateDept/' + data.field.rowId,
                         contentType: 'application/json;charset=utf-8',
                         method: 'put',
                         data: JSON.stringify(data.field),
@@ -185,7 +186,7 @@
                 param['rowGuid'] = param2;
                 if (value !== DeptCode) {
                     $.ajax({
-                        url: '/sys/dept/checkDept',
+                        url: prUrl+'/sys/dept/checkDept',
                         contentType: 'application/json;charset=utf-8',
                         type: 'post',
                         data: JSON.stringify(param),
@@ -220,7 +221,7 @@
                 }
                 if (value !== DeptName) {
                     $.ajax({
-                        url: '/sys/dept/checkDept',
+                        url: prUrl+'/sys/dept/checkDept',
                         contentType: 'application/json;charset=utf-8',
                         type: 'post',
                         data: JSON.stringify(param),

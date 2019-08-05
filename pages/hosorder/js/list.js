@@ -17,7 +17,7 @@ layui.use('table', function() {
 		elem: '#table',
 		height: 'full-130',
 		even: true,
-		url: m_url + '/sys/hosorder/listData',
+		url: prUrl + '/sys/hosorder/listData',
 		method: 'get',
 		cols: [
 			[{
@@ -171,7 +171,7 @@ layui.use('table', function() {
 			return;
 		}
 		$.ajax({
-				url:'/sys/hosorder/updateOrderStatus',
+				url:prUrl+'/sys/hosorder/updateOrderStatus',
 				contentType: 'application/json;charset=utf-8',
 				method: 'put',
 				data: JSON.stringify(params),
@@ -203,7 +203,7 @@ layui.use('table', function() {
 				return;
 			}
 			$.ajax({
-				url: m_url + '/sys/hosorder/delete',
+				url: prUrl + '/sys/hosorder/delete',
 				contentType: 'application/json;charset=utf-8',
 				method: 'post',
 				data: JSON.stringify(params),
@@ -291,7 +291,7 @@ layui.use('table', function() {
 			var value = obj.data;
 			//根据行标获取
             $.ajax({
-                url: '/sys/hosorder/getOrderDetailByGuid',
+                url: prUrl+'/sys/hosorder/getOrderDetailByGuid',
                 contentType: 'application/json;charset=utf-8',
                 method: 'post',
                 data:value.rowGuid,

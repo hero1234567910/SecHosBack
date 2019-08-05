@@ -90,6 +90,7 @@
     <script src="../../Content/kindeditor/kindeditor-all-min.js"></script>
     <script src="../../Content/kindeditor/lang/zh-CN.js"></script>
     <script src="../../Content/layui-formSelects-master/dist/formSelects-v4.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/local.js"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -111,14 +112,14 @@
             deflag = flag;
             formSelects.data("categoryselect", "server", {
                 type: "get",
-                url: "/sys/codeValue/getCodeByValue",
+                url: prUrl+"/sys/codeValue/getCodeByValue",
                 data: { codeName: "信息类别", val: data }
             });
             window.editor.html(content);
             var name;
             $.ajax({
                 async: false,
-                url:"/sys/informationcategory/getCategoryByGuid?categoryGuid=" +categoryGuid,
+                url:prUrl+"/sys/informationcategory/getCategoryByGuid?categoryGuid=" +categoryGuid,
                 contentType: "application/json;charset=utf-8",
                 method: "get",
                 // data: JSON.stringify(categoryGuid),
@@ -337,7 +338,7 @@
             guids.push(ele.id);
             $.ajax({
                 async: true,
-                url: "/sys/frameAttach/delete",
+                url: prUrl+"/sys/frameAttach/delete",
                 contentType: "application/json;charset=utf-8",
                 method: "post",
                 data: JSON.stringify(guids),
@@ -387,7 +388,7 @@
                 mparam["categoryGuid"] = $("#categoryGuid").val();
                 $.ajax({
                     async: false,
-                    url: "/sys/informationcategory/getCategoryByGuid",
+                    url: prUrl+"/sys/informationcategory/getCategoryByGuid",
                     contentType: "application/json;charset=utf-8",
                     method: "get",
                     data: mparam,
@@ -416,10 +417,10 @@
                 params["attachRowGuids"] = local_data_attachGuids;
                 params["infoUrl"] = data.field.infoUrl;
                 params["attachGuid"] = $("#attachGuid").val();
-                console.log($("#attachGuid").val());
+                //console.log($("#attachGuid").val());
                 $.ajax({
                     async: false,
-                    url: "/sys/informationinfo/update",
+                    url: prUrl+"/sys/informationinfo/update",
                     contentType: "application/json;charset=utf-8",
                     method: "put",
                     data: JSON.stringify(params),

@@ -60,6 +60,7 @@
 </form>
 
 <script type="text/javascript" src="../../Scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script>
 	$.ajaxSetup({
@@ -84,7 +85,7 @@
                 form.on('submit(formDemo)', function(data){
                     $.ajax({
                     	async:false,
-                        url:'/sys/informationcategory/add',
+                        url:prUrl+'/sys/informationcategory/add',
                         contentType: 'application/json;charset=utf-8',
                         method:'post',
                         data:JSON.stringify(data.field),
@@ -115,7 +116,7 @@
                 form.on('submit(formDemo)', function(data){
                     $.ajax({
                     	async:false,
-                        url:'/sys/informationcategory/update',
+                        url:prUrl+'/sys/informationcategory/update',
                         contentType: 'application/json;charset=utf-8',
                         method:'put',
                         data:JSON.stringify(data.field),

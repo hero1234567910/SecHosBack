@@ -53,6 +53,7 @@
 <script type="text/javascript" src="Scripts/jquery-3.3.1.min.js"></script>
 <script src="Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="Scripts/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="Scripts/local.js"></script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -94,7 +95,7 @@
             map["rowGuid"]=rowGuid;
             $.ajax({
                 async:false,
-                url:'/sys/user/updateAdmin',
+                url:prUrl+'/sys/user/updateAdmin',
                 contentType: 'application/json;charset=utf-8',
                 method:'put',
                 data:JSON.stringify(map),

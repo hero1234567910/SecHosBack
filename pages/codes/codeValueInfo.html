@@ -31,6 +31,7 @@
 
 
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
@@ -57,7 +58,7 @@
 	            elem: '#codeValueTable'
                 , even:true
                 , height:'full-130'
-	            , url: '/sys/codeValue/getCodeValue?codeGuid='+rowGuid
+	            , url: prUrl+'/sys/codeValue/getCodeValue?codeGuid='+rowGuid
 	            , toolbar: '#toolbarDemo'
 	            , method: 'get'
 	            , cols: [[
@@ -125,7 +126,7 @@
 	                    return;
 	                }
 	                $.ajax({
-	                    url: '/sys/codeValue/deleteCodeValue/' + params,
+	                    url: prUrl+'/sys/codeValue/deleteCodeValue/' + params,
 	                    contentType: 'application/json;charset=utf-8',
 	                    method: 'post',
 	                    data: JSON.stringify(params),
@@ -391,7 +392,7 @@
     }
     .layui-table tr {
         transition: all .3s;
-        -webkit-transition: all .3s
+        -webkit-transition: all .3s;
         height:26px;
     }
 </style>

@@ -14,7 +14,7 @@ $().ready(function (){
     var m_url = location.protocol + '\\\\' + location.hostname + ':' + (location.port == '' ? 80 : location.port);
     $.ajax({
         async: false,
-        url:m_url+'/sys/sechosconsultation/getReplyCount',
+        url:prUrl+'/sys/sechosconsultation/getReplyCount',
         contentType: 'application/json;charset=utf-8',
         method: 'get',
         dataType:'JSON',
@@ -42,7 +42,7 @@ layui.use('table', function(){
             elem: '#table'
             ,height: 'full-130'
             ,even:true
-            ,url:m_url+'/sys/sechosconsultation/listData'
+            ,url:prUrl+'/sys/sechosconsultation/listData'
             ,method:'get'
             ,cols: [[
                 {checkbox:true}
@@ -149,7 +149,7 @@ layui.use('table', function(){
                     return;
                 }
                 $.ajax({
-                    url:m_url+'/sys/sechosconsultation/delete',
+                    url:prUrl+'/sys/sechosconsultation/delete',
                     contentType: 'application/json;charset=utf-8',
                     method:'post',
                     data:JSON.stringify(params),

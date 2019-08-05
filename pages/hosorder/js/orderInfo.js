@@ -15,7 +15,7 @@ var vm = new Vue({
             let self = this;
             //根据行标获取
             $.ajax({
-                url: '/sys/hosorder/getOrderDetailByGuid',
+                url: prUrl+'/sys/hosorder/getOrderDetailByGuid',
                 contentType: 'application/json;charset=utf-8',
                 method: 'post',
                 data:self.rowGuid,

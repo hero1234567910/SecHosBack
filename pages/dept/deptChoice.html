@@ -9,6 +9,7 @@
 <ul id="deptShu"></ul>
 
 <script type="text/javascript" src="../../Scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js" charset="utf-8"></script>
 <script>
@@ -28,7 +29,7 @@
 
     $().ready(function () {
         $.ajax({
-            url: '/sys/dept/getDeptTrees',
+            url: prUrl+'/sys/dept/getDeptTrees',
             contentType: 'application/json;charset=utf-8',
             method: 'post',
             dataType: 'JSON',

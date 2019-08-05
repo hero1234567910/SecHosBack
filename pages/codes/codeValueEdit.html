@@ -45,6 +45,7 @@
 </form>
 
 <script type="text/javascript" src="../../Scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script>
 
@@ -73,7 +74,7 @@
                     map['field']=data.field;
                     map['rowGuid']=rowGuid;
                     $.ajax({
-                        url:'/sys/codeValue/insertCodeValue',
+                        url:prUrl+'/sys/codeValue/insertCodeValue',
                         contentType: 'application/json;charset=utf-8',
                         method:'post',
                         data:JSON.stringify(map),
@@ -100,7 +101,7 @@
                 //监听提交
                 form.on('submit(demo1)', function (data) {
                     $.ajax({
-                        url: '/sys/codeValue/updateCodeValue/' + data.field.rowId,
+                        url: prUrl+ '/sys/codeValue/updateCodeValue/' + data.field.rowId,
                         contentType: 'application/json;charset=utf-8',
                         method: 'put',
                         data: JSON.stringify(data.field),

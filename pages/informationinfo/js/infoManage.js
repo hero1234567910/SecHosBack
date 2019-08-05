@@ -23,7 +23,7 @@ function getCodeValue(){
     par['codeName'] = '信息类别';
     $.ajax({
         async:false,
-        url: '/sys/codeValue/getCodeValueToMap',
+        url: prUrl+'/sys/codeValue/getCodeValueToMap',
         contentType: 'application/json;charset=utf-8',
         method: 'get',
         data: par,
@@ -43,7 +43,7 @@ function getCodeValue(){
 var arr = [];
 $().ready(function () {
     $.ajax({
-        url: m_url + '/sys/informationcategory/getCategoryTrees',
+        url: prUrl + '/sys/informationcategory/getCategoryTrees',
         contentType: 'application/json;charset=utf-8',
         method: 'post',
         dataType: 'JSON',
@@ -58,7 +58,7 @@ $().ready(function () {
                     , click: function (node) {
                         $.ajax({
                             async: false,
-                            url: m_url + '/sys/informationinfo/getInfoByCateGuid/' + node.rowGuid,
+                            url: prUrl + '/sys/informationinfo/getInfoByCateGuid/' + node.rowGuid,
                             contentType: 'application/json;charset=utf-8',
                             method: 'get',
                             data: {},
@@ -99,7 +99,7 @@ layui.use('table', function () {
         elem: '#InfoTable'
         , even: true
         , height: 'full-115'
-        , url:m_url+ '/sys/informationinfo/listData'
+        , url:prUrl+ '/sys/informationinfo/listData'
         , toolbar: '#InfoToolbar'
         , method: 'get'
 //			,height:'420px'
@@ -169,7 +169,7 @@ $('#InfoDel').on('click', function () {
             return;
         }
         $.ajax({
-            url: m_url+'/sys/informationinfo/deleteInfo/' + params,
+            url: prUrl+'/sys/informationinfo/deleteInfo/' + params,
             contentType: 'application/json;charset=utf-8',
             method: 'post',
             data: JSON.stringify(params),
@@ -240,7 +240,7 @@ $('#InfoDel').on('click', function () {
             param['guid'] = value.attachGuid;
             $.ajax({
                 async:false,
-                url: '/sys/frameAttach/getAttachList',
+                url: prUrl+'/sys/frameAttach/getAttachList',
                 contentType: 'application/json;charset=utf-8',
                 method: 'get',
                 data: param,
@@ -305,7 +305,7 @@ $('#InfoDel').on('click', function () {
                 return;
             }
             $.ajax({
-                url:m_url+ '/sys/informationinfo/deliverInfo/' + params,
+                url:prUrl+ '/sys/informationinfo/deliverInfo/' + params,
                 contentType: 'application/json;charset=utf-8',
                 method: 'post',
                 data: JSON.stringify(params),
@@ -342,7 +342,7 @@ $('#InfoDel').on('click', function () {
                 return;
             }
             $.ajax({
-                url: m_url+'/sys/informationinfo/stopDeliver/' + params,
+                url: prUrl+'/sys/informationinfo/stopDeliver/' + params,
                 contentType: 'application/json;charset=utf-8',
                 method: 'post',
                 data: JSON.stringify(params),

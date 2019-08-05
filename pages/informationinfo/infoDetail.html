@@ -23,6 +23,7 @@
     </ul>
 </div>
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script>
 	$.ajaxSetup({
 	    headers: {
@@ -42,7 +43,7 @@
         var param = {};
         param['guid'] = Guid;
         $.ajax({
-            url: '/sys/frameAttach/getAttachList',
+            url: prUrl+'/sys/frameAttach/getAttachList',
             contentType: 'application/json;charset=utf-8',
             method: 'get',
             data: param,

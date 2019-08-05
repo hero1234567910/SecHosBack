@@ -43,9 +43,11 @@
 </div>
 
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js" charset="utf-8"></script>
 <script type="text/javascript" src="../../Scripts/layui-xtree.js"></script>
+
 
 <script type="text/javascript">
     $.ajaxSetup({
@@ -63,7 +65,7 @@
     var checkedBtn;
     $().ready(function () {
         $.ajax({
-            url: '/sys/modular/getModuleTrees',
+            url: prUrl+'/sys/modular/getModuleTrees',
             contentType: 'application/json;charset=utf-8',
             method: 'post',
             dataType: 'JSON',
@@ -91,7 +93,7 @@
                             param['checkedBtn'] = checkedBtn;
                             param['paramArray'] = paramArray;
                             $.ajax({
-                                url: '/sys/role/insertModuleRightBatch',
+                                url: prUrl+'/sys/role/insertModuleRightBatch',
                                 contentType: 'application/json;charset=utf-8',
                                 method: 'post',
                                 data: JSON.stringify(param),
@@ -182,7 +184,7 @@
                 $(obj.tr).siblings().css("background-color","");
                 obj.tr.css("background-color","#7DBDE2");
                 $.ajax({
-                    url: '/sys/role/selectModule',
+                    url: prUrl+'/sys/role/selectModule',
                     contentType: 'application/json;charset=utf-8',
                     method: 'post',
                     data: value.rowGuid,

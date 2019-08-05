@@ -25,6 +25,7 @@
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
 <script src="../../Scripts/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 
 <script>
@@ -50,7 +51,7 @@
                 elem: '#userTable'
                 , height:'full-130'
                 , even:true
-                , url: '/sys/user/getUserFromRole?roleGuid=' + rowGuid
+                , url: prUrl+'/sys/user/getUserFromRole?roleGuid=' + rowGuid
                 , toolbar: '#toolbarDemo'
                 , method: 'get'
                 , cols: [[
@@ -142,7 +143,7 @@
                         return;
                     }
                     $.ajax({
-                        url: '/sys/user/deleteUser/' + params,
+                        url: prUrl +'/sys/user/deleteUser/' + params,
                         contentType: 'application/json;charset=utf-8',
                         method: 'post',
                         data: JSON.stringify(params),
@@ -174,7 +175,7 @@
                         console.log(data.rowId);
                         $.ajax({
                             data: {"rowId": data.rowId},
-                            url: '/sys/user/deleteUser/' + data.rowId,
+                            url: prUrl+ '/sys/user/deleteUser/' + data.rowId,
                             type: 'POST',
                             dataType: 'json',
                             success: function (data) {

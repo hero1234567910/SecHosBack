@@ -66,6 +66,7 @@
 
 <script type="text/javascript" src="../../Scripts/jquery-3.3.1.min.js"></script>
 <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../Scripts/local.js"></script>
 <script>
 
     $.ajaxSetup({
@@ -91,7 +92,7 @@
                 form.on('submit(formDemo)', function (data) {
                     $.ajax({
                         async: false,
-                        url: '/sys/modular/add',
+                        url: prUrl+'/sys/modular/add',
                         contentType: 'application/json;charset=utf-8',
                         method: 'post',
                         data: JSON.stringify(data.field),
@@ -120,7 +121,7 @@
                 form.on('submit(formDemo)', function (data) {
                     $.ajax({
                         async: false,
-                        url: '/sys/modular/updateModule/' + data.field.rowId,
+                        url: prUrl+'/sys/modular/updateModule/' + data.field.rowId,
                         contentType: 'application/json;charset=utf-8',
                         method: 'put',
                         data: JSON.stringify(data.field),
@@ -208,7 +209,7 @@
                     }
                     $.ajax({
                         contentType: 'application/json;charset=utf-8',
-                        url: '/sys/modular/checkModuleName',
+                        url: prUrl+'/sys/modular/checkModuleName',
                         method: 'get',
                         async: false,
                         data: {
@@ -230,7 +231,7 @@
                     var check;
                     $.ajax({
                         contentType: 'application/json;charset=utf-8',
-                        url: '/sys/modular/checkModuleAddr',
+                        url: prUrl+ '/sys/modular/checkModuleAddr',
                         method: 'get',
                         async: false,
                         data: {
