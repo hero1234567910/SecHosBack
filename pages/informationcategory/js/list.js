@@ -76,10 +76,10 @@ layui.use('table', function(){
             var data = 'add';
             layer.open({
                 type: 2,
-                title: 'iframe父子操作',
+                title: '新增信息栏目',
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
-                area : ['480px' , '400px'],
+                area : ['500px' , '400px'],
                 content: 'Edit.html',
                 success: function(layero, index){
                     var body = layer.getChildFrame('body',index);

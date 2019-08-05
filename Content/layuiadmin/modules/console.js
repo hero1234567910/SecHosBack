@@ -48,18 +48,18 @@ layui.define(function(exports){
     ,echarts = layui.echarts;
     
     var re = [];
-    $.ajax({
-    	async:false,
-        url: '/sys/hosorder/orderStatistical',
-        contentType: 'application/json;charset=utf-8',
-        method: 'get',
-        dataType: 'JSON',
-        success: function (res) {
-            if (res.code == '0') {
-                re = res.data;
-            }
-        }
-    });
+    // $.ajax({
+    // 	async:false,
+    //     url: '/sys/hosorder/orderStatistical',
+    //     contentType: 'application/json;charset=utf-8',
+    //     method: 'get',
+    //     dataType: 'JSON',
+    //     success: function (res) {
+    //         if (res.code == '0') {
+    //             re = res.data;
+    //         }
+    //     }
+    // });
 	var dateToTime = function(str){
 		return str.replace(':',''); //用/替换日期中的-是为了解决Safari的兼容
     }
@@ -181,31 +181,31 @@ layui.define(function(exports){
   });
 
   //最新订单
-  layui.use('table', function(){
-    var $ = layui.$
-    ,table = layui.table;
-    //通告信息
-    var m_url = location.protocol + '\\\\' + location.hostname + ':' + (location.port == '' ? 80 : location.port);
-    table.render({
-        elem: '#LAY-index-topSearch'
-//      , height: 'full-130'
-        , even: true
-        , url: m_url + '/sys/informationinfo/listData'
-        , method: 'get'
-        , cols: [[
-//          {width: 18, title: '',align:'center' ,templet:'#indexTpl'},
-            {type: 'numbers', fixed: 'left'}
-//          {checkbox: true}
-            , {field: 'title', minWidth: 200, title: '标题'}
-            , {field: 'createUserName', minWidth: 100, title: '创建人'}
-            , {field: 'infoDate', title: '信息日期'}
-        ]]
-        ,skin: 'line'
-        , page: true
-        , limit: 10 //默认十条数据一页
-        , id: 'testReload'
-    });
-  });
+//   layui.use('table', function(){
+//     var $ = layui.$
+//     ,table = layui.table;
+//     //通告信息
+//     var m_url = location.protocol + '\\\\' + location.hostname + ':' + (location.port == '' ? 80 : location.port);
+//     table.render({
+//         elem: '#LAY-index-topSearch'
+// //      , height: 'full-130'
+//         , even: true
+//         , url: m_url + '/sys/informationinfo/listData'
+//         , method: 'get'
+//         , cols: [[
+// //          {width: 18, title: '',align:'center' ,templet:'#indexTpl'},
+//             {type: 'numbers', fixed: 'left'}
+// //          {checkbox: true}
+//             , {field: 'title', minWidth: 200, title: '标题'}
+//             , {field: 'createUserName', minWidth: 100, title: '创建人'}
+//             , {field: 'infoDate', title: '信息日期'}
+//         ]]
+//         ,skin: 'line'
+//         , page: true
+//         , limit: 10 //默认十条数据一页
+//         , id: 'testReload'
+//     });
+//   });
   
   exports('console', {})
 });

@@ -205,7 +205,7 @@
             //监听提交
             form.on("submit(formDemo)", function(data) {
               $.ajax({
-                url: m_url + "/sys/sechosconsultation/add",
+                url: peUrl + "/sys/sechosconsultation/add",
                 contentType: "application/json;charset=utf-8",
                 method: "post",
                 data: JSON.stringify(data.field),
@@ -236,7 +236,7 @@
             form.on("submit(formDemo)", function(data) {
               $.ajax({
                 async: false,
-                url: m_url + "/sys/sechosconsultation/reply",
+                url: prUrl + "/sys/sechosconsultation/reply",
                 contentType: "application/json;charset=utf-8",
                 method: "put",
                 data: JSON.stringify(data.field),

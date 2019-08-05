@@ -149,7 +149,8 @@
                         async: false,
                         url: prUrl+'/sys/dept/updateDept/' + data.field.rowId,
                         contentType: 'application/json;charset=utf-8',
-                        method: 'put',
+                        type:'PUT',
+                        method: 'PUT',
                         data: JSON.stringify(data.field),
                         dataType: 'JSON',
                         success: function (res) {

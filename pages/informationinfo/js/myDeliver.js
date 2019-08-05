@@ -102,7 +102,7 @@ layui.use('table', function () {
         elem: '#InfoTable'
         , even: true
         , height: 'full-115'
-        , url: m_url+'/sys/informationinfo/listData?createUserName=' +loginId
+        , url: prUrl+'/sys/informationinfo/listData?createUserName=' +loginId
         , toolbar: '#InfoToolbar'
         , method: 'get'
 //			,height:'420px'

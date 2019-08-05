@@ -84,13 +84,14 @@
     </form>
 
     <script type="text/javascript" src="../../Scripts/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/local.js"></script>
     <script type="text/javascript" src="../../Content/uploadify/jquery.uploadify.min.js"></script>
     <script src="../../Scripts/layui/layui.js" charset="utf-8"></script>
     <script src="../../Scripts/layui/layui.all.js"></script>
     <script src="../../Content/kindeditor/kindeditor-all-min.js"></script>
     <script src="../../Content/kindeditor/lang/zh-CN.js"></script>
     <script src="../../Content/layui-formSelects-master/dist/formSelects-v4.min.js"></script>
-    <script type="text/javascript" src="../../Scripts/local.js"></script>
+    
     <script>
         $.ajaxSetup({
             headers: {
@@ -145,7 +146,7 @@
             if(deflag =="false"){
                 formSelects.data("xmselect", "server", {
                 type: "post",
-                url: "/sys/informationcategory/getAllCategory"
+                url: prUrl+"/sys/informationcategory/getAllCategory"
                 });
             }
         }
@@ -193,7 +194,7 @@
         $(function () {
             $("#uploadFile").uploadify({
                 swf: "../../Content/uploadify/uploadify.swf",
-                uploader: "/sys/common/uploadFile", //服务器端方法
+                uploader: prUrl+"/sys/common/uploadFile", //服务器端方法
                 //'formData'    : {'someKey' : 'someValue', 'someOtherKey' : 1},//传输数据json格式
                 height: 30, //按钮高度
                 width: 100, //按钮宽度
