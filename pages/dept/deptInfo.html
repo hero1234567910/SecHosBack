@@ -191,6 +191,7 @@
             if (obj.event === 'edit') {
                 //更新
                 var data = 'edit';
+                setTimeout(function(){
                 layer.open({
                     type: 2,
                     title: '部门修改',
@@ -222,6 +223,7 @@
                         window.location.reload();
                     }
                 });
+                },300);
             }
         });
 
