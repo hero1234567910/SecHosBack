@@ -13,7 +13,7 @@
     <!-- load css -->
     <link href="Scripts/layui/css/layui.css" rel="stylesheet" />
     <link href="Content/global.css" rel="stylesheet" media="all" />
-    <link href="Content/index.css" rel="stylesheet"/>
+    <link href="Content/index.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -136,8 +136,8 @@
         var ws = null;          // 判断当前浏览器是否支持WebSocket
         var wsUrl = "ws://ey.nxjnjc.com/websocket/20".replace("http", "ws");
         createWebSocket(wsUrl);   //连接ws
-        var reg = new RegExp('"','g');  
-        $('#UserName').append(localStorage.getItem("m_user_userName").replace(reg,""));
+        var reg = new RegExp('"', 'g');
+        $('#UserName').append(localStorage.getItem("m_user_userName").replace(reg, ""));
         function createWebSocket(url) {
             try {
                 if ('WebSocket' in window) {
@@ -269,7 +269,8 @@
                 roles: [],
             },
             created() {
-                this.getMenu()
+                this.getMenu(),
+                this.updateLoginTime()
             },
             methods: {
                 getMenu() {
@@ -290,6 +291,29 @@
                             if (res.code == '0') {
                                 self.roles = res.data;
                             }
+                        }
+                    });
+                },
+                updateLoginTime() {
+                    var map = {};
+                    map['rowGuid'] = JSON.parse(window.localStorage.getItem('m_user_rowGuid'));
+                    $.ajax({
+                        async: false,
+                        url: '/sys/user/updateLoginTime',
+                        contentType: 'application/json;charset=utf-8',
+                        method: 'post',
+                        data: JSON.stringify(map),
+                        dataType: 'JSON',
+                        success: function (res) {
+                            if (res.code == '0') {
+                                console.log("success");
+                            }
+                            else
+                                layer.msg(res.msg);
+                        },
+                        //谷歌浏览器出现Provisional headers are shown警告     
+                        error: function (data) {
+
                         }
                     });
                 }
