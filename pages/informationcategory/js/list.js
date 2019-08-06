@@ -54,7 +54,7 @@ layui.use('table', function(){
                 ,{field:'categoryCode', width:80, title: '栏目编号'}
                 ,{field:'categoryName', width:80, title: '栏目名称'}
                 ,{field:'isSingle', width:80, title: '是否单条信息',templet:'#checkSingle'}
-                ,{field:'isNeedAudit', width:80, title: '是否需要审核',templet:'#checkAudit'}
+                ,{field:'isNeedAudit', width:80, title: '需要审核',templet:'#checkAudit'}
                 ,{field:'sortSq', width:80, title: '排序',sort:true}
                 ,{field:'right',title:'修改',toolbar:'#barDemo',width:70}
             ]]
