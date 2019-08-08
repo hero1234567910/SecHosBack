@@ -46,20 +46,20 @@ layui.define(function(exports){
     var $ = layui.$
     ,carousel = layui.carousel
     ,echarts = layui.echarts;
-    
+    var prUrl = 'https://p.zjgwsjk.com/2ysechosback';
     var re = [];
-    // $.ajax({
-    // 	async:false,
-    //     url: '/sys/hosorder/orderStatistical',
-    //     contentType: 'application/json;charset=utf-8',
-    //     method: 'get',
-    //     dataType: 'JSON',
-    //     success: function (res) {
-    //         if (res.code == '0') {
-    //             re = res.data;
-    //         }
-    //     }
-    // });
+    $.ajax({
+    	async:false,
+        url: prUrl+'/sys/sechosconsultation/qusStatistical',
+        contentType: 'application/json;charset=utf-8',
+        method: 'get',
+        dataType: 'JSON',
+        success: function (res) {
+            if (res.code == '0') {
+                re = res.data;
+            }
+        }
+    });
 	var dateToTime = function(str){
 		return str.replace(':',''); //用/替换日期中的-是为了解决Safari的兼容
     }
@@ -83,7 +83,7 @@ layui.define(function(exports){
       //今日流量趋势
       {
         title: {
-          text: '昨日订单',
+          text: '昨日门诊咨询统计',
           x: 'center',
           textStyle: {
             fontSize: 14
@@ -104,7 +104,7 @@ layui.define(function(exports){
           type : 'value'
         }],
         series : [{
-          name:'下单数量',
+          name:'咨询数量',
           type:'line',
           smooth:true,
           itemStyle: {normal: {areaStyle: {type: 'default'}}},
@@ -181,31 +181,32 @@ layui.define(function(exports){
   });
 
   //最新订单
-//   layui.use('table', function(){
-//     var $ = layui.$
-//     ,table = layui.table;
-//     //通告信息
-//     var m_url = location.protocol + '\\\\' + location.hostname + ':' + (location.port == '' ? 80 : location.port);
-//     table.render({
-//         elem: '#LAY-index-topSearch'
-// //      , height: 'full-130'
-//         , even: true
-//         , url: m_url + '/sys/informationinfo/listData'
-//         , method: 'get'
-//         , cols: [[
-// //          {width: 18, title: '',align:'center' ,templet:'#indexTpl'},
-//             {type: 'numbers', fixed: 'left'}
-// //          {checkbox: true}
-//             , {field: 'title', minWidth: 200, title: '标题'}
-//             , {field: 'createUserName', minWidth: 100, title: '创建人'}
-//             , {field: 'infoDate', title: '信息日期'}
-//         ]]
-//         ,skin: 'line'
-//         , page: true
-//         , limit: 10 //默认十条数据一页
-//         , id: 'testReload'
-//     });
-//   });
+  layui.use('table', function(){
+    var $ = layui.$
+    ,table = layui.table;
+    //通告信息
+    var m_url = location.protocol + '\\\\' + location.hostname + ':' + (location.port == '' ? 80 : location.port);
+    var prUrl = 'https://p.zjgwsjk.com/2ysechosback';
+    table.render({
+        elem: '#LAY-index-topSearch'
+//      , height: 'full-130'
+        , even: true
+        , url: prUrl + '/sys/informationinfo/listData'
+        , method: 'get'
+        , cols: [[
+//          {width: 18, title: '',align:'center' ,templet:'#indexTpl'},
+            {type: 'numbers', fixed: 'left'}
+//          {checkbox: true}
+            , {field: 'title', minWidth: 200, title: '标题'}
+            , {field: 'createUserName', minWidth: 100, title: '创建人'}
+            , {field: 'infoDate', title: '信息日期'}
+        ]]
+        ,skin: 'line'
+        , page: true
+        , limit: 10 //默认十条数据一页
+        , id: 'testReload'
+    });
+  });
   
   exports('console', {})
 });
