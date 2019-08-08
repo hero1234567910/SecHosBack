@@ -50,7 +50,7 @@ layui.define(function(exports){
     var re = [];
     $.ajax({
     	async:false,
-        url: '/sys/hosorder/orderStatistical',
+        url: '/sys/sechosconsultation/qusStatistical',
         contentType: 'application/json;charset=utf-8',
         method: 'get',
         dataType: 'JSON',
@@ -83,7 +83,7 @@ layui.define(function(exports){
       //今日流量趋势
       {
         title: {
-          text: '昨日订单',
+          text: '昨日门诊咨询',
           x: 'center',
           textStyle: {
             fontSize: 14
@@ -104,7 +104,7 @@ layui.define(function(exports){
           type : 'value'
         }],
         series : [{
-          name:'下单数量',
+          name:'咨询数量',
           type:'line',
           smooth:true,
           itemStyle: {normal: {areaStyle: {type: 'default'}}},
