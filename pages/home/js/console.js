@@ -5,7 +5,7 @@ var vm = new Vue({
         orderCount:{}
     },
     created() {
-        this.getRthing();
+        //this.getRthing();
     },
     methods: {
       //代办事项
