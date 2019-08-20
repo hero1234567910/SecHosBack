@@ -181,13 +181,26 @@
         // });
 
         //富文本编辑器
-        KindEditor.ready(function (K) {
-            window.editor = K.create("#editor_id", {
-                afterBlur: function () {
-                    this.sync();
-                }
-            });
-        });
+	    KindEditor.ready(function(K) {
+	        window.editor = K.create('#editor_id', {
+	            afterBlur: function () { this.sync(); },
+	             uploadJson : '/sys/uploadJson',
+	             fileManagerJson : '/sys/fileManagerJson',
+					allowFileManager : true,
+					afterCreate : function() {
+						var self = this;
+						K.ctrl(document, 13, function() {
+							self.sync();
+							document.forms['example'].submit();
+						});
+						K.ctrl(self.edit.doc, 13, function() {
+							self.sync();
+							document.forms['example'].submit();
+						});
+					}
+	        });
+	        prettyPrint();
+	    });
 
         //定义全局变量
         var local_data_attachGuids = new Array();
