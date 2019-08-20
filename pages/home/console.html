@@ -1,16 +1,17 @@
-
-
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>layuiAdmin 控制台主页一</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <link rel="stylesheet" href="../../Content/layuiadmin/layui/css/layui.css" media="all">
   <link rel="stylesheet" href="../../Content/layuiadmin/style/admin.css" media="all">
 </head>
+
 <body>
   <div class="layui-fluid" id="vueConfig">
     <div class="layui-row layui-col-space15">
@@ -20,7 +21,7 @@
             <div class="layui-card">
               <div class="layui-card-header">快捷方式</div>
               <div class="layui-card-body">
-                
+
                 <div class="layui-carousel layadmin-carousel layadmin-shortcut">
                   <div carousel-item>
                     <ul class="layui-row layui-col-space10">
@@ -69,14 +70,14 @@
                     </ul>
                   </div>
                 </div>
-                
+
               </div>
             </div>
           </div>
           <div class="layui-col-md6">
             <div class="layui-card">
-              <div class="layui-card-header">所有事项</div>
-              <!-- <div class="layui-card-body">
+              <!-- <div class="layui-card-header">所有事项</div>
+              <div class="layui-card-body">
 
                 <div class="layui-carousel layadmin-carousel layadmin-backlog">
                   <div carousel-item>
@@ -116,14 +117,15 @@
             <div class="layui-card">
               <div class="layui-card-header">数据概览</div>
               <div class="layui-card-body">
-                
-                <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-dataview">
+
+                <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                  lay-filter="LAY-index-dataview">
                   <div carousel-item id="LAY-index-dataview">
                     <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
                     <!--<div></div>-->
                   </div>
                 </div>
-                
+
               </div>
             </div>
             <div class="layui-card">
@@ -145,36 +147,36 @@
           </div>
         </div>
       </div>
-      
+
     </div>
   </div>
-	
+
   <script type="text/javascript" src="../../Scripts/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="../../Scripts/local.js"></script>
-	<script src="../../Scripts/vue.js"></script>
-	<script src="../../Content/layuiadmin/layui/layui.js?t=1" charset="utf-8"></script>
-	<script>
-		$.ajaxSetup({
-	    beforeSend: function(xhr){
-	    	xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
-	    	xhr.setRequestHeader("token", window.localStorage.getItem('m_token')); 
-	    },
-	    complete: function (res) {
-	        if (JSON.parse(res.responseText).code == '401') {
-				window.top.location.href = '../../login.html';
-	        }
-	    }
-		});
-	</script>
-	<script src="../../Scripts/local.js"></script>
-	<script src="js/console.js"></script>
+  <script src="../../Scripts/vue.js"></script>
+  <script src="../../Content/layuiadmin/layui/layui.js?t=1" charset="utf-8"></script>
   <script>
-  layui.config({
-    base: '../../Content/layuiadmin/' //静态资源所在路径
-  }).extend({
-    index: '../../Content/layuiadmin/lib/index' //主入口模块
-  }).use(['index','console']);
+    $.ajaxSetup({
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+        xhr.setRequestHeader("token", window.localStorage.getItem('m_token'));
+      },
+      complete: function (res) {
+        if (JSON.parse(res.responseText).code == '401') {
+          window.top.location.href = '../../login.html';
+        }
+      }
+    });
+  </script>
+  <script src="../../Scripts/local.js"></script>
+  <script src="js/console.js"></script>
+  <script>
+    layui.config({
+      base: '../../Content/layuiadmin/' //静态资源所在路径
+    }).extend({
+      index: '../../Content/layuiadmin/lib/index' //主入口模块
+    }).use(['index', 'console']);
   </script>
 </body>
-</html>
 
+</html>
