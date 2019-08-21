@@ -114,7 +114,7 @@ layui.use('table', function () {
             , {field: 'typeName', width: 70, title: '信息类型', sort: true}
             , {field: 'infoDate', width: 90, title: '信息日期', sort: true,templet: '<div>{{ layui.laytpl.toDateString(d.infoDate,"yyyy-MM-dd") }}</div>'}
             , {field: 'status', width: 90, title: '状态', sort: true, templet: '#checkDeliver'}
-            , {field: 'sortSq', width: 90, title: '排序', sort: true}
+            //, {field: 'sortSq', width: 90, title: '排序', sort: true}
             , {field: 'right', title: '修改', toolbar: '#barDemo', width: 80}
             , {field: 'right', title: '查看', toolbar: '#Demo', width: 80}
         ]]

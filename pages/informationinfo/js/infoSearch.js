@@ -76,7 +76,7 @@ layui.use('table', function () {
             {width: 18, title: '', align: 'center', templet: '#indexTpl'}
             , {field: 'title', width: 200, title: '标题', sort: true}
             , {field: 'createUserName', width: 80, title: '创建人', sort: true}
-            , {field: 'typeName', width: 80, title: '信息类别', sort: true}
+            , {field: 'typeName', width: 100, title: '信息类别', sort: true}
             , {
                 field: 'infoDate',
                 width: 90,
