@@ -184,8 +184,8 @@
 	    KindEditor.ready(function(K) {
 	        window.editor = K.create('#editor_id', {
 	            afterBlur: function () { this.sync(); },
-	             uploadJson : '/sys/uploadJson',
-	             fileManagerJson : '/sys/fileManagerJson',
+	             uploadJson : prUrl+'/sys/uploadJson',
+	             fileManagerJson : prUrl+'/sys/fileManagerJson',
 					allowFileManager : true,
 					afterCreate : function() {
 						var self = this;
