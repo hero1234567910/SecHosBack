@@ -71,7 +71,7 @@
             <div class="layui-form-item layui-form-pane" style="height: 38.5px;">
                 <label class="layui-form-label ">手机号码</label>
                 <div class="layui-input-block">
-                    <input type="text" name="mobile" id="mobile" lay-verify="title" autocomplete="off"
+                    <input type="text" name="mobile" id="mobile" lay-verify="phone" autocomplete="off"
                         placeholder="请输入手机号码" class="layui-input">
                 </div>
             </div>
@@ -351,7 +351,7 @@
                         return '密码不得少于6位';
                     }
                 },
-                tel: [/^1[3|4|5|7|8]\d{9}$/, '手机必须11位，只能是数字！']
+                phone: [/^1[3|4|5|7|8]\d{9}$/, '手机必须11位，只能是数字！']
 
             });
 

@@ -32,7 +32,7 @@
     <div class="layui-form-item layui-form-pane">
         <label class="layui-form-label ">手机</label>
         <div class="layui-input-block">
-            <input type="text" name="mobile" id="mobile" lay-verify="title" autocomplete="off"  class="layui-input">
+            <input type="text" name="mobile" id="mobile" lay-verify="title" autocomplete="off"  class="layui-input" lay-verify="phone">
         </div>
     </div>
     <div class="layui-form-item layui-form-pane">
@@ -113,6 +113,9 @@
                 }
             }) ;
         });
+        form.verify({
+            phone: [/^1[3|4|5|7|8]\d{9}$/, '手机必须11位，只能是数字！']
+        })
     });
 
     //修改密码
