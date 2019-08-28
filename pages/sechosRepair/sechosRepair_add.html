@@ -2,20 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>设备报修新增信息</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <script src="../../Scripts/JsAndCss.Model.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../../Content/uploadify/jquery.uploadify.min.js"></script>
 </head>
 
 <body>
     <form class="layui-form" lay-filter="layform">
         <div class="layui-container">
             <div class="layui-row">
-
                 <div class="layui-col-xs6">
                     <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
                         <label class="layui-form-label">设备名称:<font style="color:red">*</font></label>
@@ -31,26 +31,27 @@
                         <label class="layui-form-label">报修人姓名:<font style="color:red">*</font></label>
                         <div class="layui-input-block">
                             <input type="text" id="repairName" name="repairName" class="layui-input"
-                                lay-verify="required" readonly/>
+                                lay-verify="required" readonly />
                         </div>
                     </div>
                 </div>
 
                 <div class="layui-col-xs6" style="display: none;">
-                        <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
-                            <label class="layui-form-label">报修人Guid:<font style="color:red">*</font></label>
-                            <div class="layui-input-block">
-                                <input type="text" id="repairGuid" name="repairGuid" class="layui-input"
-                                    lay-verify="required" readonly/>
-                            </div>
+                    <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
+                        <label class="layui-form-label">报修人Guid:<font style="color:red">*</font></label>
+                        <div class="layui-input-block">
+                            <input type="text" id="repairGuid" name="repairGuid" class="layui-input"
+                                lay-verify="required" readonly />
                         </div>
                     </div>
+                </div>
 
                 <div class="layui-col-xs6">
                     <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
                         <label class="layui-form-label">报修人电话:</label>
                         <div class="layui-input-block">
-                            <input type="text" id="repairPhone" name="repairPhone" class="layui-input" lay-verify="required|repairPhone" />
+                            <input type="text" id="repairPhone" name="repairPhone" class="layui-input"
+                                lay-verify="required|repairPhone" />
                         </div>
                     </div>
                 </div>
@@ -59,7 +60,8 @@
                     <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
                         <label class="layui-form-label">设备位置:</label>
                         <div class="layui-input-block">
-                            <input type="text" id="devicePlace" name="devicePlace" class="layui-input" lay-verify="required"/>
+                            <input type="text" id="devicePlace" name="devicePlace" class="layui-input"
+                                lay-verify="required" />
                         </div>
                     </div>
                 </div>
@@ -68,7 +70,7 @@
                         <label class="layui-form-label">损坏位置:</label>
                         <div class="layui-input-block">
                             <input type="text" name="damagedParts" id="damagedParts" autocomplete="off"
-                                class="layui-input" lay-verify="required">
+                                class="layui-input" lay-verify="required" />
                         </div>
                     </div>
                 </div>
@@ -95,17 +97,29 @@
                 <div class="layui-col-xs6">
                     <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
                         <label class="layui-form-label">设备图片:</label>
-                        <div class="layui-input-block">
-                            <input type="text" id="picGuid" name="picGuid" class="layui-input" autocomplete="off" />
+                        <div style="margin-left: 20px;">
+                            <input type="file" name="uploadify" id="uploadFile" />
+                            <div id="some_file_queue"></div>
+                            <div id="fileName"></div>
                         </div>
+                        <!-- <div class="layui-upload">
+                            <button type="button" class="layui-btn" id="test1">
+                                上传图片
+                            </button>
+                            <div class="layui-upload-list">
+                                <img class="layui-upload-img" id="demo1" />
+                                <p id="demoText"></p>
+                            </div>
+                        </div> -->
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <div style="text-align:center;margin-top:20px">
-            <button class="layui-btn" lay-submit="" lay-filter="formDemo">添加</button>
+        <div style="text-align:center;margin-top:50px">
+            <button class="layui-btn" lay-submit="" lay-filter="formDemo">
+                添加
+            </button>
             <input type="button" value="关闭" class="layui-btn layui-btn-normal" onclick="closeWin()" />
         </div>
     </form>
@@ -113,49 +127,52 @@
     <script>
         var table;
 
-        layui.use(['form', 'table'], function () {
+        layui.use(["form", "table", "upload"], function () {
             var form = layui.form;
             table = layui.table;
             var $ = layui.jquery;
-
+            upload = layui.upload;
 
             form.verify({
-            repairPhone: [/^1[3|4|5|7|8]\d{9}$/, '手机必须11位，只能是数字！']
-
-        });
+                repairPhone: [/^1[3|4|5|7|8]\d{9}$/, "手机必须11位，只能是数字！"]
+            });
             //监听提交
-            form.on('submit(formDemo)', function (data) {
 
-                SendAjax("/sys/sechosrepair/add", JSON.stringify(data.field), function (res) {
-                    if (res.code == '0') {
-                        top.messageAlert("提醒", "添加成功", "info", function () {
-                            top.closePanel(window.name, true);
-                        });
+            form.on("submit(formDemo)", function (data) {
+                SendAjax(
+                    "/sys/sechosrepair/add",
+                    JSON.stringify(data.field),
+                    function (res) {
+                        if (res.code == "0") {
+                            top.messageAlert("提醒", "添加成功", "info", function () {
+                                top.closePanel(window.name, true);
+                            });
+                        } else {
+                            top.messageAlert("提醒", res.msg, "error");
+                        }
                     }
-                    else {
-                        top.messageAlert("提醒", res.msg, "error");
-                    }
-
-                });
+                );
                 return false;
             });
         });
 
         $(function () {
             inItSelect();
-            var reg = new RegExp('"', 'g');
-            $('#repairName').val(localStorage.getItem('m_user_userName').replace(reg, ""));
-            $('#repairGuid').val(localStorage.getItem('m_user_rowGuid').replace(reg, ""));
-        })
-
+            var reg = new RegExp('"', "g");
+            $("#repairName").val(
+                localStorage.getItem("m_user_userName").replace(reg, "")
+            );
+            $("#repairGuid").val(
+                localStorage.getItem("m_user_rowGuid").replace(reg, "")
+            );
+        });
 
         function afterSuccess(data) {
             if (data.IsSuccess == true) {
                 top.messageAlert("提醒", "提交成功", "info", function () {
                     top.closePanel(window.name, true);
                 });
-            }
-            else {
+            } else {
                 top.messageAlert("提醒", data.msg, "error");
             }
         }
@@ -163,8 +180,17 @@
         function closeWin() {
             top.closePanel(window.name, false);
         }
-
     </script>
+    <style>
+        .m-img {
+            width: 200px;
+        }
+
+        .layui-input-block1 {
+            min-height: 36px;
+            margin-left: 140px;
+        }
+    </style>
 </body>
 
 </html>

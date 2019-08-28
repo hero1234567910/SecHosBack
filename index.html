@@ -153,7 +153,7 @@
                 initEventHandle();
             } catch (e) {
                 reconnect(url);
-                console.log(e);
+                //console.log(e);
             }
         }
 
@@ -172,7 +172,7 @@
             };
             ws.onmessage = function (event) {    //如果获取到消息，心跳检测重置
                 heartCheck.reset().start();      //拿到任何消息都说明当前连接是正常的
-                console.log(event.data);
+                //console.log(event.data);
                 if (event.data.substring(0, 6) == '您有新的订单') {
                     playSound();
                     layui.use(['layer'], function () {

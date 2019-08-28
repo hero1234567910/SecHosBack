@@ -8,7 +8,7 @@ layui
   .extend({
     index: "lib/index" //主入口模块
   })
-  .use(["index", "form", "laydate"], function() {
+  .use(["index", "form", "laydate","layer"], function() {
     var $ = layui.$,
       admin = layui.admin,
       element = layui.element,

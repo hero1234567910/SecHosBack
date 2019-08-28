@@ -20,8 +20,8 @@
                     <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
                         <label class="layui-form-label">Guid:<font style="color:red">*</font></label>
                         <div class="layui-input-block">
-                            <input type="text" id="rowGuid" name="rowGuid" class="layui-input"
-                                lay-verify="required" readonly />
+                            <input type="text" id="rowGuid" name="rowGuid" class="layui-input" lay-verify="required"
+                                readonly />
                         </div>
                     </div>
                 </div>
@@ -123,61 +123,65 @@
     </form>
 
     <script>
-            var table;
-            layui.use(["form","table"], function () {
-                var form = layui.form;
-                table = layui.table;
-                var $ = layui.jquery;
-                //表单初始赋值
-                var rowGuid = getURLParameter("rowGuid");
-                SendAjax("/sys/sechosrepair/getDetailByGuid", rowGuid, function (res) {
-                    if (res.code == "0") {
-                        //layform 即 class="layui-form" 所在元素对应的 lay-filter="" 对应的值
-                        form.val("layform", res.data);
-                        form.render();
-                    }
-                });
-            
-                //监听提交
-                form.on("submit(formDemo)", function (data) {
-                    SendAjax(
-                        "/sys/sechosrepair/update",
-                        JSON.stringify(data.field),
-                        function (res) {
-                            if (res.code == "0") {
-                                top.messageAlert("提醒", "保存成功", "info", function () {
-                                    top.closePanel(window.name, true);
-                                });
-                            } else {
-                                top.messageAlert("提醒", data.msg, "error");
-                            }
-                        }
-                    );
-                    return false;
-                });
+        var table;
+        layui.use(["form", "table"], function () {
+            var form = layui.form;
+            table = layui.table;
+            var $ = layui.jquery;
+            //表单初始赋值
+            var rowGuid = getURLParameter("rowGuid");
+            SendAjax("/sys/sechosrepair/getDetailByGuid", rowGuid, function (res) {
+                if (res.code == "0") {
+                    //layform 即 class="layui-form" 所在元素对应的 lay-filter="" 对应的值
+                    form.val("layform", res.data);
+                    form.render();
+                }
+            });
+
+            form.verify({
+                repairPhone: [/^1[3|4|5|7|8]\d{9}$/, '手机必须11位，只能是数字！']
 
             });
-    
-            $(function () {
-                inItSelect();
+            //监听提交
+            form.on("submit(formDemo)", function (data) {
+                SendAjax(
+                    "/sys/sechosrepair/update",
+                    JSON.stringify(data.field),
+                    function (res) {
+                        if (res.code == "0") {
+                            top.messageAlert("提醒", "保存成功", "info", function () {
+                                top.closePanel(window.name, true);
+                            });
+                        } else {
+                            top.messageAlert("提醒", data.msg, "error");
+                        }
+                    }
+                );
+                return false;
             });
-    
-            function afterSuccess(data) {
-                if (data.IsSuccess == true) {
-                    top.messageAlert("提醒", "保存成功", "info", function () {
-                        top.closePanel(window.name, true);
-                    });
-                } else {
-                    top.messageAlert("提醒", data.msg, "error");
-                }
+
+        });
+
+        $(function () {
+            inItSelect();
+        });
+
+        function afterSuccess(data) {
+            if (data.IsSuccess == true) {
+                top.messageAlert("提醒", "保存成功", "info", function () {
+                    top.closePanel(window.name, true);
+                });
+            } else {
+                top.messageAlert("提醒", data.msg, "error");
             }
-    
-            function closeWin() {
-                top.closePanel(window.name, false);
-            }
-    
-            
-        </script>
+        }
+
+        function closeWin() {
+            top.closePanel(window.name, false);
+        }
+
+
+    </script>
 </body>
 
 </html>
