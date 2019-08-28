@@ -270,7 +270,7 @@
             },
             created() {
                 this.getMenu(),
-                this.updateLoginTime()
+                    this.updateLoginTime()
             },
             methods: {
                 getMenu() {
@@ -379,6 +379,107 @@
             window.localStorage.removeItem('m_token');
             location.href = "login.html";
         }
+    </script>
+
+    <script>
+
+
+        layui.use('layer', function () {
+            window.RetValue = "";  //全局变量，用于保存Dialog的返回值。
+            window.allowBack = false;//当需要执行回掉函数时，将top.allowBack设为true
+            //注意：请再使用之后清空该变量。
+
+            function OpenPanel(url, width, height, title, callbackMethod, options) {   //打开话框
+                if (width > $(window).width()) {
+                    width = $(window).width() - 10;
+                }
+                var config = {
+                    full: false,//是否全屏
+                    title: title,
+                    type: 2,
+                    shadeClose: false,
+                    shade: [0.3, '#000'],
+                    maxmin: true, //开启最大化最小化按钮
+                    area: [width + 'px', height + 'px'],
+                    content: url,
+                    end: function (layero, index) {
+                        if (window.allowBack) {
+                            typeof callbackMethod === 'function' && callbackMethod.apply(this, arguments);
+                        }
+                    }
+                };
+                config = $.extend({}, config, options);
+                var index = layer.open(config);
+                if (config.full) {
+                    layer.full(index);
+                }
+            }
+
+            function closePanel(url, Back) {
+
+                if (Back != undefined) {
+                    window.allowBack = Back;
+                }
+                var index = top.layer.getFrameIndex(url); //先得到当前iframe层的索引
+                top.layer.close(index); //再执行关闭
+            }
+
+            //为了兼容以前的写法
+            function messageAlert(title, msg, icon, fn) {
+
+                layer.closeAll('loading');
+                var ic = 1;
+                switch (icon) {
+                    case "info": ic = 1; break;
+                    case "error": ic = 2; break;
+                }
+                layer.alert(msg, {icon: ic}, function (index) {
+                    layer.close(index);
+                    typeof fn === 'function' && fn.apply(this, arguments);
+                })
+            }
+
+
+
+            function layuiConfirm(content, options, yes, cancel) {
+                layer.confirm(content, options, function (index) {
+                    layer.close(index);
+                    if (yes != undefined) {
+                        yes();
+                    }
+
+                }, function (index) {
+                    layer.close(index);
+                    if (cancel != undefined) {
+                        cancel();
+                    }
+
+                })
+            }
+            function layuiMsg(title) {
+                layer.msg(title, {time: 3000});
+            }
+            function layuiPrompt(title, yes) {
+                layer.prompt({title: title, formType: 2}, function (data, index) {
+                    layer.close(index);
+                    if (yes != undefined) {
+                        yes(data);
+                    }
+                }
+                );
+
+            }
+
+
+            //将方法名暴露出来，供外部方法调用
+            window.OpenPanel = OpenPanel;
+            window.closePanel = closePanel;
+            window.messageAlert = messageAlert;
+            window.layuiConfirm = layuiConfirm;
+            window.layuiMsg = layuiMsg;
+            window.layuiPrompt = layuiPrompt;
+        });
+
     </script>
 </body>
 
