@@ -3,19 +3,19 @@
     //必须要的js
     "../../Scripts/jquery-3.3.1.min.js",
    "../../Scripts/layuiadmin/layui/layui.js?t=1",
-   "../../Content/uploadify/jquery.uploadify.min.js",
+   "../../Scripts/jquery.unobtrusive-ajax.min.js",
    "../../Scripts/utils.js",
     "../../Scripts/global.js",
       "../../Scripts/Page.js",
-         "../../Scripts/jquery.unobtrusive-ajax.min.js",
-         "../../Scripts/uploadPic.js"
+         "../../Content/uploadify/jquery.uploadify.min.js"
     ]
     var AllCss = [
     //必须要的css
     "../../Scripts/layuiadmin/layui/css/layui.css",
+    "../../Content/uploadify/uploadify.css",
      "../../Content/global.css",
-      "../../Scripts/layuiadmin/style/admin.css",
-      "../../Content/uploadify/uploadify.css"
+      "../../Scripts/layuiadmin/style/admin.css"
+      
     ]
 
 
