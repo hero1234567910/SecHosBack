@@ -61,7 +61,7 @@
                         <label class="layui-form-label">维修速度:</label>
                         <div class="layui-input-block">
                             <input type="text" id="repairSpeed" name="repairSpeed" class="layui-input"
-                               readonly />
+                               readonly placeholder="暂无"/>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                         <label class="layui-form-label">维修人员态度:</label>
                         <div class="layui-input-block">
                             <input type="text" id="repairAttitude" name="repairAttitude" class="layui-input"
-                                readonly />
+                                readonly placeholder="暂无"/>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                         <label class="layui-form-label">维修技术水平:</label>
                         <div class="layui-input-block">
                             <input type="text" name="skillLevels" id="skillLevels" autocomplete="off"
-                                class="layui-input" readonly>
+                                class="layui-input" placeholder="暂无" readonly>
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                         <label class="layui-form-label">维修意见:</label>
                         <div class="layui-input-block">
                             <textarea type="textarea" id="repairAdvice" name="repairAdvice" class="layui-textarea"
-                                lay-verify="" maxlength="200" rows="3" readonly></textarea>
+                                lay-verify="" maxlength="200" rows="3" placeholder="暂无" readonly></textarea>
                         </div>
                     </div>
                 </div>
@@ -134,9 +134,23 @@
                 if (res.code == "0") {
                     //layform 即 class="layui-form" 所在元素对应的 lay-filter="" 对应的值
                     form.val("layform", res.data);
-                    $('#skillLevels').val(res.data.skillLevels+" "+"星");
-                    $('#repairAttitude').val(res.data.repairAttitude+" "+"星");
-                    $('#repairSpeed').val(res.data.repairSpeed+" "+"星");
+                    if(res.data.skillLevels=='null'||res.data.skillLevels==null||res.data.skillLevels==''){
+                        $('#skillLevels').val();
+                    }else{
+                        $('#skillLevels').val(res.data.skillLevels+" "+"星");
+                    }
+                    
+                    if(res.data.repairAttitude=='null'||res.data.repairAttitude==null||res.data.repairAttitude==''){
+                        $('#repairAttitude').val();
+                    }else{
+                        $('#repairAttitude').val(res.data.repairAttitude+" "+"星");
+                    }
+
+                    if(res.data.repairSpeed=='null'||res.data.repairSpeed==null||res.data.repairSpeed==''){
+                        $('#repairSpeed').val();
+                    }else{
+                        $('#repairSpeed').val(res.data.repairSpeed+" "+"星");
+                    }
                     form.render();
                 }
             });

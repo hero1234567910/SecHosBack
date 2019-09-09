@@ -98,7 +98,11 @@
                     },
                     {
                         field: 'repairSpeed', title: '报修速度', sort: true, Width: 80, align: 'center',templet: function(d){
-                            return d.repairSpeed +' '+'星'
+                            if(d.repairSpeed=="null"||d.repairSpeed==""||d.repairSpeed==null){
+                                return '暂无'
+                            }else{
+                                return d.repairSpeed +' '+'星'
+                            }
                         }
                     },
                     {
@@ -106,12 +110,20 @@
                     },
                     {
                         field: 'repairAttitude', title: '维修人员态度', Width: 100, align: 'center',templet: function(d){
-                            return d.repairSpeed +' '+'星'
+                            if(d.repairAttitude=="null"||d.repairAttitude==""||d.repairAttitude==null){
+                                return '暂无'
+                            }else{
+                                return d.repairAttitude +' '+'星'
+                            }
                         }
                     },
                     {
                         field: 'skillLevels', title: '维修技术水平', Width: 100, align: 'center',templet: function(d){
-                            return d.repairSpeed +' '+'星'
+                            if(d.skillLevels=="null"||d.skillLevels==""||d.skillLevels==null){
+                                return '暂无'
+                            }else{
+                                return d.skillLevels +' '+'星'
+                            }
                         }
                     },
                     {
