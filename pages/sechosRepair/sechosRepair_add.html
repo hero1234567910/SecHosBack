@@ -93,6 +93,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="layui-col-xs6">
                     <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
                         <label class="layui-form-label">设备图片:</label>
@@ -127,6 +128,7 @@
             //监听提交
 
             form.on("submit(formDemo)", function (data) {
+                data.field['uploadImgGuid'] = local_data_attachGuids[0];
                 SendAjax(
                     "/sys/sechosrepair/add",
                     JSON.stringify(data.field),
@@ -161,13 +163,13 @@
                     var jdata = $.parseJSON(data);
                     var last = jdata.type.substr("1", jdata.type.length);
                     $("#fileName").append(
-                        "<div style='float:left;margin-right:30px'><a href=" +
+                        "<div style='float:left;margin-right:110px'><a href=" +
                         jdata.url +
                         " download=" +
                         jdata.fileName +
                         "><em><img class='m-img' src='" +
                         jdata.url +
-                        "' /></em><em id=" +
+                        "' /></em><em style='margin-left: 110px;' id=" +
                         jdata.attachRowguid +
                         " name='fileName'  style='color:#555555'>" +
                         jdata.fileName +
@@ -268,12 +270,14 @@
     <style>
         .m-img {
             width: 200px;
+            margin-left: 110px;
         }
 
         .layui-input-block1 {
             min-height: 36px;
             margin-left: 140px;
         }
+        
     </style>
 </body>
 
