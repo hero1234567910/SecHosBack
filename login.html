@@ -75,7 +75,7 @@
                 success:function(res){
                     if(res.code == 0){
                         //获取token，并存储在localstorage
-                        console.log(res.data.user)
+                        //console.log(res.data.user)
                         window.localStorage.setItem('m_token',res.data.token);
                         window.localStorage.setItem('m_user_rowGuid',JSON.stringify(res.data.userRowGuid));
                         window.localStorage.setItem('m_user_userName',JSON.stringify(res.data.userName));
@@ -95,7 +95,7 @@
                     }
                 }
             }) ;
-            console.log(data.field)
+            //console.log(data.field)
         });
 //		     //自定义验证规则
 //	        form.verify({
