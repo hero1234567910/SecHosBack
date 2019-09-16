@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>设备报修列表</title>
+    <title>报修满意度列表</title>
     <meta name="renderer" content="webkit" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -28,7 +28,7 @@
                                         class="layui-input">
                                 </td>
                                 <td class="TB_01" style="width:10%">
-                                    报修日期:
+                                    评价日期:
                                 </td>
                                 <td class="TB_02" style="width:10%;">
                                     <input id="startTime" type="text" name="startTime" placeholder="开始日期"
@@ -47,7 +47,7 @@
                                 <td style="padding:5px;width: 20%;">
                                     <input type="button" value="查询" onclick="search()" class="layui-btn layui-btn-sm" />
 
-                                    <input type="button" value="新增" onclick="addRow()" class="layui-btn layui-btn-sm" />
+                                    <!-- <input type="button" value="新增" onclick="addRow()" class="layui-btn layui-btn-sm" /> -->
                                     <input type="button" value="删除" onclick="deleteRow()"
                                         class="layui-btn layui-btn-sm" />
                                 </td>
@@ -59,15 +59,13 @@
         </table>
     </div>
 
-    <table id="sechosRepairTable"></table>
+    <table id="repairSatisfactionTable"></table>
 
     <script type="text/html" id="checkStatus">
-        {{# if(d.repairStatus == 0){ }}
-        <span style="color: orange;">报修中</span>
-        {{# } else if(d.repairStatus == 1) { }}
-        <span style="color: red;">报修取消</span>
-        {{# } else if(d.repairStatus == 2) { }}
-        <span style="color: green;">报修完成</span>
+        {{# if(d.evaluationStatus == 0){ }}
+        <span style="color: orange;">未评价</span>
+        {{# } else if(d.evaluationStatus == 1) { }}
+        <span style="color: green;">已评价</span>
         {{# } }}
     </script>
 
@@ -84,12 +82,12 @@
             var prUrl = 'https://p.zjgwsjk.com/2ysechosback';
             table.render({
                 id: 'layuiTable',//固定写法
-                elem: '#sechosRepairTable',//固定写法
+                elem: '#repairSatisfactionTable',//固定写法
                 height: 'full-' + ($("#toolBar").height()),//固定写法
                 method: 'get',//固定写法
                 remoteSort: true,
                 initSort: {field: "deviceName,createTime", type: "desc,asc"},
-                url: prUrl + '/sys/sechosrepair/listData', //数据接口
+                url: prUrl + '/sys/sechosrepairsatisfaction/listData', //数据接口
                 page: true, //开启分页
                 limit: 20,//每页显示行数
                 where: where,
@@ -97,31 +95,44 @@
 
                     {type: 'checkbox', fixed: 'left'},//固定
                     {
-                        field: 'deviceName', title: '设备名称', sort: true, minWidth: 100, align: 'left'
+                        field: 'deviceName', title: '报修设备名称', sort: true, minWidth: 100, align: 'left'
                     },
                     {
-                        field: 'repairName', title: '报修人姓名', sort: true, Width: 80, align: 'left'
+                        field: 'repairSpeed', title: '报修速度', sort: true, Width: 80, align: 'center',templet: function(d){
+                            if(d.repairSpeed=="null"||d.repairSpeed==""||d.repairSpeed==null){
+                                return '暂无'
+                            }else{
+                                return d.repairSpeed +' '+'星'
+                            }
+                        }
                     },
                     {
-                        field: 'devicePlace', title: '设备地址', sort: true, Width: 80, align: 'center'
+                        field: 'createTime', title: '评价日期', sort: true, width: 130, align: 'center', templet: '<div>{{ Format(d.createTime,"yyyy-MM-dd")}}</div>'
                     },
                     {
-                        field: 'createTime', title: '报修日期', sort: true, width: 130, align: 'center', templet: '<div>{{ Format(d.createTime,"yyyy-MM-dd")}}</div>'
+                        field: 'repairAttitude', title: '维修人员态度', Width: 100, align: 'center',templet: function(d){
+                            if(d.repairAttitude=="null"||d.repairAttitude==""||d.repairAttitude==null){
+                                return '暂无'
+                            }else{
+                                return d.repairAttitude +' '+'星'
+                            }
+                        }
                     },
                     {
-                        field: 'damagedParts', title: '损坏部位', Width: 100, align: 'center'
+                        field: 'skillLevels', title: '维修技术水平', Width: 100, align: 'center',templet: function(d){
+                            if(d.skillLevels=="null"||d.skillLevels==""||d.skillLevels==null){
+                                return '暂无'
+                            }else{
+                                return d.skillLevels +' '+'星'
+                            }
+                        }
                     },
                     {
-                        field: 'repairStatus', title: '报修状态', Width: 100, align: 'center', templet: '#checkStatus'
+                        field: 'evaluationStatus', title: '评价状态', Width: 100, align: 'center', templet: '#checkStatus'
                     },
                     {
                         title: '操作', align: 'center', width: 80, fixed: 'right', templet: function (d) {
-                            if(d.repairStatus==0){
-                                return "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosRepair/sechosRepair_edit.html?rowGuid=" + d.rowGuid + "', 850, 500, '修改报修信息',refreshGrid)\" >修改</a>";
-                            }else{
-                                return "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosRepair/sechosRepair_detail.html?rowGuid=" + d.rowGuid + "', 850, 500, '查看报修信息',refreshGrid)\" >查看</a>";
-                            }
-                            
+                            return "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosRepairSatisfaction/satisfactionRepair_detail.html?rowGuid=" + d.rowGuid + "', 800, 350, '查看报修评价信息',refreshGrid)\" >查看</a>";
                         }
                     }
                 ]]
@@ -142,7 +153,7 @@
                     RowGuids.push(rows[i].rowGuid);
                 }
 
-                SendAjax("/sys/sechosrepair/delete", JSON.stringify(RowGuids), function (res) {
+                SendAjax("/sys/sechosrepairsatisfaction/delete", JSON.stringify(RowGuids), function (res) {
                     if (res.code == '0') {
                         top.messageAlert("提醒", "删除成功", "info", function () {
                             refreshGrid();
@@ -169,9 +180,9 @@
             initData(data);
         }
 
-        function addRow() {
-            OpenWin('/SecHosBack/pages/sechosRepair/sechosRepair_add.html', 850, 500, '新增设备报修', refreshGrid)
-        }
+        // function addRow() {
+        //     OpenWin('/SecHosBack/pages/sechosRepair/sechosRepair_add.html', 850, 500, '新增设备报修', refreshGrid)
+        // }
     </script>
 </body>
 

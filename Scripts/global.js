@@ -72,10 +72,10 @@ function SendAjax(url, responseData, successFunction, async, type) {
   //else {
   //    obj = $.extend({}, obj, a);
   //}
-
+  var prUrl = 'https://p.zjgwsjk.com/2ysechosback'; //serverUrl
   $.ajax({
     type: booltype,
-    url: window.serverUrl + url,
+    url: prUrl + url,
     async: boolasync,
     dataType: "JSON",
     data: responseData,

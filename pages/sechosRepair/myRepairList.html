@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>设备报修列表</title>
+    <title>我的设备报修列表</title>
     <meta name="renderer" content="webkit" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -82,6 +82,7 @@
         function initData(where) {
             var m_url = location.protocol + '\\\\' + location.hostname + ':' + (location.port == '' ? 80 : location.port);
             var prUrl = 'https://p.zjgwsjk.com/2ysechosback';
+            var repairGuid = JSON.parse(window.localStorage.getItem('m_user_rowGuid'));
             table.render({
                 id: 'layuiTable',//固定写法
                 elem: '#sechosRepairTable',//固定写法
@@ -89,7 +90,7 @@
                 method: 'get',//固定写法
                 remoteSort: true,
                 initSort: {field: "deviceName,createTime", type: "desc,asc"},
-                url: prUrl + '/sys/sechosrepair/listData', //数据接口
+                url: prUrl + '/sys/sechosrepair/listData?repairGuid='+repairGuid, //数据接口
                 page: true, //开启分页
                 limit: 20,//每页显示行数
                 where: where,
@@ -117,7 +118,7 @@
                     {
                         title: '操作', align: 'center', width: 80, fixed: 'right', templet: function (d) {
                             if(d.repairStatus==0){
-                                return "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosRepair/sechosRepair_edit.html?rowGuid=" + d.rowGuid + "', 850, 500, '修改报修信息',refreshGrid)\" >修改</a>";
+                                return "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosRepair/sechosRepair_edit.html?rowGuid=" + d.rowGuid + "&flag="+"true"+"', 850, 500, '修改报修信息',refreshGrid)\" >修改</a>";
                             }else{
                                 return "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosRepair/sechosRepair_detail.html?rowGuid=" + d.rowGuid + "', 850, 500, '查看报修信息',refreshGrid)\" >查看</a>";
                             }
