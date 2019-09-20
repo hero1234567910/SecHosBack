@@ -50,39 +50,37 @@
                 >药品代码:<font style="color:red">*</font></label
               >
               <div class="layui-input-block">
-                 <select
-                  name="drugCode"
+                <select
                   id="drugCode"
-                  lay-verify="required"
-                  lay-filter="drugNameFilter"
-                >
-                  <option value="">--请选择--</option>
-                </select>
-                </div>
+                  name="drugCode"
+                  data-event="药品代码"
+                  data-codename="药品代码"
+                  data-showoption="--请选择--"
+                  lay-filter="drugType"
+                ></select>
               </div>
             </div>
           </div>
 
           <div class="layui-col-xs6">
-              <div
-                class="layui-form-item"
-                style="margin-top:7px;margin-bottom:7px;"
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label"
+                >药品名称:<font style="color:red">*</font></label
               >
-                <label class="layui-form-label"
-                  >药品名称:<font style="color:red">*</font></label
-                >
-                <div class="layui-input-block">
-                    <input
-                    type="text"
-                    id="drugName"
-                    name="drugName"
-                    class="layui-input"
-                    lay-verify="required"
-                  />
-                  
-                </div>
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="drugName"
+                  name="drugName"
+                  class="layui-input"
+                  lay-verify="required"
+                />
               </div>
             </div>
+          </div>
 
           <div class="layui-col-xs6">
             <div
@@ -153,9 +151,21 @@
             form.render();
           }
         });
-        setTimeout(function() {
-          
-        },500);
+        form.on("select(drugType)", function(data) {
+          //console.log(data.value); 
+            //得到被选中的值
+          SendAjax("/sys/sechosdrugmaterial/getDrugName", data.value, function(
+            res
+          ) {
+            if (res.code == "0") {
+              $('#drugName').val(res.data);
+              layer.msg('药品名自动填充完成');
+            }else{
+              top.messageAlert("提醒", data.msg, "error");
+            }
+          });
+        });
+
         //监听提交
 
         form.on("submit(formDemo)", function(data) {
@@ -178,8 +188,8 @@
       });
 
       $(function() {
+        //初始化页面下拉框
         inItSelect();
-
       });
 
       function afterSuccess(data) {

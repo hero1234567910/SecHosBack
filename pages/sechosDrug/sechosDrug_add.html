@@ -54,7 +54,7 @@
                   id="drugCode"
                   name="drugCode"
                   class="layui-input"
-                  lay-verify="required"
+                  lay-verify="required|drugCode"
                 />
               </div>
             </div>
@@ -180,8 +180,21 @@
             >
               <label class="layui-form-label">药品状态:</label>
               <div class="layui-input-block">
-                <input type="radio" name="drugStatus" id="drugStatus0" value="0" title="正常" checked/>
-                <input type="radio" name="drugStatus" id="drugStatus1" value="1" title="停用" />
+                <input
+                  type="radio"
+                  name="drugStatus"
+                  id="drugStatus0"
+                  value="0"
+                  title="正常"
+                  checked
+                />
+                <input
+                  type="radio"
+                  name="drugStatus"
+                  id="drugStatus1"
+                  value="1"
+                  title="停用"
+                />
               </div>
             </div>
           </div>
@@ -206,15 +219,6 @@
             </div>
           </div>
 
-          <!-- <div class="layui-col-xs6">
-                    <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
-                        <label class="layui-form-label">报修状态:</label>
-                        <div class="layui-input-inline">
-                            <select id="repairStatus" name="repairStatus" data-codename="报修状态" data-showoption="--请选择--"
-                                lay-verify="required"></select>
-                        </div>
-                    </div>
-                </div> -->
         </div>
       </div>
 
@@ -261,7 +265,29 @@
               return "药品价格格式不正确！";
             }
           },
-          drugShelfLife: [/^\d{0,3}$/, "保质期时长格式错误，只能是数字！"]
+          drugShelfLife: [/^\d{0,3}$/, "保质期时长格式错误，只能是数字！"],
+          drugCode: function(value, item) {
+            var param = {};
+            param["drugCode"] = value;
+            var msg = ''
+            $.ajax({
+              url: "/sys/sechosdrugmaterial/checkDrugCode",
+              contentType: "application/json;charset=utf-8",
+              type: "post",
+              data: JSON.stringify(param),
+              dataType: "JSON",
+              async: false,
+              success: function(result) {
+                if (result.code == 500) {
+                  msg = result.code;
+                }
+              },
+              error: function(error) {}
+            });
+            if (msg == 500) {
+              return "该药品代码已存在！";
+            }
+          }
         });
         //监听提交
         form.on("switch(switchStatus)", function(data) {
