@@ -31,8 +31,8 @@
               <div class="layui-input-block">
                 <input
                   type="text"
-                  id="rowGuid"
-                  name="rowGuid"
+                  id="purchaseGuid"
+                  name="purchaseGuid"
                   class="layui-input"
                   lay-verify="required"
                   readonly
@@ -77,6 +77,7 @@
                   name="drugName"
                   class="layui-input"
                   lay-verify="required"
+                  autocomplete="off"
                 />
               </div>
             </div>
@@ -93,15 +94,96 @@
               <div class="layui-input-block">
                 <input
                   type="text"
-                  id="drugNum"
-                  name="drugNum"
+                  id="drugAmount"
+                  name="drugAmount"
+                  class="layui-input"
+                  lay-verify="required"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6" style="display: none;">
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label"
+                >drugGuid:<font style="color:red">*</font></label
+              >
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="drugGuid"
+                  name="drugGuid"
                   class="layui-input"
                   lay-verify="required"
                 />
               </div>
             </div>
           </div>
+
+          <div class="layui-col-xs6" style="display: none;">
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label"
+                >drugTotalPrice:<font style="color:red">*</font></label
+              >
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="drugTotalPrice"
+                  name="drugTotalPrice"
+                  class="layui-input"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6" style="display: none;">
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label"
+                >drugPrice:<font style="color:red">*</font></label
+              >
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="drugPrice"
+                  name="drugPrice"
+                  class="layui-input"
+                  lay-verify="required"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+          </div>
+
           <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label">药品过期日期:</label>
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  name="drugOverdue"
+                  id="drugOverdue"
+                  autocomplete="off"
+                  class="layui-input date-input"
+                  laydate-type="date"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="layui-col-xs6">
             <div
               class="layui-form-item"
               style="margin-top:7px;margin-bottom:7px;"
@@ -117,7 +199,7 @@
                 />
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -130,6 +212,37 @@
           value="删除选中"
           class="layui-btn layui-btn-normal"
           onclick="deleteRow()"
+        />
+      </div>
+
+      <fieldset class="layui-elem-field">
+        <legend>采购内容</legend>
+        <div class="layui-field-box"></div>
+        <div>
+          <table id="PurchaseItemTable"></table>
+        </div>
+      </fieldset>
+
+      <div class="layui-col-xs6">
+        <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
+          <label class="layui-form-label">采购备注:</label>
+          <div class="layui-input-block">
+            <input
+              type="text"
+              id="purchaseNote"
+              name="purchaseNote"
+              class="layui-input"
+            />
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top: 16px;">
+        <input
+          type="button"
+          style="width: 100px;height:40px;"
+          value="材料入库"
+          class="layui-btn layui-btn-normal"
+          onclick="purchaseIn()"
         />
       </div>
     </form>
@@ -147,36 +260,117 @@
         ) {
           if (res.code == "0") {
             //layform 即 class="layui-form" 所在元素对应的 lay-filter="" 对应的值
+            $("#purchaseGuid").val(rowGuid);
+            //console.log($("#purchaseGuid").val());
             form.val("layform", res.data);
             form.render();
           }
         });
         form.on("select(drugType)", function(data) {
-          //console.log(data.value); 
-            //得到被选中的值
+          //console.log(data.value);
+          //得到被选中的值
           SendAjax("/sys/sechosdrugmaterial/getDrugName", data.value, function(
             res
           ) {
             if (res.code == "0") {
-              $('#drugName').val(res.data);
-              layer.msg('药品名自动填充完成');
-            }else{
+              //console.log(res.data);
+              $("#drugName").val(res.data.drugName);
+              $("#drugGuid").val(res.data.rowGuid);
+              $("#drugPrice").val(res.data.drugPrice);
+              layer.msg("药品名自动填充完成");
+            } else {
               top.messageAlert("提醒", data.msg, "error");
             }
           });
         });
 
-        //监听提交
+        var m_url =
+          location.protocol +
+          "\\\\" +
+          location.hostname +
+          ":" +
+          (location.port == "" ? 80 : location.port);
+
+        table.render({
+          id: "layuiTable", //固定写法
+          elem: "#PurchaseItemTable", //固定写法
+          height: 315, //固定写法
+          method: "get", //固定写法
+          remoteSort: true,
+          initSort: { field: "drugAmount", type: "asc" },
+          url:
+            m_url + "/sys/sechospurchasingm2m/listData?purchaseGuid=" + rowGuid, //数据接口
+          page: true, //开启分页
+          limit: 20, //每页显示行数
+          //where: where,
+          cols: [
+            [
+              { type: "checkbox", fixed: "left" }, //固定
+              {
+                field: "drugName",
+                title: "材料名称",
+                sort: true,
+                width: 200,
+                align: "center"
+              },
+              {
+                field: "drugAmount",
+                title: "材料数量",
+                sort: true,
+                width: 150,
+                align: "center"
+              },
+              {
+                field: "drugTotalPrice",
+                title: "材料总价",
+                sort: true,
+                width: 150,
+                align: "center"
+              },
+              {
+                field: "drugOverdue",
+                title: "材料过期时间",
+                sort: true,
+                width: 200,
+                align: "center",
+                templet: '<div>{{ Format(d.drugOverdue,"yyyy-MM-dd")}}</div>'
+              },
+              {
+                title: "操作",
+                align: "center",
+                width: 150,
+                fixed: "right",
+                templet: function(d) {
+                  return (
+                    "<a href=\"javascript: OpenWin('/SecHosBack/pages/secPurchase/sechosPurchaseItem_edit.html?rowGuid=" +
+                    d.rowGuid +
+                    "&drugName=" +
+                    d.drugName +
+                    "&drugAmount=" +
+                    d.drugAmount +
+                    "&drugPrice=" +
+                    d.drugPrice +
+                    "', 600, 150, '修改采购信息',refreshGrid)\" >修改</a>"
+                  );
+                }
+              }
+            ]
+          ]
+        });
 
         form.on("submit(formDemo)", function(data) {
           //console.log(data.field);
+          var drugTotalPrice = data.field.drugPrice * data.field.drugAmount;
+          data.field.drugTotalPrice = drugTotalPrice;
           SendAjax(
-            "/sys/sechosdrugmaterial/update",
+            "/sys/sechospurchasingm2m/add",
             JSON.stringify(data.field),
             function(res) {
               if (res.code == "0") {
-                top.messageAlert("提醒", "添加成功", "info", function() {
-                  top.closePanel(window.name, true);
+                top.messageAlert("提醒", "材料添加成功", "info", function() {
+                  $("#drugAmount").val("");
+                  $("#drugOverdue").val("");
+                  refreshGrid();
                 });
               } else {
                 top.messageAlert("提醒", data.msg, "error");
@@ -202,11 +396,63 @@
         }
       }
 
-      function deleteRow() {}
+      function deleteRow() {
+        var rows = table.checkStatus("layuiTable").data; //获取选中行
+        if (!rows || rows.length == 0) {
+          top.layuiMsg("请选择要删除的采购记录!");
+          return;
+        }
+        top.layuiConfirm("确定要删除该记录?", {}, function() {
+          var RowGuids = new Array();
+          for (var i = 0; i < rows.length; i++) {
+            RowGuids.push(rows[i].rowGuid);
+          }
+
+          SendAjax(
+            "/sys/sechospurchasingm2m/delete",
+            JSON.stringify(RowGuids),
+            function(res) {
+              if (res.code == "0") {
+                top.messageAlert("提醒", "删除成功", "info", function() {
+                  refreshGrid();
+                });
+              } else {
+                top.messageAlert("提醒", res.msg, "error");
+              }
+            }
+          );
+          return false;
+        });
+      }
 
       function closeWin() {
         top.closePanel(window.name, false);
       }
+      function refreshGrid() {
+        table.reload("layuiTable");
+      }
     </script>
   </body>
 </html>
+<style>
+  .layui-table-box {
+    width: 100%;
+  }
+  .layui-table-body {
+    overflow-x: hidden;
+  }
+  .layui-table-cell {
+    height: 20px;
+    line-height: 20px;
+  }
+  th .layui-table-cell {
+    height: 20px;
+    line-height: 20px;
+  }
+  .layui-field-box {
+    padding-top: 0px;
+    padding-right: 15px;
+    padding-bottom: 0px;
+    padding-left: 15px;
+  }
+</style>

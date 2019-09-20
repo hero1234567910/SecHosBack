@@ -151,13 +151,14 @@
                 field: "purchaseDate",
                 title: "下单日期",
                 sort: true,
-                width: 130,
+                width: 200,
                 align: "center",
                 templet: function(d){
                   if(d.purchaseDate==null){
                     return ''
                   }else{
-                    return '<div>{{ Format(d.purchaseDate,"yyyy-MM-dd")}}</div>'
+                    return d.purchaseDate
+                    // '<div>{{ Format(d.purchaseDate,"yyyy-MM-dd")}}</div>'
                   }
                 }
               },
@@ -165,7 +166,7 @@
                 field: "inboundDate",
                 title: "入库日期",
                 sort: true,
-                width: 130,
+                width: 200,
                 align: "center",
                 templet: function(d){
                   if(d.inboundDate==null){
@@ -178,13 +179,13 @@
               {
                 field: "purchaseNote",
                 title: "采购备注",
-                Width: 100,
+                Width: 150,
                 align: "center"
               },
               {
                 field: "purchaseStatus",
                 title: "采购状态",
-                Width: 100,
+                width: 100,
                 align: "center",
                 templet: "#checkStatus"
               },
