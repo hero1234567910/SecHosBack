@@ -82,6 +82,26 @@
             </div>
           </div>
 
+          <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label"
+                >材料单价:<font style="color:red">*</font></label
+              >
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="drugPrice"
+                  name="drugPrice"
+                  class="layui-input"
+                  lay-verify="required|drugPrice"
+                />
+              </div>
+            </div>
+          </div>
+
           <div class="layui-col-xs6" style="display: none;">
             <div
               class="layui-form-item"
@@ -130,16 +150,29 @@
         $("#drugName").val(getURLParameter("drugName"));
         $("#rowGuid").val(getURLParameter("rowGuid"));
         $("#drugAmount").val(getURLParameter("drugAmount"));
+        $("#drugPrice").val(getURLParameter("drugPrice"));
         form.verify({
-          drugAmount: [/^\d{0,3}$/, "材料数量格式错误，只能是数字！"]
+          drugAmount: [/^\d{0,3}$/, "材料数量格式错误，只能是数字！"],
+          drugPrice: function(value, item) {
+            if (value == "") {
+              return "药品价格不能为空";
+            }
+            if (
+              !new RegExp(
+                "(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)"
+              ).test(value)
+            ) {
+              return "药品价格格式不正确！";
+            }
+          }
         });
 
         form.on("submit(formDemo)", function(data) {
-          console.log(data.field.drugAmount);
-          console.log(getURLParameter("drugPrice"));
-          console.log(data.field.drugTotalPrice);
+          //console.log(data.field.drugAmount);
+          //console.log(getURLParameter("drugPrice"));
+          //console.log(data.field.drugTotalPrice);
           data.field.drugTotalPrice =
-            data.field.drugAmount * getURLParameter("drugPrice");
+            data.field.drugAmount * data.field.drugPrice;
           SendAjax(
             "/sys/sechospurchasingm2m/update",
             JSON.stringify(data.field),
