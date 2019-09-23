@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>设备报修修改信息</title>
+    <title>采购信息添加</title>
     <meta name="renderer" content="webkit" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta
@@ -178,6 +178,7 @@
                   autocomplete="off"
                   class="layui-input date-input"
                   laydate-type="date"
+                  lay-verify="required"
                 />
               </div>
             </div>
@@ -301,7 +302,7 @@
           url:
             m_url + "/sys/sechospurchasingm2m/listData?purchaseGuid=" + rowGuid, //数据接口
           page: true, //开启分页
-          limit: 20, //每页显示行数
+          limit: 10, //每页显示行数
           //where: where,
           cols: [
             [
@@ -430,6 +431,30 @@
       }
       function refreshGrid() {
         table.reload("layuiTable");
+      }
+
+      function purchaseIn() {
+        var guid = getURLParameter("rowGuid");
+        var purchaseNote = $('#purchaseNote').val();
+        var data = {
+          rowGuid: guid,
+          purchaseStatus: 3,
+          purchaseNote:purchaseNote
+        };
+        SendAjax("/sys/sechosprocurement/update", JSON.stringify(data), function(res) {
+          if (res.code == "0") {
+            top.messageAlert(
+              "提醒",
+              "提交成功，等待审批中。",
+              "info",
+              function() {
+                top.closePanel(window.name, true);
+              }
+            );
+          } else {
+            top.messageAlert("提醒", res.msg, "error");
+          }
+        });
       }
     </script>
   </body>

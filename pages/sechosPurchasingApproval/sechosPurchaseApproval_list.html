@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>材料采购列表</title>
+    <title>采购审批列表</title>
     <meta name="renderer" content="webkit" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta
@@ -137,7 +137,7 @@
             field: "purchaseOrderNum,purchaseDate",
             type: "desc,asc"
           },
-          url: m_url + "/sys/sechosprocurement/listData", //数据接口
+          url: m_url + "/sys/sechosprocurement/listData2", //数据接口
           page: true, //开启分页
           limit: 20, //每页显示行数
           where: where,
@@ -194,22 +194,32 @@
                 templet: "#checkStatus"
               },
               {
+                field: "purchasePrice",
+                title: "采购总价",
+                width: 100,
+                align: "center",
+                templet: function(d) {
+                  return d.purchasePrice + " " + "元";
+                }
+              },
+              {
                 title: "操作",
                 align: "center",
                 width: 80,
                 fixed: "right",
                 templet: function(d) {
-                  if (d.purchaseStatus == 0||d.purchaseStatus == 1) {
+                  if (d.purchaseStatus == 3) {
+                    console.log(d.purchasePrice)
                     return (
-                      "<a href=\"javascript: OpenWin('/SecHosBack/pages/secPurchase/sechosPurchase_edit.html?rowGuid=" +
-                      d.rowGuid +
-                      "', 900, 600, '"+d.purchaseOrderNum+"',refreshGrid)\" >填写</a>"
+                      "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosPurchasingApproval/sechosPurchase_edit.html?rowGuid=" +
+                      d.rowGuid +"&purchasePrice="+d.purchasePrice+
+                      "', 900, 680, '"+d.purchaseOrderNum+"',refreshGrid)\" >审批</a>"
                     );
                   } else {
                     return (
-                      "<a href=\"javascript: OpenWin('/SecHosBack/pages/secPurchase/sechosPurchase_detail.html?rowGuid=" +
-                      d.rowGuid +
-                      "', 900, 600, '"+d.purchaseOrderNum+"',refreshGrid)\" >查看</a>"
+                      "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosPurchasingApproval/sechosPurchase_detail.html?rowGuid=" +
+                      d.rowGuid +"&purchasePrice="+d.purchasePrice+
+                      "', 900, 680, '"+d.purchaseOrderNum+"',refreshGrid)\" >查看</a>"
                     );
                   }
                 }
@@ -263,24 +273,24 @@
         initData(data);
       }
 
-      function addRow() {
-        $.ajax({
-          async: true,
-          url: "/sys/sechosprocurement/add",
-          contentType: "application/json;charset=utf-8",
-          method: "post",
-          dataType: "JSON",
-          success: function(res) {
-            if (res.code == "0") {
-              top.messageAlert("提醒", "添加成功", "info", function() {
-                refreshGrid();
-              });
-            } else {
-              top.messageAlert("提醒", res.msg, "error");
-            }
-          }
-        });
-      }
+      // function addRow() {
+      //   $.ajax({
+      //     async: true,
+      //     url: "/sys/sechosprocurement/add",
+      //     contentType: "application/json;charset=utf-8",
+      //     method: "post",
+      //     dataType: "JSON",
+      //     success: function(res) {
+      //       if (res.code == "0") {
+      //         top.messageAlert("提醒", "添加成功", "info", function() {
+      //           refreshGrid();
+      //         });
+      //       } else {
+      //         top.messageAlert("提醒", res.msg, "error");
+      //       }
+      //     }
+      //   });
+      // }
     </script>
   </body>
 </html>
