@@ -176,7 +176,7 @@
                   if(d.inboundDate==null){
                     return ''
                   }else{
-                    return '<div>{{ Format(d.inboundDate,"yyyy-MM-dd")}}</div>'
+                    return d.inboundDate
                   }
                 }
               },
@@ -227,8 +227,8 @@
         }
         top.layuiConfirm("确定要删除该记录?", {}, function() {
           for (var i = 0; i < rows.length; i++) {
-            if(rows[i].purchaseStatus==2){
-              top.layuiMsg("不允许删除已完成的记录!");
+            if(rows[i].purchaseStatus==2||rows[i].purchaseStatus==3||rows[i].purchaseStatus==4){
+              top.layuiMsg("不允许删除此记录!");
               return;
             }
           }

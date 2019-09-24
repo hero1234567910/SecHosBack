@@ -39,7 +39,7 @@
       <input type="button" style="width: 100px;height:40px;" value="导出Excel" class="layui-btn layui-btn-danger"
         onclick="purchaseOut()" />
       <input type="button" style="width: 100px;height:40px;" value="采购入库" class="layui-btn layui-btn-normal"
-        onclick="purchasePut()" />
+        onclick="purchasePut()" id="purchase" />
     </div>
   </form>
 
@@ -114,7 +114,7 @@
         done: function (res, curr, count) {
           var obj = $(".layui-table-total td[data-field=drugTotalPrice]");
           var purchasePrice = getURLParameter('purchasePrice');
-          console.log(purchasePrice)
+          //console.log(purchasePrice)
           obj.html(
             "<div class='layui-table-cell laytable-cell-" +
             "date-key='1-0-3' style='width: 200px;'"+
@@ -129,6 +129,10 @@
     $(function () {
       //初始化页面下拉框
       inItSelect();
+      var purchaseStatus = getURLParameter("purchaseStatus");
+      if(purchaseStatus==4){
+        $('#purchase').css('display','none');
+      }
     });
 
     function afterSuccess(data) {
@@ -155,9 +159,26 @@
     }
 
     function purchasePut() {
-      var guid = getURLParameter("rowGuid");
+      var purchaseGuid = getURLParameter("rowGuid");
+      var personGuid = JSON.parse(localStorage.getItem('m_user_rowGuid'));
+      var data = {
+        purchaseGuid:purchaseGuid,
+        personGuid:personGuid
+      }
       top.layuiConfirm("确定入库吗?", {}, function() {
-
+        SendAjax(
+            "/sys/sechosputinstorage/add",
+            JSON.stringify(data),
+            function(res) {
+              if (res.code == "0") {
+                top.messageAlert("提醒", "入库成功", "info", function() {
+                  top.closePanel(window.name, true);
+                });
+              } else {
+                top.messageAlert("提醒", res.msg, "error");
+              }
+            }
+          );
       });
       
     }

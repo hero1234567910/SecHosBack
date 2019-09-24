@@ -168,7 +168,7 @@
                   if(d.inboundDate==null){
                     return ''
                   }else{
-                    return '<div>{{ Format(d.inboundDate,"yyyy-MM-dd")}}</div>'
+                    return d.inboundDate
                   }
                 }
               },
@@ -210,7 +210,7 @@
                   } else {
                     return (
                       "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosPurchasingApproval/sechosPurchase_detail.html?rowGuid=" +
-                      d.rowGuid +"&purchasePrice="+d.purchasePrice+
+                      d.rowGuid +"&purchasePrice="+d.purchasePrice+"&purchaseStatus="+d.purchaseStatus+
                       "', 900, 680, '"+d.purchaseOrderNum+"',refreshGrid)\" >查看</a>"
                     );
                   }
