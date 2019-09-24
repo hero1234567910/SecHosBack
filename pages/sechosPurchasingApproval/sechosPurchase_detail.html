@@ -165,12 +165,14 @@
         purchaseGuid:purchaseGuid,
         personGuid:personGuid
       }
-      top.layuiConfirm("确定入库吗?", {}, function() {
+      top.layuiConfirm("确定入库吗?", {}, function(index) {
+        var index  = layer.load(1);
         SendAjax(
             "/sys/sechosputinstorage/add",
             JSON.stringify(data),
             function(res) {
               if (res.code == "0") {
+                layer.close(index);
                 top.messageAlert("提醒", "入库成功", "info", function() {
                   top.closePanel(window.name, true);
                 });
