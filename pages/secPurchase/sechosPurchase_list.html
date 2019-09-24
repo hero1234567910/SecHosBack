@@ -264,9 +264,10 @@
       }
 
       function addRow() {
+        var personGuid = JSON.parse(localStorage.getItem('m_user_rowGuid'));
         $.ajax({
           async: true,
-          url: "/sys/sechosprocurement/add",
+          url: "/sys/sechosprocurement/add/"+personGuid,
           contentType: "application/json;charset=utf-8",
           method: "post",
           dataType: "JSON",
