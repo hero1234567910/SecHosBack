@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>采购信息</title>
+  <title>入库单号信息</title>
   <meta name="renderer" content="webkit" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -28,7 +28,7 @@
     </div>
 
     <fieldset class="layui-elem-field">
-      <legend>采购内容</legend>
+      <legend>入库内容</legend>
       <div class="layui-field-box"></div>
       <div>
         <table id="PurchaseItemTable"></table>
@@ -158,30 +158,6 @@
         "/sys/sechospurchasingm2m/exportExcel/" + purchaseGuid;
     }
 
-    function purchasePut() {
-      var purchaseGuid = getURLParameter("rowGuid");
-      var personGuid = JSON.parse(localStorage.getItem('m_user_rowGuid'));
-      var data = {
-        purchaseGuid:purchaseGuid,
-        personGuid:personGuid
-      }
-      top.layuiConfirm("确定入库吗?", {}, function() {
-        SendAjax(
-            "/sys/sechosputinstorage/add",
-            JSON.stringify(data),
-            function(res) {
-              if (res.code == "0") {
-                top.messageAlert("提醒", "入库成功", "info", function() {
-                  top.closePanel(window.name, true);
-                });
-              } else {
-                top.messageAlert("提醒", res.msg, "error");
-              }
-            }
-          );
-      });
-      
-    }
   </script>
 </body>
 
