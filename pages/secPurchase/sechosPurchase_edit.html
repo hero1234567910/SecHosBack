@@ -97,7 +97,7 @@
                   id="drugAmount"
                   name="drugAmount"
                   class="layui-input"
-                  lay-verify="required"
+                  lay-verify="required|drugAmount"
                   autocomplete="off"
                 />
               </div>
@@ -363,12 +363,16 @@
                     d.drugAmount +
                     "&drugPrice=" +
                     d.drugPrice +
-                    "', 600, 200, '修改采购信息',refreshGrid)\" >修改</a>"
+                    "', 600, 150, '修改采购信息',refreshGrid)\" >修改</a>"
                   );
                 }
               }
             ]
           ]
+        });
+
+        form.verify({
+          drugAmount:[/^\+?[1-9][0-9]*$/,"数量格式不正确"]
         });
 
         form.on("submit(formDemo)", function(data) {
