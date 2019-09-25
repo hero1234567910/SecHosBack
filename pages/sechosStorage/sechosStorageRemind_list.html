@@ -73,6 +73,12 @@
                       onclick="search()"
                       class="layui-btn layui-btn-sm"
                     />
+                    <input
+                      type="button"
+                      value="更新"
+                      onclick="update()"
+                      class="layui-btn layui-btn-sm"
+                    />
                   </td>
                 </tr>
               </table>
@@ -244,24 +250,10 @@
         });
         },500);
       });
-      // function addRow() {
-      //   $.ajax({
-      //     async: true,
-      //     url: "/sys/sechosprocurement/add",
-      //     contentType: "application/json;charset=utf-8",
-      //     method: "post",
-      //     dataType: "JSON",
-      //     success: function(res) {
-      //       if (res.code == "0") {
-      //         top.messageAlert("提醒", "添加成功", "info", function() {
-      //           refreshGrid();
-      //         });
-      //       } else {
-      //         top.messageAlert("提醒", res.msg, "error");
-      //       }
-      //     }
-      //   });
-      // }
+      
+      function update(){
+        location.reload();
+      }
     </script>
   </body>
 </html>

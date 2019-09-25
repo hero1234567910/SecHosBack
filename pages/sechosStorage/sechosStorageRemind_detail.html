@@ -111,11 +111,15 @@
                 var a2 = Date.parse(new Date(date2));
                 var day = parseInt((a2-a1)/ (1000 * 60 * 60 * 24))
                 //console.log(day)
-                if(day<=30){
+                if(day<=30&&day>=0){
                   return '<span style="color:white;background-color:red;padding:5px;">' + day +' 天'+ '</span>'
-                }else{
+                }
+                if(day>30){
                   return day +'天';
                 }
+                if(day<0){
+                  return '已过期';
+                }   
               }
               //'<div>{{ Format(d.drugOverdue,"yyyy-MM-dd")}}</div>'
             }

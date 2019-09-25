@@ -15,7 +15,7 @@ layui
       layer = layui.layer,
       laydate = layui.laydate,
       form = layui.form;
-      var index  = layer.load(1);
+      //var index  = layer.load(1);
 
     form.render(null, "layform");
 

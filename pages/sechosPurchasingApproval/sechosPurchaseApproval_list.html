@@ -207,11 +207,12 @@
                       d.rowGuid +"&purchasePrice="+d.purchasePrice+
                       "', 900, 680, '"+d.purchaseOrderNum+"',refreshGrid)\" >审批</a>"
                     );
-                  } else {
+                  } 
+                  if(d.purchaseStatus == 2){
                     return (
                       "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosPurchasingApproval/sechosPurchase_detail.html?rowGuid=" +
                       d.rowGuid +"&purchasePrice="+d.purchasePrice+"&purchaseStatus="+d.purchaseStatus+
-                      "', 900, 680, '"+d.purchaseOrderNum+"',refreshGrid)\" >查看</a>"
+                      "', 900, 680, '"+d.purchaseOrderNum+"',refreshGrid)\" >入库</a>"
                     );
                   }
                 }
@@ -230,7 +231,7 @@
         top.layuiConfirm("确定要删除该记录?", {}, function() {
           for (var i = 0; i < rows.length; i++) {
             if(rows[i].purchaseStatus==2){
-              top.layuiMsg("不允许删除已完成的记录!");
+              top.layuiMsg("不允许删除此记录!");
               return;
             }
           }

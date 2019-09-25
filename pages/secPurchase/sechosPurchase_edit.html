@@ -250,11 +250,23 @@
 
     <script>
       var table;
-      layui.use(["form", "table"], function() {
+      layui.use(["form", "table","laydate"], function() {
         var form = layui.form;
         table = layui.table;
         var $ = layui.jquery;
+        var laydate = layui.laydate;
         //表单初始赋值
+        var date1 = new Date();
+        var date2 = new Date(date1);
+        date2.setDate(date1.getDate() + 31);
+        var date3 = Format(date2,"yyyy-MM-dd");
+        //console.log(date3);
+        laydate.render({
+          elem: "#drugOverdue",
+          value: date3,
+          isInitValue: false,
+          min: date3
+        });
         var rowGuid = getURLParameter("rowGuid");
         SendAjax("/sys/sechosdrugmaterial/getDetailByGuid", rowGuid, function(
           res
@@ -435,26 +447,30 @@
 
       function purchaseIn() {
         var guid = getURLParameter("rowGuid");
-        var purchaseNote = $('#purchaseNote').val();
+        var purchaseNote = $("#purchaseNote").val();
         var data = {
           rowGuid: guid,
           purchaseStatus: 3,
-          purchaseNote:purchaseNote
+          purchaseNote: purchaseNote
         };
-        SendAjax("/sys/sechosprocurement/update", JSON.stringify(data), function(res) {
-          if (res.code == "0") {
-            top.messageAlert(
-              "提醒",
-              "提交成功，等待审批中。",
-              "info",
-              function() {
-                top.closePanel(window.name, true);
-              }
-            );
-          } else {
-            top.messageAlert("提醒", res.msg, "error");
+        SendAjax(
+          "/sys/sechosprocurement/update",
+          JSON.stringify(data),
+          function(res) {
+            if (res.code == "0") {
+              top.messageAlert(
+                "提醒",
+                "提交成功，等待审批中。",
+                "info",
+                function() {
+                  top.closePanel(window.name, true);
+                }
+              );
+            } else {
+              top.messageAlert("提醒", res.msg, "error");
+            }
           }
-        });
+        );
       }
     </script>
   </body>
