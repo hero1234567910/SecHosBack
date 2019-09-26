@@ -47,14 +47,14 @@
               style="margin-top:7px;margin-bottom:7px;"
             >
               <label class="layui-form-label"
-                >药品代码:<font style="color:red">*</font></label
+                >材料代码:<font style="color:red">*</font></label
               >
               <div class="layui-input-block">
                 <select
                   id="drugCode"
                   name="drugCode"
-                  data-event="药品代码"
-                  data-codename="药品代码"
+                  data-event="材料代码"
+                  data-codename="材料代码"
                   data-showoption="--请选择--"
                   lay-filter="drugType"
                   lay-search
@@ -69,7 +69,7 @@
               style="margin-top:7px;margin-bottom:7px;"
             >
               <label class="layui-form-label"
-                >药品名称:<font style="color:red">*</font></label
+                >材料名称:<font style="color:red">*</font></label
               >
               <div class="layui-input-block">
                 <input
@@ -165,43 +165,6 @@
             </div>
           </div>
 
-          <div class="layui-col-xs6">
-            <div
-              class="layui-form-item"
-              style="margin-top:7px;margin-bottom:7px;"
-            >
-              <label class="layui-form-label">药品过期日期:</label>
-              <div class="layui-input-block">
-                <input
-                  type="text"
-                  name="drugOverdue"
-                  id="drugOverdue"
-                  autocomplete="off"
-                  class="layui-input date-input"
-                  laydate-type="date"
-                  lay-verify="required"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- <div class="layui-col-xs6">
-            <div
-              class="layui-form-item"
-              style="margin-top:7px;margin-bottom:7px;"
-            >
-              <label class="layui-form-label">采购备注:</label>
-              <div class="layui-input-block">
-                <input
-                  type="text"
-                  id="purchaseNote"
-                  name="purchaseNote"
-                  class="layui-input"
-                  lay-verify="required"
-                />
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
 
@@ -257,19 +220,9 @@
         var $ = layui.jquery;
         var laydate = layui.laydate;
         //表单初始赋值
-        var date1 = new Date();
-        var date2 = new Date(date1);
-        date2.setDate(date1.getDate() + 31);
-        var date3 = Format(date2,"yyyy-MM-dd");
-        //console.log(date3);
-        laydate.render({
-          elem: "#drugOverdue",
-          value: date3,
-          isInitValue: false,
-          min: date3
-        });
+        
         var rowGuid = getURLParameter("rowGuid");
-        SendAjax("/sys/sechosdrugmaterial/getDetailByGuid", rowGuid, function(
+        SendAjax("/sys/sechosmaterials/getDetailByGuid", rowGuid, function(
           res
         ) {
           if (res.code == "0") {
@@ -283,15 +236,16 @@
         form.on("select(drugType)", function(data) {
           //console.log(data.value);
           //得到被选中的值
-          SendAjax("/sys/sechosdrugmaterial/getDrugName", data.value, function(
+          SendAjax("/sys/sechosmaterials/getMaterialName", data.value, function(
             res
           ) {
             if (res.code == "0") {
               //console.log(res.data);
-              $("#drugName").val(res.data.drugName);
+              console.log(res.data)
+              $("#drugName").val(res.data.materialName);
               $("#drugGuid").val(res.data.rowGuid);
-              $("#drugPrice").val(res.data.drugPrice);
-              layer.msg("药品名自动填充完成");
+              $("#drugPrice").val(res.data.materialPrice);
+              layer.msg("材料名自动填充完成");
             } else {
               top.messageAlert("提醒", data.msg, "error");
             }
@@ -324,35 +278,28 @@
                 field: "drugName",
                 title: "材料名称",
                 sort: true,
-                width: 200,
+                Width: 200,
                 align: "center"
               },
               {
                 field: "drugAmount",
                 title: "材料数量",
                 sort: true,
-                width: 150,
+                Width: 150,
                 align: "center"
               },
               {
                 field: "drugTotalPrice",
                 title: "材料总价",
                 sort: true,
-                width: 150,
+                Width: 150,
                 align: "center"
               },
-              {
-                field: "drugOverdue",
-                title: "材料过期时间",
-                sort: true,
-                width: 200,
-                align: "center",
-                templet: '<div>{{ Format(d.drugOverdue,"yyyy-MM-dd")}}</div>'
-              },
+              
               {
                 title: "操作",
                 align: "center",
-                width: 150,
+                Width: 150,
                 fixed: "right",
                 templet: function(d) {
                   return (

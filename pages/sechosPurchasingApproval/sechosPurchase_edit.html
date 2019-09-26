@@ -111,7 +111,13 @@
               sort: true,
               width: 200,
               align: "center",
-              templet: '<div>{{ Format(d.drugOverdue,"yyyy-MM-dd")}}</div>'
+              templet: function(d){
+                if(d.drugOverdue==null){
+                  return '无'
+                }else{
+                  return '<div>{{ Format(d.drugOverdue,"yyyy-MM-dd")}}</div>';
+                }
+              }
             },
 
           ]

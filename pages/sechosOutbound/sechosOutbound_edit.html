@@ -57,6 +57,7 @@
                   data-codename="药品代码"
                   data-showoption="--请选择--"
                   lay-filter="drugType"
+                  lay-search
                 ></select>
               </div>
             </div>
@@ -89,7 +90,7 @@
               style="margin-top:7px;margin-bottom:7px;"
             >
               <label class="layui-form-label"
-                >采购数量:<font style="color:red">*</font></label
+                >出库数量:<font style="color:red">*</font></label
               >
               <div class="layui-input-block">
                 <input
@@ -217,7 +218,7 @@
       </div>
 
       <fieldset class="layui-elem-field">
-        <legend>入库内容</legend>
+        <legend>出库内容</legend>
         <div class="layui-field-box"></div>
         <div>
           <table id="OutboundItemTable"></table>
@@ -226,7 +227,7 @@
 
       <div class="layui-col-xs6">
         <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
-          <label class="layui-form-label">采购备注:</label>
+          <label class="layui-form-label">出库备注:</label>
           <div class="layui-input-block">
             <input
               type="text"
@@ -409,6 +410,7 @@
             "/sys/sechosoutboundm2m/add",
             JSON.stringify(data.field),
             function(res) {
+              console.log(res)
               if (res.code == "0") {
                 top.messageAlert("提醒", "材料添加成功", "info", function() {
                   $("#drugAmount").val("");
@@ -416,7 +418,7 @@
                   refreshGrid();
                 });
               } else {
-                top.messageAlert("提醒", data.msg, "error");
+                top.messageAlert("提醒", res.msg, "error");
               }
             }
           );

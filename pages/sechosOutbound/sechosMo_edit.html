@@ -31,8 +31,8 @@
               <div class="layui-input-block">
                 <input
                   type="text"
-                  id="purchaseGuid"
-                  name="purchaseGuid"
+                  id="outboundGuid"
+                  name="outboundGuid"
                   class="layui-input"
                   lay-verify="required"
                   readonly
@@ -47,14 +47,14 @@
               style="margin-top:7px;margin-bottom:7px;"
             >
               <label class="layui-form-label"
-                >药品代码:<font style="color:red">*</font></label
+                >材料代码:<font style="color:red">*</font></label
               >
               <div class="layui-input-block">
                 <select
                   id="drugCode"
                   name="drugCode"
-                  data-event="药品代码"
-                  data-codename="药品代码"
+                  data-event="材料代码"
+                  data-codename="材料代码"
                   data-showoption="--请选择--"
                   lay-filter="drugType"
                   lay-search
@@ -69,7 +69,7 @@
               style="margin-top:7px;margin-bottom:7px;"
             >
               <label class="layui-form-label"
-                >药品名称:<font style="color:red">*</font></label
+                >材料名称:<font style="color:red">*</font></label
               >
               <div class="layui-input-block">
                 <input
@@ -90,7 +90,7 @@
               style="margin-top:7px;margin-bottom:7px;"
             >
               <label class="layui-form-label"
-                >采购数量:<font style="color:red">*</font></label
+                >出库数量:<font style="color:red">*</font></label
               >
               <div class="layui-input-block">
                 <input
@@ -170,38 +170,21 @@
               class="layui-form-item"
               style="margin-top:7px;margin-bottom:7px;"
             >
-              <label class="layui-form-label">药品过期日期:</label>
+              <label class="layui-form-label">材料剩余数量:</label>
               <div class="layui-input-block">
                 <input
                   type="text"
-                  name="drugOverdue"
-                  id="drugOverdue"
+                  name="drugSum"
+                  id="drugSum"
                   autocomplete="off"
-                  class="layui-input date-input"
-                  laydate-type="date"
+                  class="layui-input "
                   lay-verify="required"
+                  readonly
                 />
               </div>
             </div>
           </div>
 
-          <!-- <div class="layui-col-xs6">
-            <div
-              class="layui-form-item"
-              style="margin-top:7px;margin-bottom:7px;"
-            >
-              <label class="layui-form-label">采购备注:</label>
-              <div class="layui-input-block">
-                <input
-                  type="text"
-                  id="purchaseNote"
-                  name="purchaseNote"
-                  class="layui-input"
-                  lay-verify="required"
-                />
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
 
@@ -218,21 +201,21 @@
       </div>
 
       <fieldset class="layui-elem-field">
-        <legend>采购内容</legend>
+        <legend>出库内容</legend>
         <div class="layui-field-box"></div>
         <div>
-          <table id="PurchaseItemTable"></table>
+          <table id="OutboundItemTable"></table>
         </div>
       </fieldset>
 
       <div class="layui-col-xs6">
         <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
-          <label class="layui-form-label">采购备注:</label>
+          <label class="layui-form-label">出库备注:</label>
           <div class="layui-input-block">
             <input
               type="text"
-              id="purchaseNote"
-              name="purchaseNote"
+              id="outboundNote"
+              name="outboundNote"
               class="layui-input"
             />
           </div>
@@ -257,24 +240,14 @@
         var $ = layui.jquery;
         var laydate = layui.laydate;
         //表单初始赋值
-        var date1 = new Date();
-        var date2 = new Date(date1);
-        date2.setDate(date1.getDate() + 31);
-        var date3 = Format(date2,"yyyy-MM-dd");
-        //console.log(date3);
-        laydate.render({
-          elem: "#drugOverdue",
-          value: date3,
-          isInitValue: false,
-          min: date3
-        });
+        
         var rowGuid = getURLParameter("rowGuid");
-        SendAjax("/sys/sechosdrugmaterial/getDetailByGuid", rowGuid, function(
+        SendAjax("/sys/sechosmaterials/getDetailByGuid", rowGuid, function(
           res
         ) {
           if (res.code == "0") {
             //layform 即 class="layui-form" 所在元素对应的 lay-filter="" 对应的值
-            $("#purchaseGuid").val(rowGuid);
+            $("#outboundGuid").val(rowGuid);
             //console.log($("#purchaseGuid").val());
             form.val("layform", res.data);
             form.render();
@@ -283,15 +256,28 @@
         form.on("select(drugType)", function(data) {
           //console.log(data.value);
           //得到被选中的值
-          SendAjax("/sys/sechosdrugmaterial/getDrugName", data.value, function(
+          SendAjax("/sys/sechosmaterials/getMaterialName", data.value, function(
             res
           ) {
             if (res.code == "0") {
               //console.log(res.data);
-              $("#drugName").val(res.data.drugName);
+              console.log(res.data)
+              $("#drugName").val(res.data.materialName);
               $("#drugGuid").val(res.data.rowGuid);
-              $("#drugPrice").val(res.data.drugPrice);
-              layer.msg("药品名自动填充完成");
+              var drugGuid = $("#drugGuid").val();
+              $("#drugPrice").val(res.data.materialPrice);
+              SendAjax(
+                "/sys/sechosstorageamount/getSumByGuid",
+                drugGuid,
+                function(res) {
+                  if (res.code == "0") {
+                    $("#drugSum").val(res.data);
+                  } else {
+                    top.messageAlert("提醒", data.msg, "error");
+                  }
+                }
+              );
+              layer.msg("材料名自动填充完成");
             } else {
               top.messageAlert("提醒", data.msg, "error");
             }
@@ -307,13 +293,13 @@
 
         table.render({
           id: "layuiTable", //固定写法
-          elem: "#PurchaseItemTable", //固定写法
+          elem: "#OutboundItemTable", //固定写法
           height: 315, //固定写法
           method: "get", //固定写法
           remoteSort: true,
           initSort: { field: "drugAmount", type: "asc" },
           url:
-            m_url + "/sys/sechospurchasingm2m/listData?purchaseGuid=" + rowGuid, //数据接口
+            m_url + "/sys/sechosoutboundm2m/listData?outboundGuid=" + rowGuid, //数据接口
           page: true, //开启分页
           limit: 10, //每页显示行数
           //where: where,
@@ -324,39 +310,32 @@
                 field: "drugName",
                 title: "材料名称",
                 sort: true,
-                width: 200,
+                Width: 200,
                 align: "center"
               },
               {
                 field: "drugAmount",
                 title: "材料数量",
                 sort: true,
-                width: 150,
+                Width: 150,
                 align: "center"
               },
               {
                 field: "drugTotalPrice",
                 title: "材料总价",
                 sort: true,
-                width: 150,
+                Width: 150,
                 align: "center"
               },
-              {
-                field: "drugOverdue",
-                title: "材料过期时间",
-                sort: true,
-                width: 200,
-                align: "center",
-                templet: '<div>{{ Format(d.drugOverdue,"yyyy-MM-dd")}}</div>'
-              },
+              
               {
                 title: "操作",
                 align: "center",
-                width: 150,
+                Width: 150,
                 fixed: "right",
                 templet: function(d) {
                   return (
-                    "<a href=\"javascript: OpenWin('/SecHosBack/pages/secPurchase/sechosPurchaseItem_edit.html?rowGuid=" +
+                    "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosOutbound/sechosOutboundtem_edit.html?rowGuid=" +
                     d.rowGuid +
                     "&drugName=" +
                     d.drugName +
@@ -373,7 +352,20 @@
         });
 
         form.verify({
-          drugAmount:[/^\+?[1-9][0-9]*$/,"数量格式不正确"]
+          drugAmount: function(value, item) {
+            var guize = /^-?\d+$/;
+            var re = guize.test(value);
+            if (value == "") {
+              return "药品数量不能为空";
+            }
+            if (!re) {
+              return "材料数量格式不正确！";
+            }
+            //console.log(value > parseInt( $("#drugSum").val()),parseInt(value),$("#drugSum").val())
+            if (parseInt(value) >parseInt( $("#drugSum").val())) {
+              return "出库数量超过库存数量！";
+            }
+          }
         });
 
         form.on("submit(formDemo)", function(data) {
@@ -381,17 +373,17 @@
           var drugTotalPrice = data.field.drugPrice * data.field.drugAmount;
           data.field.drugTotalPrice = drugTotalPrice;
           SendAjax(
-            "/sys/sechospurchasingm2m/add",
+            "/sys/sechosoutboundm2m/add",
             JSON.stringify(data.field),
             function(res) {
               if (res.code == "0") {
                 top.messageAlert("提醒", "材料添加成功", "info", function() {
                   $("#drugAmount").val("");
-                  $("#drugOverdue").val("");
+                  
                   refreshGrid();
                 });
               } else {
-                top.messageAlert("提醒", data.msg, "error");
+                top.messageAlert("提醒", res.msg, "error");
               }
             }
           );
@@ -427,7 +419,7 @@
           }
 
           SendAjax(
-            "/sys/sechospurchasingm2m/delete",
+            "/sys/sechosoutboundm2m/delete",
             JSON.stringify(RowGuids),
             function(res) {
               if (res.code == "0") {
@@ -452,14 +444,14 @@
 
       function purchaseIn() {
         var guid = getURLParameter("rowGuid");
-        var purchaseNote = $("#purchaseNote").val();
+        var outboundNote = $("#outboundNote").val();
         var data = {
           rowGuid: guid,
-          purchaseStatus: 3,
-          purchaseNote: purchaseNote
+          outboundStatus: 3,
+          outboundNote: outboundNote
         };
         SendAjax(
-          "/sys/sechosprocurement/update",
+          "/sys/sechosoutbound/update",
           JSON.stringify(data),
           function(res) {
             if (res.code == "0") {
