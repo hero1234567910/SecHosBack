@@ -14,10 +14,9 @@
 <body>
     <table id="RepairPeopleTable" lay-filter="test"></table>
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-xs" lay-event="assign">指派</a>
-      </script>
+      <a class="layui-btn layui-btn-xs" lay-event="assign">指派</a>
+    </script>
     <script>
-
         var deptGuid1;
         var RowGuids2 = new Array();
         // $(function () {
@@ -54,7 +53,7 @@
 
                 initSort: {field: "userName,tel", type: "desc,asc"},
                 url: m_url + "/sys/user/getAll?deptGuid=" + deptGuid1, //数据接口
-                page: true, //开启分页
+                //page: true, //开启分页
                 limit: 5, //每页显示行数
                 //where: where,
                 cols: [
@@ -79,22 +78,25 @@
                             align: "center",
                             Width: 80,
                             fixed: "right",
-                            toolbar: '#barDemo'
+                            toolbar: "#barDemo"
                         }
                     ]
                 ]
             });
 
-            table.on('tool(test)', function (obj) {
+            table.on("tool(test)", function (obj) {
                 var data = obj.data;
                 //console.log(obj)
-                if (obj.event === 'assign') {
-                    layer.confirm('确定要指派该维修人员?', function (index) {
+                if (obj.event === "assign") {
+                    layer.confirm("确定要指派该维修人员?", function (index) {
                         var maintainGuid = data.rowGuid;
                         var maintainName = data.userName;
                         //console.log(maintainGuid)
                         SendAjax(
-                            "/sys/sechosrepair/assignBatch/" + maintainGuid+"/"+maintainName,
+                            "/sys/sechosrepair/assignBatch/" +
+                            maintainGuid +
+                            "/" +
+                            maintainName,
                             JSON.stringify(RowGuids2),
                             function (res) {
                                 if (res.code == "0") {
@@ -116,9 +118,6 @@
         function refreshGrid() {
             table.reload("layuiTable");
         }
-
-
-
     </script>
 </body>
 
