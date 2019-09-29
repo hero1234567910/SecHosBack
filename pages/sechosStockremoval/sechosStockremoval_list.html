@@ -18,29 +18,31 @@
         <td>
           <form id="SearchForm">
             <table style="width:100%">
-              <tr>
-                <td class="TB_01" style="width:10%">
-                  出库单号:
-                </td>
-                <td class="TB_02" style="width:20%">
-                  <input id="purchaseOrderNumVague" type="text" name="purchaseOrderNumVague" placeholder="请输入"
-                    class="layui-input" />
-                </td>
-                <td class="TB_01" style="width:10%">
-                  出库日期:
-                </td>
-                <td class="TB_02" style="width:10%;">
-                  <input id="startTime" type="text" name="startInTime" placeholder="开始日期" class="layui-input icon"
-                    laydate-type="date" style="width:100%;" />
-                </td>
-                <td class="TB_01" style="width:2%;">
-                  到
-                </td>
-                <td class="TB_02" style="width:20%;">
-                  <input id="endTime" type="text" name="endInTime" placeholder="结束日期" class="layui-input icon"
-                    laydate-type="date" style="width:180px;" />
-                </td>
-              </tr>
+              <div class="myRow">
+                <div style="float: left;">
+                  <label class="tb_1 layui-form-label">出库单号:</label>
+                  <div class="layui-input-block">
+                    <input id="outboundOrderNumVague" type="text" name="outboundOrderNumVague" placeholder="请输入"
+                      class="layui-input" autocomplete="off">
+                  </div>
+                </div>
+
+                <div style="float: left;">
+                  <label class="tb_1 layui-form-label">出库日期:</label>
+                  <div class="layui-input-block" style="width: 200px">
+                    <input type="text" name="startTime" class="layui-input  icon" id="startTime" placeholder="开始时间"
+                      laydate-type="date" autocomplete="off">
+                  </div>
+                </div>
+                <div style="float: left;">
+                  <label class="tb_1 layui-form-label-1">到</label>
+                  <div class="layui-input-block" style="width: 200px;margin-left:38px;">
+                    <input type="text" name="endTime" class="layui-input  icon" id="endTime" placeholder="结束时间"
+                      laydate-type="date" autocomplete="off">     
+                  </div>
+                </div>
+                <div class="tb_1" style="width: 100%;"></div>
+              </div>
               <tr>
                 <td style="padding:5px;width: 10%;">
                   <input type="button" value="查询" onclick="search()" class="layui-btn layui-btn-sm" />
