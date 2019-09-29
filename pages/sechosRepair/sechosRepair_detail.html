@@ -245,12 +245,12 @@
         setTimeout(function() {
           var formGuid = picGuid;
           var url = "https://p.zjgwsjk.com/2ysechosback/file/";
-          var m_url =
-            location.protocol +
-            "\\\\" +
-            location.hostname +
-            ":" +
-            (location.port == "" ? 80 : location.port);
+          // var m_url =
+          //   location.protocol +
+          //   "\\\\" +
+          //   location.hostname +
+          //   ":" +
+          //   (location.port == "" ? 80 : location.port);
           $.ajax({
             async: false,
             url: m_url + "/sys/frameAttach/getAttachList",

@@ -1,4 +1,10 @@
 ﻿window.serverUrl = "http://localhost:7071";
+var m_url =
+  location.protocol +
+  "\\\\" +
+  location.hostname +
+  ":" +
+  (location.port == "" ? 80 : location.port);
 
 layui
   .config({
@@ -8,14 +14,14 @@ layui
   .extend({
     index: "lib/index" //主入口模块
   })
-  .use(["index", "form", "laydate","layer"], function() {
+  .use(["index", "form", "laydate", "layer"], function() {
     var $ = layui.$,
       admin = layui.admin,
       element = layui.element,
       layer = layui.layer,
       laydate = layui.laydate,
       form = layui.form;
-      //var index  = layer.load(1);
+    //var index  = layer.load(1);
 
     form.render(null, "layform");
 

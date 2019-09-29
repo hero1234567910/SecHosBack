@@ -84,7 +84,7 @@
         });
 
         function initData(where) {
-            var m_url = location.protocol + '\\\\' + location.hostname + ':' + (location.port == '' ? 80 : location.port);
+            //var m_url = location.protocol + '\\\\' + location.hostname + ':' + (location.port == '' ? 80 : location.port);
             var repairGuid = JSON.parse(window.localStorage.getItem('m_user_rowGuid'));
             table.render({
                 id: 'layuiTable',//固定写法
