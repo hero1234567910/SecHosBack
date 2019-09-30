@@ -262,7 +262,7 @@
       var personGuid = JSON.parse(localStorage.getItem("m_user_rowGuid"));
       $.ajax({
         async: true,
-        url: "/sys/sechosprocurement/add/" + personGuid,
+        url: m_url+"/sys/sechosprocurement/add/" + personGuid,
         contentType: "application/json;charset=utf-8",
         method: "post",
         dataType: "JSON",
@@ -282,7 +282,7 @@
       var personGuid = JSON.parse(localStorage.getItem("m_user_rowGuid"));
       $.ajax({
         async: true,
-        url: "/sys/sechosprocurement/add2/" + personGuid,
+        url: m_url+"/sys/sechosprocurement/add2/" + personGuid,
         contentType: "application/json;charset=utf-8",
         method: "post",
         dataType: "JSON",
