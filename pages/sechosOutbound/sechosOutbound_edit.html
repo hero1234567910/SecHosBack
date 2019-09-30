@@ -367,6 +367,7 @@
                 width: 100,
                 fixed: "right",
                 templet: function(d) {
+                  //var drugSum = $('#drugSum').val();
                   return (
                     "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosOutbound/sechosOutboundtem_edit.html?rowGuid=" +
                     d.rowGuid +
@@ -375,7 +376,9 @@
                     "&drugAmount=" +
                     d.drugAmount +
                     "&drugPrice=" +
-                    d.drugPrice +
+                    d.drugPrice + 
+                    "&drugGuid=" +
+                    d.drugGuid +
                     "', 600, 150, '修改出库信息',refreshGrid)\" >修改</a>"
                   );
                 }
@@ -410,7 +413,7 @@
             "/sys/sechosoutboundm2m/add",
             JSON.stringify(data.field),
             function(res) {
-              console.log(res)
+              //console.log(res)
               if (res.code == "0") {
                 top.messageAlert("提醒", "材料添加成功", "info", function() {
                   $("#drugAmount").val("");

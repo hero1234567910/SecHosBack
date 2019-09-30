@@ -1,184 +1,145 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8" />
-    <title>药品报修新增信息</title>
-    <meta name="renderer" content="webkit" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta
-      name="viewport"
-      content="width=drug-width, initial-scale=1, maximum-scale=1"
-    />
 
-    <script
-      src="../../Scripts/JsAndCss.Model.js"
-      type="text/javascript"
-    ></script>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <title>药品报修新增信息</title>
+  <meta name="renderer" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=drug-width, initial-scale=1, maximum-scale=1" />
 
-  <body>
-    <form class="layui-form" lay-filter="layform">
-      <div class="layui-container">
-        <div class="layui-row">
-          <div class="layui-col-xs6" style="display: none;">
-            <div
-              class="layui-form-item"
-              style="margin-top:7px;margin-bottom:7px;"
-            >
-              <label class="layui-form-label"
-                >Guid:<font style="color:red">*</font></label
-              >
-              <div class="layui-input-block">
-                <input
-                  type="text"
-                  id="rowGuid"
-                  name="rowGuid"
-                  class="layui-input"
-                  lay-verify="required"
-                  readonly
-                />
-              </div>
+  <script src="../../Scripts/JsAndCss.Model.js" type="text/javascript"></script>
+</head>
+
+<body>
+  <form class="layui-form" lay-filter="layform">
+    <div class="layui-container">
+      <div class="layui-row">
+        <div class="layui-col-xs6" style="display: none;">
+          <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
+            <label class="layui-form-label">Guid:<font style="color:red">*</font></label>
+            <div class="layui-input-block">
+              <input type="text" id="rowGuid" name="rowGuid" class="layui-input" lay-verify="required" readonly />
             </div>
           </div>
+        </div>
 
-          <div class="layui-col-xs6">
-            <div
-              class="layui-form-item"
-              style="margin-top:7px;margin-bottom:7px;"
-            >
-              <label class="layui-form-label"
-                >材料名称:<font style="color:red">*</font></label
-              >
-              <div class="layui-input-block">
-                <input
-                  type="text"
-                  id="drugName"
-                  name="drugName"
-                  class="layui-input"
-                  lay-verify="required"
-                  readonly
-                />
-              </div>
+        <div class="layui-col-xs6">
+          <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
+            <label class="layui-form-label">材料名称:<font style="color:red">*</font></label>
+            <div class="layui-input-block">
+              <input type="text" id="drugName" name="drugName" class="layui-input" lay-verify="required" readonly />
             </div>
           </div>
+        </div>
 
-          <div class="layui-col-xs6">
-            <div
-              class="layui-form-item"
-              style="margin-top:7px;margin-bottom:7px;"
-            >
-              <label class="layui-form-label"
-                >材料数量:<font style="color:red">*</font></label
-              >
-              <div class="layui-input-block">
-                <input
-                  type="text"
-                  id="drugAmount"
-                  name="drugAmount"
-                  class="layui-input"
-                  lay-verify="required"
-                />
-              </div>
+        <div class="layui-col-xs6">
+          <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
+            <label class="layui-form-label">材料数量:<font style="color:red">*</font></label>
+            <div class="layui-input-block">
+              <input type="text" id="drugAmount" name="drugAmount" class="layui-input" lay-verify="required" />
             </div>
           </div>
+        </div>
 
-          <div class="layui-col-xs6" style="display: none;">
-            <div
-              class="layui-form-item"
-              style="margin-top:7px;margin-bottom:7px;"
-            >
-              <label class="layui-form-label"
-                >材料单价:<font style="color:red">*</font></label
-              >
-              <div class="layui-input-block">
-                <input
-                  type="text"
-                  id="drugPrice"
-                  name="drugPrice"
-                  class="layui-input"
-                  lay-verify="required|drugPrice"
-                />
-              </div>
+        <div class="layui-col-xs6" style="display: none;">
+          <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
+            <label class="layui-form-label">材料单价:<font style="color:red">*</font></label>
+            <div class="layui-input-block">
+              <input type="text" id="drugPrice" name="drugPrice" class="layui-input" lay-verify="required|drugPrice" />
             </div>
           </div>
+        </div>
 
-          <div class="layui-col-xs6" style="display: none;">
-            <div
-              class="layui-form-item"
-              style="margin-top:7px;margin-bottom:7px;"
-            >
-              <label class="layui-form-label"
-                >Price:<font style="color:red">*</font></label
-              >
-              <div class="layui-input-block">
-                <input
-                  type="text"
-                  id="drugTotalPrice"
-                  name="drugTotalPrice"
-                  class="layui-input"
-                  readonly
-                />
-              </div>
+        <div class="layui-col-xs6" style="display: none;">
+          <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
+            <label class="layui-form-label">Price:<font style="color:red">*</font></label>
+            <div class="layui-input-block">
+              <input type="text" id="drugTotalPrice" name="drugTotalPrice" class="layui-input" readonly />
             </div>
           </div>
         </div>
       </div>
 
-      <div style="text-align:center;">
-        <button class="layui-btn" lay-submit="" lay-filter="formDemo">
-          修改
-        </button>
-        <input
-          type="button"
-          value="关闭"
-          class="layui-btn layui-btn-normal"
-          onclick="closeWin()"
-        />
+      <div class="layui-col-xs6" style="display: none;">
+        <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
+          <label class="layui-form-label">drugNum:<font style="color:red">*</font></label>
+          <div class="layui-input-block">
+            <input type="text" id="drugNum" name="drugNum" class="layui-input" readonly />
+          </div>
+        </div>
       </div>
-    </form>
-    <script>
-      var table;
+    </div>
+    </div>
 
-      layui.use(["form", "layer"], function() {
-        var form = layui.form;
-        var $ = layui.jquery;
-        var layer = layui.layer;
+    <div style="text-align:center;">
+      <button class="layui-btn" lay-submit="" lay-filter="formDemo">
+        修改
+      </button>
+      <input type="button" value="关闭" class="layui-btn layui-btn-normal" onclick="closeWin()" />
+    </div>
+  </form>
+  <script>
+    var table;
 
-        var rowGuid = getURLParameter("rowGuid");
-        var drugAmount = getURLParameter("getURLParameter");
-        var drugName = getURLParameter("drugName");
-        $("#drugName").val(getURLParameter("drugName"));
-        $("#rowGuid").val(getURLParameter("rowGuid"));
-        $("#drugAmount").val(getURLParameter("drugAmount"));
-        $("#drugPrice").val(getURLParameter("drugPrice"));
-        form.verify({
-          drugAmount: [/^\d{0,3}$/, "材料数量格式错误，只能是数字！"],
-          drugPrice: function(value, item) {
-            if (value == "") {
-              return "药品价格不能为空";
-            }
-            if (
-              !new RegExp(
-                "(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)"
-              ).test(value)
-            ) {
-              return "药品价格格式不正确！";
-            }
+    layui.use(["form", "layer"], function () {
+      var form = layui.form;
+      var $ = layui.jquery;
+      var layer = layui.layer;
+
+      var rowGuid = getURLParameter("rowGuid");
+      var drugAmount = getURLParameter("getURLParameter");
+      var drugName = getURLParameter("drugName");
+      $("#drugName").val(getURLParameter("drugName"));
+      $("#rowGuid").val(getURLParameter("rowGuid"));
+      $("#drugAmount").val(getURLParameter("drugAmount"));
+      $("#drugPrice").val(getURLParameter("drugPrice"));
+      var drugGuid = getURLParameter("drugGuid");
+      //console.log(drugGuid)
+      SendAjax(
+        "/sys/sechosstorageamount/getSumByGuid",
+        drugGuid,
+        function (res) {
+          if (res.code == "0") {
+            $('#drugNum').val(res.data);
+            //console.log(res.data)
+          } else {
+            top.messageAlert("提醒", res.msg, "error");
           }
-        });
+        }
+      );
+      form.verify({
+        drugAmount: [/^\d{0,3}$/, "材料数量格式错误，只能是数字！"],
+        drugPrice: function (value, item) {
+          if (value == "") {
+            return "药品价格不能为空";
+          }
+          if (
+            !new RegExp(
+              "(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)"
+            ).test(value)
+          ) {
+            return "药品价格格式不正确！";
+          }
+        }
+      });
 
-        form.on("submit(formDemo)", function(data) {
-          //console.log(data.field.drugAmount);
-          //console.log(getURLParameter("drugPrice"));
-          //console.log(data.field.drugTotalPrice);
+      form.on("submit(formDemo)", function (data) {
+        
+        var num = parseInt($("#drugAmount").val());
+        var num2 = parseInt($('#drugNum').val());
+        //console.log(num , num2)
+        if (num > num2) {
+          top.messageAlert("提醒", "出库数量不能超过库存总数", "error");
+        } else {
           data.field.drugTotalPrice =
             data.field.drugAmount * data.field.drugPrice;
           SendAjax(
             "/sys/sechosoutboundm2m/update",
             JSON.stringify(data.field),
-            function(res) {
+            function (res) {
               if (res.code == "0") {
-                top.messageAlert("提醒", "修改成功", "info", function() {
+                top.messageAlert("提醒", "修改成功", "info", function () {
                   top.closePanel(window.name, true);
                 });
               } else {
@@ -186,37 +147,40 @@
               }
             }
           );
-          return false;
-        });
-      });
-
-      function afterSuccess(data) {
-        if (data.IsSuccess == true) {
-          top.messageAlert("提醒", "提交成功", "info", function() {
-            top.closePanel(window.name, true);
-          });
-        } else {
-          top.messageAlert("提醒", data.msg, "error");
         }
-      }
 
-      function closeWin() {
-        top.closePanel(window.name, false);
-      }
-      $(function() {
-        inItSelect();
+        return false;
       });
-    </script>
-    <style>
-      .m-img {
-        width: 200px;
-        margin-left: 110px;
-      }
+    });
 
-      .layui-input-block1 {
-        min-height: 36px;
-        margin-left: 140px;
+    function afterSuccess(data) {
+      if (data.IsSuccess == true) {
+        top.messageAlert("提醒", "提交成功", "info", function () {
+          top.closePanel(window.name, true);
+        });
+      } else {
+        top.messageAlert("提醒", data.msg, "error");
       }
-    </style>
-  </body>
+    }
+
+    function closeWin() {
+      top.closePanel(window.name, false);
+    }
+    $(function () {
+      inItSelect();
+    });
+  </script>
+  <style>
+    .m-img {
+      width: 200px;
+      margin-left: 110px;
+    }
+
+    .layui-input-block1 {
+      min-height: 36px;
+      margin-left: 140px;
+    }
+  </style>
+</body>
+
 </html>

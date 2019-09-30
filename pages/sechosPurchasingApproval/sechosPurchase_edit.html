@@ -113,7 +113,8 @@
                 if(d.drugOverdue==null){
                   return '无'
                 }else{
-                  return '<div>{{ Format(d.drugOverdue,"yyyy-MM-dd")}}</div>';
+                  return d.drugOverdue
+                  //'<div>{{ Format(d.drugOverdue,"yyyy-MM-dd")}}</div>';
                 }
               }
             },
