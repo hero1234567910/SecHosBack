@@ -120,9 +120,9 @@
                     {
                         title: '操作', align: 'center', width: 80, fixed: 'right', templet: function (d) {
                             if (d.repairStatus == 0) {
-                                return "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosRepair/sechosRepair_edit.html?rowGuid=" + d.rowGuid + "', 850, 500, '修改报修信息',refreshGrid)\" >修改</a>";
+                                return "<a href=\"javascript: OpenWin('/2ysechosback/pages/sechosRepair/sechosRepair_edit.html?rowGuid=" + d.rowGuid + "', 850, 500, '修改报修信息',refreshGrid)\" >修改</a>";
                             } else {
-                                return "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosRepair/sechosRepair_detail.html?rowGuid=" + d.rowGuid + "', 850, 500, '查看报修信息',refreshGrid)\" >查看</a>";
+                                return "<a href=\"javascript: OpenWin('/2ysechosback/pages/sechosRepair/sechosRepair_detail.html?rowGuid=" + d.rowGuid + "', 850, 500, '查看报修信息',refreshGrid)\" >查看</a>";
                             }
 
                         }
@@ -173,7 +173,7 @@
         }
 
         function addRow() {
-            OpenWin('/SecHosBack/pages/sechosRepair/sechosRepair_add.html', 850, 500, '新增设备报修', refreshGrid)
+            OpenWin('/2ysechosback/pages/sechosRepair/sechosRepair_add.html', 850, 500, '新增设备报修', refreshGrid)
         }
     </script>
 </body>

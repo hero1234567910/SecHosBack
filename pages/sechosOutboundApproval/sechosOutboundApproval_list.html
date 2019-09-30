@@ -186,14 +186,14 @@
                   if (d.outboundStatus == 3) {
                     //console.log(d.purchasePrice)
                     return (
-                      "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosOutboundApproval/sechosOutbound_edit.html?rowGuid=" +
+                      "<a href=\"javascript: OpenWin('/2ysechosback/pages/sechosOutboundApproval/sechosOutbound_edit.html?rowGuid=" +
                       d.rowGuid +"&outboundPrice="+d.outboundPrice+
                       "', 900, 680, '"+d.outboundOrderNum+"',refreshGrid)\" >审批</a>"
                     );
                   } 
                   if(d.outboundStatus == 2){
                     return (
-                      "<a href=\"javascript: OpenWin('/SecHosBack/pages/sechosOutboundApproval/sechosOutbound_detail.html?rowGuid=" +
+                      "<a href=\"javascript: OpenWin('/2ysechosback/pages/sechosOutboundApproval/sechosOutbound_detail.html?rowGuid=" +
                       d.rowGuid +"&outboundPrice="+d.outboundPrice+"&outboundStatus="+d.outboundStatus+
                       "', 900, 680, '"+d.outboundOrderNum+"',refreshGrid)\" >出库</a>"
                     );
