@@ -287,7 +287,7 @@
         });
         setTimeout(function() {
           var formGuid = picGuid;
-          var url = "https://p.zjgwsjk.com/2ysechosback/uploadFile/";
+          var url = "https://p.zjgwsjk.com/2ysechosback/file/";
           // var m_url =
           //   location.protocol +
           //   "\\\\" +
@@ -310,7 +310,7 @@
                   $("#picGuid2").val(res.data[0].contentUrl);
                   var guid = res.data[0].contentUrl;
                   $("#fileName").append(
-                    "<div style='float:left;margin-right:110px'><a href=" +
+                    "<div style='float:left;margin-right:110px;margin-left: 110px;'><a href=" +
                       url +
                       guid +
                       " download=" +
@@ -318,7 +318,7 @@
                       "><em><img class='m-img' src='" +
                       url +
                       guid +
-                      "' /></em><em style='margin-left: 110px;' id=" +
+                      "' style='width: 70%;'/></em><em style='margin-left: 110px;' id=" +
                       res.data[0].rowGuid +
                       " name='fileName'  style='color:#555555'>"
                   );
