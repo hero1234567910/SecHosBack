@@ -6,7 +6,67 @@ function inItSelect() {
         var id = $(this).attr("id");
         var showOption = $(this).attr("data-showOption");//默认显示文本
         var dataEvent = $(this).attr("data-event");//其他事件名称
-      
+        //console.log(dataEvent)
+        if (dataEvent == "药品代码") {
+            // var par = {};
+            // par['codeName'] = codeName;
+            
+            SendAjax(
+              "/sys/sechosdrugmaterial/getDrugCodes",null,
+              function(res) {
+                if (res.code == 0) {
+                  //console.log(res.data);
+                  var strLi = "";
+                  if (showOption != "") {
+                    strLi += '<option value="">' + showOption + "</option>";
+                  }
+                  $.each(res.data, function(value, text) {
+                    //console.log(res.data);
+                    //console.log(value);
+                    //console.log(text.drugCode);
+                    strLi +=
+                      '<option value="' + text.drugCode + '">' + text.drugCode + "</option>";
+                  });
+
+                  $("#" + id).append(strLi);
+                }
+              },
+              false,
+              "POST"
+            );
+            return false;
+          }
+         
+        if (dataEvent == "材料代码") {
+            // var par = {};
+            // par['codeName'] = codeName;
+            
+            SendAjax(
+              "/sys/sechosmaterials/getMaterialCodes",null,
+              function(res) {
+                if (res.code == 0) {
+                  //console.log(res.data);
+                  var strLi = "";
+                  if (showOption != "") {
+                    strLi += '<option value="">' + showOption + "</option>";
+                  }
+                  $.each(res.data, function(value, text) {
+                    //console.log(res.data);
+                    //console.log(value);
+                    //console.log(text.drugCode);
+                    strLi +=
+                      '<option value="' + text.materialCode + '">' + text.materialCode + "</option>";
+                  });
+
+                  $("#" + id).append(strLi);
+                }
+              },
+              false,
+              "POST"
+            );
+            return false;
+          }
+
         if (dataEvent == undefined) {
             var par = {};
             par['codeName'] = codeName;
@@ -51,7 +111,10 @@ function inItSelect() {
 
         }
 
+        
+
     });
 }
+
 
 

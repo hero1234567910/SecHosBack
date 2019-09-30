@@ -66,7 +66,7 @@
                 </div>
                 <div class="layui-col-xs6">
                     <div class="layui-form-item" style="margin-top:7px;margin-bottom:7px;">
-                        <label class="layui-form-label">损坏位置:</label>
+                        <label class="layui-form-label">问题简述:</label>
                         <div class="layui-input-block">
                             <input type="text" name="damagedParts" id="damagedParts" autocomplete="off"
                                 class="layui-input" lay-verify="required" />
@@ -145,14 +145,14 @@
                 return false;
             });
         });
-        var prUrl = 'https://p.zjgwsjk.com/2ysechosback';
+
         var local_data_attachGuids = new Array();
         var uploadLimit = 1;
         $(function () {
             $("#uploadFile").uploadify({
 
                 swf: "../../Content/uploadify/uploadify.swf",
-                uploader: prUrl+"/sys/common/uploadFile", //服务器端方法
+                uploader: "/sys/common/uploadFile", //服务器端方法
                 fileTypeExts: "*.jpg;*.jpge;*.png",
                 buttonText: "选择图片",
                 fileSizeLimit: "10MB", //接受一个单位（B,KB,MB,GB）。如果是数字则默认单位为KB。设置为0时表示不限制
@@ -243,7 +243,7 @@
             guids.push(ele.id);
             $.ajax({
                 async: true,
-                url: prUrl+"/sys/frameAttach/delete",
+                url: "/sys/frameAttach/delete",
                 contentType: "application/json;charset=utf-8",
                 method: "post",
                 data: JSON.stringify(guids),
