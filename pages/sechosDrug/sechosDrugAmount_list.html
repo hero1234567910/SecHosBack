@@ -48,6 +48,12 @@
                       onclick="search()"
                       class="layui-btn layui-btn-sm"
                     />
+                    <input
+                      type="button"
+                      value="更新"
+                      onclick="update()"
+                      class="layui-btn layui-btn-sm"
+                    />
                   </td>
                 </tr>
               </table>
@@ -123,6 +129,9 @@
         initData(data);
       }
 
+      function update(){
+        location.reload();
+      }
     </script>
   </body>
 </html>

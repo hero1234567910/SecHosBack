@@ -42,47 +42,48 @@
           </div>
 
           <div class="layui-col-xs6">
-            <div
-              class="layui-form-item"
-              style="margin-top:7px;margin-bottom:7px;"
-            >
-              <label class="layui-form-label"
-                >材料代码:<font style="color:red">*</font></label
+              <div
+                class="layui-form-item"
+                style="margin-top:7px;margin-bottom:7px;"
               >
-              <div class="layui-input-block">
-                <select
-                  id="drugCode"
-                  name="drugCode"
-                  data-event="材料代码"
-                  data-codename="材料代码"
-                  data-showoption="--请选择--"
-                  lay-filter="drugType"
-                  lay-search
-                ></select>
+                <label class="layui-form-label"
+                  >材料名称:<font style="color:red">*</font></label
+                >
+                <div class="layui-input-block">
+                  <select
+                    id="drugName"
+                    name="drugName"
+                    data-event="材料名称"
+                    data-codename="材料名称"
+                    data-showoption="--请选择--"
+                    lay-filter="drugType"
+                    lay-search
+                  ></select>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="layui-col-xs6">
-            <div
-              class="layui-form-item"
-              style="margin-top:7px;margin-bottom:7px;"
-            >
-              <label class="layui-form-label"
-                >材料名称:<font style="color:red">*</font></label
+  
+            <div class="layui-col-xs6">
+              <div
+                class="layui-form-item"
+                style="margin-top:7px;margin-bottom:7px;"
               >
-              <div class="layui-input-block">
-                <input
-                  type="text"
-                  id="drugName"
-                  name="drugName"
-                  class="layui-input"
-                  lay-verify="required"
-                  autocomplete="off"
-                />
+                <label class="layui-form-label"
+                  >材料代码:<font style="color:red">*</font></label
+                >
+                <div class="layui-input-block">
+                  <input
+                    type="text"
+                    id="drugCode"
+                    name="drugCode"
+                    class="layui-input"
+                    lay-verify="required"
+                    autocomplete="off"
+                    readonly
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
           <div class="layui-col-xs6">
             <div
@@ -214,6 +215,7 @@
 
     <script>
       var table;
+      var tmp;
       layui.use(["form", "table","laydate"], function() {
         var form = layui.form;
         table = layui.table;
@@ -234,7 +236,7 @@
           }
         });
         form.on("select(drugType)", function(data) {
-          //console.log(data.value);
+          tmp = document.getElementsByClassName("layui-this")[0].innerHTML;
           //得到被选中的值
           SendAjax("/sys/sechosmaterials/getMaterialName", data.value, function(
             res
@@ -242,10 +244,10 @@
             if (res.code == "0") {
               //console.log(res.data);
               //console.log(res.data)
-              $("#drugName").val(res.data.materialName);
+              $("#drugCode").val(data.value);
               $("#drugGuid").val(res.data.rowGuid);
               $("#drugPrice").val(res.data.materialPrice);
-              layer.msg("材料名自动填充完成");
+              layer.msg("材料代码自动填充完成");
             } else {
               top.messageAlert("提醒", data.msg, "error");
             }
@@ -327,6 +329,7 @@
           //console.log(data.field);
           var drugTotalPrice = data.field.drugPrice * data.field.drugAmount;
           data.field.drugTotalPrice = drugTotalPrice;
+          data.field.drugName = tmp;
           SendAjax(
             "/sys/sechospurchasingm2m/add",
             JSON.stringify(data.field),
