@@ -7,7 +7,7 @@ function inItSelect() {
         var showOption = $(this).attr("data-showOption");//默认显示文本
         var dataEvent = $(this).attr("data-event");//其他事件名称
         //console.log(dataEvent)
-        if (dataEvent == "药品代码") {
+        if (dataEvent == "药品名称") {
             // var par = {};
             // par['codeName'] = codeName;
             
@@ -21,11 +21,11 @@ function inItSelect() {
                     strLi += '<option value="">' + showOption + "</option>";
                   }
                   $.each(res.data, function(value, text) {
-                    //console.log(res.data);
+                    //console.log(text);
                     //console.log(value);
                     //console.log(text.drugCode);
                     strLi +=
-                      '<option value="' + text.drugCode + '">' + text.drugCode + "</option>";
+                      '<option value="' + text.drugCode + '">' + text.drugName + "</option>";
                   });
 
                   $("#" + id).append(strLi);
@@ -37,7 +37,7 @@ function inItSelect() {
             return false;
           }
          
-        if (dataEvent == "材料代码") {
+        if (dataEvent == "材料名称") {
             // var par = {};
             // par['codeName'] = codeName;
             
@@ -55,7 +55,7 @@ function inItSelect() {
                     //console.log(value);
                     //console.log(text.drugCode);
                     strLi +=
-                      '<option value="' + text.materialCode + '">' + text.materialCode + "</option>";
+                      '<option value="' + text.materialCode + '">' + text.materialName + "</option>";
                   });
 
                   $("#" + id).append(strLi);

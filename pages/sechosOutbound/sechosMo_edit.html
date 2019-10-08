@@ -47,14 +47,14 @@
               style="margin-top:7px;margin-bottom:7px;"
             >
               <label class="layui-form-label"
-                >材料代码:<font style="color:red">*</font></label
+                >材料名称:<font style="color:red">*</font></label
               >
               <div class="layui-input-block">
                 <select
-                  id="drugCode"
-                  name="drugCode"
-                  data-event="材料代码"
-                  data-codename="材料代码"
+                  id="drugName"
+                  name="drugName"
+                  data-event="材料名称"
+                  data-codename="材料名称"
                   data-showoption="--请选择--"
                   lay-filter="drugType"
                   lay-search
@@ -69,16 +69,17 @@
               style="margin-top:7px;margin-bottom:7px;"
             >
               <label class="layui-form-label"
-                >材料名称:<font style="color:red">*</font></label
+                >材料代码:<font style="color:red">*</font></label
               >
               <div class="layui-input-block">
                 <input
                   type="text"
-                  id="drugName"
-                  name="drugName"
+                  id="drugCode"
+                  name="drugCode"
                   class="layui-input"
                   lay-verify="required"
                   autocomplete="off"
+                  readonly
                 />
               </div>
             </div>
@@ -184,7 +185,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -234,13 +234,14 @@
 
     <script>
       var table;
-      layui.use(["form", "table","laydate"], function() {
+      var tmp;
+      layui.use(["form", "table", "laydate"], function() {
         var form = layui.form;
         table = layui.table;
         var $ = layui.jquery;
         var laydate = layui.laydate;
         //表单初始赋值
-        
+
         var rowGuid = getURLParameter("rowGuid");
         SendAjax("/sys/sechosmaterials/getDetailByGuid", rowGuid, function(
           res
@@ -254,7 +255,7 @@
           }
         });
         form.on("select(drugType)", function(data) {
-          //console.log(data.value);
+          tmp = document.getElementsByClassName("layui-this")[0].innerHTML;
           //得到被选中的值
           SendAjax("/sys/sechosmaterials/getMaterialName", data.value, function(
             res
@@ -262,7 +263,7 @@
             if (res.code == "0") {
               //console.log(res.data);
               //console.log(res.data)
-              $("#drugName").val(res.data.materialName);
+              $("#drugCode").val(data.value);
               $("#drugGuid").val(res.data.rowGuid);
               var drugGuid = $("#drugGuid").val();
               $("#drugPrice").val(res.data.materialPrice);
@@ -327,7 +328,7 @@
                 Width: 150,
                 align: "center"
               },
-              
+
               {
                 title: "操作",
                 align: "center",
@@ -364,7 +365,7 @@
               return "材料数量格式不正确！";
             }
             //console.log(value > parseInt( $("#drugSum").val()),parseInt(value),$("#drugSum").val())
-            if (parseInt(value) >parseInt( $("#drugSum").val())) {
+            if (parseInt(value) > parseInt($("#drugSum").val())) {
               return "出库数量超过库存数量！";
             }
           }
@@ -374,6 +375,7 @@
           //console.log(data.field);
           var drugTotalPrice = data.field.drugPrice * data.field.drugAmount;
           data.field.drugTotalPrice = drugTotalPrice;
+          data.field.drugName = tmp;
           SendAjax(
             "/sys/sechosoutboundm2m/add",
             JSON.stringify(data.field),
@@ -381,7 +383,7 @@
               if (res.code == "0") {
                 top.messageAlert("提醒", "材料添加成功", "info", function() {
                   $("#drugAmount").val("");
-                  
+
                   refreshGrid();
                 });
               } else {
@@ -452,24 +454,22 @@
           outboundStatus: 3,
           outboundNote: outboundNote
         };
-        SendAjax(
-          "/sys/sechosoutbound/update",
-          JSON.stringify(data),
-          function(res) {
-            if (res.code == "0") {
-              top.messageAlert(
-                "提醒",
-                "提交成功，等待审批中。",
-                "info",
-                function() {
-                  top.closePanel(window.name, true);
-                }
-              );
-            } else {
-              top.messageAlert("提醒", res.msg, "error");
-            }
+        SendAjax("/sys/sechosoutbound/update", JSON.stringify(data), function(
+          res
+        ) {
+          if (res.code == "0") {
+            top.messageAlert(
+              "提醒",
+              "提交成功，等待审批中。",
+              "info",
+              function() {
+                top.closePanel(window.name, true);
+              }
+            );
+          } else {
+            top.messageAlert("提醒", res.msg, "error");
           }
-        );
+        });
       }
     </script>
   </body>

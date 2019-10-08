@@ -47,14 +47,14 @@
               style="margin-top:7px;margin-bottom:7px;"
             >
               <label class="layui-form-label"
-                >材料代码:<font style="color:red">*</font></label
+                >材料名称:<font style="color:red">*</font></label
               >
               <div class="layui-input-block">
                 <select
-                  id="drugCode"
-                  name="drugCode"
-                  data-event="材料代码"
-                  data-codename="材料代码"
+                  id="drugName"
+                  name="drugName"
+                  data-event="材料名称"
+                  data-codename="材料名称"
                   data-showoption="--请选择--"
                   lay-filter="drugType"
                   lay-search
@@ -69,16 +69,17 @@
               style="margin-top:7px;margin-bottom:7px;"
             >
               <label class="layui-form-label"
-                >材料名称:<font style="color:red">*</font></label
+                >材料代码:<font style="color:red">*</font></label
               >
               <div class="layui-input-block">
                 <input
                   type="text"
-                  id="drugName"
-                  name="drugName"
+                  id="drugCode"
+                  name="drugCode"
                   class="layui-input"
                   lay-verify="required"
                   autocomplete="off"
+                  readonly
                 />
               </div>
             </div>
@@ -164,7 +165,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -214,13 +214,14 @@
 
     <script>
       var table;
-      layui.use(["form", "table","laydate"], function() {
+      var tmp;
+      layui.use(["form", "table", "laydate"], function() {
         var form = layui.form;
         table = layui.table;
         var $ = layui.jquery;
         var laydate = layui.laydate;
         //表单初始赋值
-        
+
         var rowGuid = getURLParameter("rowGuid");
         SendAjax("/sys/sechosmaterials/getDetailByGuid", rowGuid, function(
           res
@@ -234,18 +235,18 @@
           }
         });
         form.on("select(drugType)", function(data) {
-          //console.log(data.value);
+          tmp = document.getElementsByClassName("layui-this")[0].innerHTML;
           //得到被选中的值
           SendAjax("/sys/sechosmaterials/getMaterialName", data.value, function(
             res
           ) {
             if (res.code == "0") {
               //console.log(res.data);
-              console.log(res.data)
-              $("#drugName").val(res.data.materialName);
+              //console.log(res.data)
+              $("#drugCode").val(data.value);
               $("#drugGuid").val(res.data.rowGuid);
               $("#drugPrice").val(res.data.materialPrice);
-              layer.msg("材料名自动填充完成");
+              layer.msg("材料代码自动填充完成");
             } else {
               top.messageAlert("提醒", data.msg, "error");
             }
@@ -295,7 +296,7 @@
                 Width: 150,
                 align: "center"
               },
-              
+
               {
                 title: "操作",
                 align: "center",
@@ -320,13 +321,14 @@
         });
 
         form.verify({
-          drugAmount:[/^\+?[1-9][0-9]*$/,"数量格式不正确"]
+          drugAmount: [/^\+?[1-9][0-9]*$/, "数量格式不正确"]
         });
 
         form.on("submit(formDemo)", function(data) {
           //console.log(data.field);
           var drugTotalPrice = data.field.drugPrice * data.field.drugAmount;
           data.field.drugTotalPrice = drugTotalPrice;
+          data.field.drugName = tmp;
           SendAjax(
             "/sys/sechospurchasingm2m/add",
             JSON.stringify(data.field),
@@ -431,17 +433,21 @@
   .layui-table-box {
     width: 100%;
   }
+
   .layui-table-body {
     overflow-x: hidden;
   }
+
   .layui-table-cell {
     height: 20px;
     line-height: 20px;
   }
+
   th .layui-table-cell {
     height: 20px;
     line-height: 20px;
   }
+
   .layui-field-box {
     padding-top: 0px;
     padding-right: 15px;
