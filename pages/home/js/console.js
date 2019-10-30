@@ -2,7 +2,8 @@
 var vm = new Vue({
     el: '#vueConfig',
     data: {
-        orderCount:{}
+        orderCount:{},
+		mzCount:''
     },
     created() {
         this.getRthing();
@@ -25,7 +26,24 @@ var vm = new Vue({
 				}
 			}
 		});
-      }
+      },
+	  getRthing(){
+      	let self = this;
+      	$.ajax({
+			url:prUrl+'/sys/sechosrechargerecord/countYestdayMz',
+			contentType: 'application/json;charset=utf-8',
+			method: 'get',
+			dataType: 'JSON',
+			success: function(res) {
+				if (res.code == '0') {
+					self.mzCount = res.data;
+				}
+				if (res.code == '500') {
+					layer.msg(res.msg)
+				}
+			}
+		});
+      },
     }
 })
 

@@ -120,6 +120,17 @@
                             </p>
                           </a>
                         </li>
+                        <li class="layui-col-xs6">
+                            <a
+                              hero-href="pages/hosorder/list.html"
+                              class="layadmin-backlog-body"
+                            >
+                              <h3>昨日门诊到访人数</h3>
+                              <p>
+                                <cite>{{ mzCount }}</cite>
+                              </p>
+                            </a>
+                          </li>
                       </ul>
                     </div>
                   </div>
@@ -193,6 +204,7 @@
       type="text/javascript"
       src="../../Scripts/jquery-1.11.3.min.js"
     ></script>
+    <script src="../../Scripts/vue.js"></script>
     <script
       src="../../Content/layuiadmin/layui/layui.js?t=1"
       charset="utf-8"
@@ -214,6 +226,7 @@
       });
     </script>
     <script src="../../Scripts/local.js"></script>
+    <script src="js/console.js"></script>
     <script>
       layui
         .config({
