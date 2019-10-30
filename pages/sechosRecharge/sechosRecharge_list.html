@@ -102,7 +102,7 @@
       </table>
     </div>
 
-    <table id="sechosPurchaseTable"></table>
+    <table id="sechosRechargeTable"></table>
 
     <script type="text/html" id="checkStatus">
       {{# if(d.payType == 0){ }}
@@ -129,15 +129,10 @@
       });
 
       function initData(where) {
-        // var m_url =
-        //   location.protocol +
-        //   "\\\\" +
-        //   location.hostname +
-        //   ":" +
-        //   (location.port == "" ? 80 : location.port);
+        var m_url = 'https://p.zjgwsjk.com/2ysechosback';
         table.render({
           id: "layuiTable", //固定写法
-          elem: "#sechosPurchaseTable", //固定写法
+          elem: "#sechosRechargeTable", //固定写法
           height: "full-" + $("#toolBar").height(), //固定写法
           method: "get", //固定写法
           remoteSort: true,
