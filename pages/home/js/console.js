@@ -7,6 +7,7 @@ var vm = new Vue({
     },
     created() {
         this.getRthing();
+		this.getMZRthing()
     },
     methods: {
       //代办事项
@@ -27,7 +28,7 @@ var vm = new Vue({
 			}
 		});
       },
-	  getRthing(){
+	  getMZRthing(){
       	let self = this;
       	$.ajax({
 			url:prUrl+'/sys/sechosrechargerecord/countYestdayMz',
