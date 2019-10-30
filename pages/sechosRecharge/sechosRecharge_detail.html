@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>缴费详细信息</title>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <script
+      src="../../Scripts/JsAndCss.Model.js"
+      type="text/javascript"
+    ></script>
+  </head>
+
+  <body>
+    <form class="layui-form" lay-filter="layform">
+      <div class="layui-container">
+        <div class="layui-row">
+          <div class="layui-col-xs6" style="display: none;">
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label"
+                >Guid:<font style="color:red">*</font></label
+              >
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="rowGuid"
+                  name="rowGuid"
+                  class="layui-input"
+                  lay-verify="required"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label">挂号收据号:</label>
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="sjh"
+                  name="sjh"
+                  class="layui-input"
+                  lay-verify="required"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label">创建时间:</label>
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="createTime"
+                  name="createTime"
+                  class="layui-input"
+                  lay-verify="required"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label">患者姓名:</label>
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="patientName"
+                  name="patientName"
+                  class="layui-input"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label">充值类型:</label>
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="payType"
+                  name="payType"
+                  class="layui-input"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label">记录状态:</label>
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="recordStatus"
+                  name="recordStatus"
+                  class="layui-input"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top:7px;margin-bottom:7px;"
+            >
+              <label class="layui-form-label">金额(元):</label>
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="payMoney"
+                  name="payMoney"
+                  class="layui-input"
+                  lay-verify="required"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6">
+              <div
+                class="layui-form-item"
+                style="margin-top:7px;margin-bottom:7px;"
+              >
+                <label class="layui-form-label">挂号序号:</label>
+                <div class="layui-input-block">
+                  <input
+                    type="text"
+                    id="ghxh"
+                    name="ghxh"
+                    class="layui-input"
+                    lay-verify="required"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="layui-col-xs6">
+                <div
+                  class="layui-form-item"
+                  style="margin-top:7px;margin-bottom:7px;"
+                >
+                  <label class="layui-form-label">patid:</label>
+                  <div class="layui-input-block">
+                    <input
+                      type="text"
+                      id="patid"
+                      name="patid"
+                      class="layui-input"
+                      lay-verify="required"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:50px">
+        <input
+          type="button"
+          value="关闭"
+          class="layui-btn layui-btn-normal"
+          onclick="closeWin()"
+        />
+      </div>
+    </form>
+
+    <script>
+      var table;
+      layui.use(["form", "table"], function() {
+        var form = layui.form;
+        table = layui.table;
+        var $ = layui.jquery;
+        //表单初始赋值
+        var rowGuid = getURLParameter("rowGuid");
+        SendAjax("/sys/sechosrechargerecord/getDetailByGuid", rowGuid, function(
+          res
+        ) {
+          if (res.code == "0") {
+            //layform 即 class="layui-form" 所在元素对应的 lay-filter="" 对应的值
+            form.val("layform", res.data);
+            //console.log(res.data.drugStatus);
+
+            if (res.data.payType === 0) $("#payType").val("预交金结算");
+            else if (res.data.payType === 1) $("#payType").val("挂号结算");
+            else $("#payType").val("门诊结算");
+            if(res.data.recordStatus === 0)
+            $("#recordStatus").val("待处理");
+            else $("#recordStatus").val("已处理");
+            form.render();
+            // if (res.data.drugStatus == 0) {
+            //   document.getElementById('drugStatus').setAttribute('checked','');
+            // }
+          }
+        });
+
+        //监听提交
+
+      });
+
+      $(function() {
+        inItSelect();
+      });
+
+      function afterSuccess(data) {
+        if (data.IsSuccess == true) {
+          top.messageAlert("提醒", "保存成功", "info", function() {
+            top.closePanel(window.name, true);
+          });
+        } else {
+          top.messageAlert("提醒", data.msg, "error");
+        }
+      }
+
+      function closeWin() {
+        top.closePanel(window.name, false);
+      }
+    </script>
+  </body>
+</html>

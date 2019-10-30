@@ -180,6 +180,117 @@ layui.define(function(exports){
     });
   });
 
+  //门诊数量
+  layui.use(["carousel", "echarts"], function() {
+    var $ = layui.$,
+      carousel = layui.carousel,
+      echarts = layui.echarts;
+    var prUrl = 'https://p.zjgwsjk.com/2ysechosback';
+    var re = [];
+    $.ajax({
+      async: false,
+      url: prUrl+"/sys/sechosrechargerecord/selectRechargeStatisical",
+      contentType: "application/json;charset=utf-8",
+      method: "get",
+      dataType: "JSON",
+      success: function(res) {
+        if (res.code == "0") {
+          re = res.data;
+        }
+      }
+    });
+    var dateToTime = function(str) {
+      return str.replace(":", ""); //用/替换日期中的-是为了解决Safari的兼容
+    };
+    for (var i = 0; i < re.length; i++) {
+      re[i].publishTimeNew = parseInt(dateToTime(re[i].time));
+    }
+    re.sort(function(a, b) {
+      return b.publishTimeNew < a.publishTimeNew ? 1 : -1;
+    });
+    //数据操作
+    var timeArray = [];
+    var timeCount = [];
+    for (var i = 0; i < re.length; i++) {
+      //获取时间点
+      timeArray.push(re[i].time);
+      timeCount.push(re[i].Count);
+    }
+
+    var echartsApp = [],
+      options = [
+        //今日流量趋势
+        {
+          title: {
+            text: "昨日门诊挂号人数",
+            x: "center",
+            textStyle: {
+              fontSize: 14
+            }
+          },
+          tooltip: {
+            trigger: "axis"
+          },
+          legend: {
+            data: ["", ""]
+          },
+          xAxis: [
+            {
+              type: "category",
+              boundaryGap: false,
+              data: timeArray
+            }
+          ],
+          yAxis: [
+            {
+              type: "value"
+            }
+          ],
+          series: [
+            {
+              name: "门诊挂号数量",
+              type: "line",
+              smooth: true,
+              itemStyle: { normal: { areaStyle: { type: "default" } } },
+              data: timeCount
+            }
+          ]
+        }
+      ],
+      elemDataView = $("#LAY-mz-dataview").children("div"),
+      renderDataView = function(index) {
+        echartsApp[index] = echarts.init(
+          elemDataView[index],
+          layui.echartsTheme
+        );
+        echartsApp[index].setOption(options[index]);
+        window.onresize = echartsApp[index].resize;
+      };
+
+    //没找到DOM，终止执行
+    if (!elemDataView[0]) return;
+
+    renderDataView(0);
+
+    //监听数据概览轮播
+    var carouselIndex = 0;
+    carousel.on("change(LAY-mz-dataview)", function(obj) {
+      renderDataView((carouselIndex = obj.index));
+    });
+
+    //监听侧边伸缩
+    layui.admin.on("side", function() {
+      setTimeout(function() {
+        renderDataView(carouselIndex);
+      }, 300);
+    });
+
+    //监听路由
+    layui.admin.on("hash(tab)", function() {
+      layui.router().path.join("") || renderDataView(carouselIndex);
+    });
+  });
+
   //最新订单
   layui.use('table', function(){
     var $ = layui.$
