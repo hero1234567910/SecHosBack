@@ -74,7 +74,7 @@
                       <label class="tb_1 layui-form-label">充值类型:</label>
                       <div class="layui-input-block" style="width: 200px">
                         <select name="payType" id="payType" lay-verify="">
-                          <option value="" >全部</option>
+                          <option value="">全部</option>
                           <option value="0">预交金</option>
                           <option value="1">门诊挂号</option>
                           <option value="2">门诊结算</option>
@@ -114,11 +114,14 @@
       {{# } }}
     </script>
     <script type="text/html" id="checkStatus2">
-      {{# if(d.recordStatus == 0){ }}
+      {{# if(d.recordStatus == 1){ }}
       <span style="color: orange;">待处理</span>
-      {{# } else if(d.recordStatus == 1) { }}
+      {{# } else if(d.recordStatus == 2) { }}
       <span style="color: blue;">已处理</span>
       {{# } }}
+    </script>
+    <script type="text/html" id="indexTpl">
+      {{d.LAY_TABLE_INDEX+1}}
     </script>
     <script>
       var table;
@@ -129,7 +132,7 @@
       });
 
       function initData(where) {
-        var m_url = 'https://p.zjgwsjk.com/2ysechosback';
+        var m_url = "https://p.zjgwsjk.com/2ysechosback";
         table.render({
           id: "layuiTable", //固定写法
           elem: "#sechosRechargeTable", //固定写法
@@ -146,13 +149,20 @@
           where: where,
           cols: [
             [
-              // { type: "checkbox", fixed: "left" }, //固定
+              {width: 25, title: '',align:'center' ,templet:'#indexTpl'} ,
               {
                 field: "sjh",
                 title: "挂号收据号",
                 sort: true,
                 minWidth: 100,
-                align: "center"
+                align: "center",
+                templet: function(d) {
+                  if(d.sjh==null||d.sjh==''){
+                    return "住院预交金无收据号";
+                  }else{
+                    return d.sjh;
+                  }
+                }
               },
               {
                 field: "createTime",
@@ -171,7 +181,7 @@
               {
                 field: "payType",
                 title: "充值类型",
-                Width: 150,
+                width: 150,
                 align: "center",
                 templet: "#checkStatus"
               },
@@ -200,7 +210,7 @@
                   return (
                     "<a href=\"javascript: OpenWin('/2ysechosback/pages/sechosRecharge/sechosRecharge_detail.html?rowGuid=" +
                     d.rowGuid +
-                    "', 900, 300, '" +
+                    "', 900, 400, '" +
                     d.sjh +
                     "',refreshGrid)\" >查看</a>"
                   );
@@ -219,8 +229,6 @@
         var data = $("#SearchForm").serializeJson();
         initData(data);
       }
-
-  
     </script>
   </body>
 </html>
