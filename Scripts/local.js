@@ -109,3 +109,5 @@ function needCLodop(){
 
 //全局变量
 var prUrl = 'https://p.zjgwsjk.com/2ysechosback';
+
+//var prUrl = 'http://localhost:7071'

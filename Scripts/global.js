@@ -1,5 +1,6 @@
-﻿window.serverUrl = "http://localhost:7071";
+﻿//window.serverUrl = "http://localhost:7071";
 var m_url = 'https://p.zjgwsjk.com/2ysechosback';
+//var m_url = 'http://localhost:7071'
 
 layui
   .config({
