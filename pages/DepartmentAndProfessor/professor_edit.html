@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>专家信息修改</title>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <script
+      src="../../Scripts/JsAndCss.Model.js"
+      type="text/javascript"
+    ></script>
+  </head>
+
+  <body>
+    <form class="layui-form" lay-filter="layform">
+      <div class="layui-container">
+        <div class="layui-row">
+          <div class="layui-col-xs6" style="display: none;">
+            <div
+              class="layui-form-item"
+              style="margin-top: 7px; margin-bottom: 7px;"
+            >
+              <label class="layui-form-label"
+                >Guid:<font style="color: red;">*</font></label
+              >
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="rowGuid"
+                  name="rowGuid"
+                  class="layui-input"
+                  lay-verify="required"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top: 7px; margin-bottom: 7px;"
+            >
+              <label class="layui-form-label"
+                >专家名称:<font style="color: red;">*</font></label
+              >
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="professorName"
+                  name="professorName"
+                  class="layui-input"
+                  lay-verify="required|professorName"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top: 7px; margin-bottom: 7px;"
+            >
+              <label class="layui-form-label">排序号:</label>
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="sortSq"
+                  name="sortSq"
+                  class="layui-input"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top: 7px; margin-bottom: 7px;"
+            >
+              <label class="layui-form-label"
+                >所属医院:<font style="color: red;">*</font></label
+              >
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="professorHos"
+                  name="professorHos"
+                  class="layui-input"
+                  autocomplete="off"
+                  lay-verify="required"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top: 7px; margin-bottom: 7px;"
+            >
+              <label class="layui-form-label"
+                >所属科室:<font style="color: red;">*</font></label
+              >
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="departmentName"
+                  name="departmentName"
+                  class="layui-input"
+                  autocomplete="off"
+                  lay-verify="required"
+                />
+                <input
+                  type="text"
+                  id="departmentGuid"
+                  name="departmentGuid"
+                  class="layui-input"
+                  hidden
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs12">
+            <div
+              class="layui-form-item"
+              style="margin-top: 7px; margin-bottom: 7px;"
+            >
+              <label class="layui-form-label"
+                >专家职称:<font style="color: red;">*</font></label
+              >
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="professorTitle"
+                  name="professorTitle"
+                  class="layui-input"
+                  autocomplete="off"
+                  lay-verify="required"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs12">
+            <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label"
+                >专家描述:<font style="color: red;">*</font></label
+              >
+              <div class="layui-input-block">
+                <textarea
+                  id="professorContent"
+                  name="professorContent"
+                  placeholder="请输入内容"
+                  class="layui-textarea"
+                  lay-verify="required"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6" style="display: none;">
+            <div
+              class="layui-form-item"
+              style="margin-top: 7px; margin-bottom: 7px;"
+            >
+              <label class="layui-form-label">专家图片:</label>
+              <div class="layui-input-block">
+                <input
+                  type="text"
+                  id="picGuid2"
+                  name="picGuid2"
+                  class="layui-input"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-col-xs6">
+            <div
+              class="layui-form-item"
+              style="margin-top: 7px; margin-bottom: 7px;"
+            >
+              <label class="layui-form-label">专家图片:</label>
+              <div style="margin-left: 20px;">
+                <input type="file" name="uploadify" id="uploadFile" />
+                <div id="some_file_queue"></div>
+                <div id="fileName"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <button class="layui-btn" lay-submit="" lay-filter="formDemo">
+          提交
+        </button>
+        <input
+          type="button"
+          value="关闭"
+          class="layui-btn layui-btn-normal"
+          onclick="closeWin()"
+        />
+      </div>
+    </form>
+
+    <script>
+      var table;
+      var form;
+      var uploadLimit = 1;
+      var local_data_attachGuids = new Array();
+      var prUrl = "http://localhost:8088";
+      layui.use(["form", "table"], function () {
+        form = layui.form;
+        table = layui.table;
+        var $ = layui.jquery;
+        //表单初始赋值
+        var rowGuid = getURLParameter("rowGuid");
+        $("#uploadFile").css("display", "none");
+        $("#some_file_queue").css("display", "none");
+        var picGuid;
+        SendAjax("/sys/sechosprofessor/getDetailByGuid", rowGuid, function (
+          res
+        ) {
+          if (res.code == "0") {
+            //layform 即 class="layui-form" 所在元素对应的 lay-filter="" 对应的值
+            form.val("layform", res.data);
+            picGuid = res.data.picGuid;
+            form.render();
+            uploadLimit = 0;
+
+            // var url = "https://p.zjgwsjk.com/2ysechosback/file/";
+            var url = "http://localhost:8088/file/";
+            $.ajax({
+              async: false,
+              url: m_url + "/sys/frameAttach/getAttachList",
+              contentType: "application/json;charset=utf-8",
+              method: "get",
+              data: { guid: picGuid },
+              dataType: "JSON",
+              success: function (res) {
+                if (res.code == "0") {
+                  //console.log(res.data);
+                  if (res.data.length == 0) {
+                    initUpload();
+                    return;
+                  } else {
+                    $("#picGuid2").val(res.data[0].contentUrl);
+                    var guid = res.data[0].contentUrl;
+                    $("#fileName").append(
+                      "<div style='float:left;margin-right:110px;margin-left: 110px;margin-top: -25px;'><a href=" +
+                        url +
+                        guid +
+                        " download=" +
+                        res.data[0].attachName +
+                        "><em><img class='m-img' src='" +
+                        url +
+                        guid +
+                        "'/></em><div style='margin-left: 110px;' id=" +
+                        res.data[0].rowGuid +
+                        " name='fileName'  style='color:#555555'>" +
+                        "</div></a><div style='color:red;cursor:pointer;' onclick = 'deleteFile(this)' id=" +
+                        res.data[0].rowGuid +
+                        ">删除</div></div>"
+                    );
+                  }
+                } else layer.msg(res.msg);
+              },
+              error: function (data) {},
+            });
+          }
+        });
+        // setTimeout(function () {
+        //   var formGuid = picGuid;
+
+        //   //   SendAjax("/sys/frameAttach/getAttachList", rowGuid, function(res) {
+        //   //     if (res.code == "0") {
+        //   //       console.log(res.data);
+
+        //   //       $("#picGuid").val(res.data);
+        //   //     }
+        //   //   });
+        // }, 500);
+
+        //监听提交
+        form.on("submit(formDemo)", function (data) {
+          if (
+            local_data_attachGuids[0] != "" ||
+            local_data_attachGuids[0] != null
+          ) {
+            data.field["uploadImgGuid"] = local_data_attachGuids[0];
+          }
+          SendAjax(
+            "/sys/sechosprofessor/update",
+            JSON.stringify(data.field),
+            function (res) {
+              if (res.code == "0") {
+                top.messageAlert("提醒", "保存成功", "info", function () {
+                  top.closePanel(window.name, true);
+                });
+              } else {
+                top.messageAlert("提醒", data.msg, "error");
+              }
+            }
+          );
+          return false;
+        });
+
+        form.verify({
+          departmentName: function (value, item) {
+            var check = false
+            //value：表单的值、item：表单的DOM对象
+            if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+              return "专家名称不能有特殊字符";
+            }
+            if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+              return "专家名称首尾不能出现下划线'_'";
+            }
+            if (/^\d+\d+\d$/.test(value)) {
+              return "专家名称不能全为数字";
+            }
+            SendAjax(
+              "/sys/sechosprofessor/checkProfessorName?professorName=" +
+                value +
+                "&rowGuid=" +
+                $("#rowGuid").val(),
+              null,
+              function (res) {
+                if (res.code == "500") {
+                  check = false
+                }else {
+                  check = true
+                }
+              }
+            );
+            if (!check) {
+              return "专家名称已经存在";
+            }
+          },
+        });
+      });
+
+      // $(function () {
+      function initUpload() {
+        $("#uploadFile").css("display", "");
+        $("#some_file_queue").css("display", "");
+        $("#uploadFile").uploadify({
+          swf: "../../Content/uploadify/uploadify.swf",
+          uploader: prUrl + "/sys/common/uploadFile", //服务器端方法
+          fileTypeExts: "*.jpg;*.jpge;*.png",
+          buttonText: "选择图片",
+          fileSizeLimit: "500KB", //接受一个单位（B,KB,MB,GB）。如果是数字则默认单位为KB。设置为0时表示不限制
+          uploadLimit: uploadLimit, //允许上传的最多张数
+          onUploadSuccess: function (file, data, response) {
+            //上传成功
+
+            var jdata = $.parseJSON(data);
+            var last = jdata.type.substr("1", jdata.type.length);
+            $("#fileName").append(
+              "<div style='float:left;margin-right:110px'><a href=" +
+                jdata.url +
+                " download=" +
+                jdata.fileName +
+                "><em><img class='m-img' src='" +
+                jdata.url +
+                "' /></em><em style='margin-left: 110px;' id=" +
+                jdata.attachRowguid +
+                " name='fileName'  style='color:#555555'>" +
+                jdata.fileName +
+                "</em></a><em style='color:red;cursor:pointer;' onclick = 'deleteFile(this)' id=" +
+                jdata.attachRowguid +
+                ">删除</em></div>"
+            );
+            local_data_attachGuids.push(jdata.attachRowguid);
+          },
+          onFallback: function () {
+            alert(
+              "您未安装FLASH控件，无法一次性上传多个文件！请安装FLASH控件后再试。"
+            );
+          },
+          onSelectError: function (file, errorCode, errorMsg) {
+            //选择失败
+            switch (errorCode) {
+              case -100:
+                alert(
+                  "上传的文件数量已经超出系统限制的" +
+                    $("#uploadFile").uploadify("settings", "uploadLimit") +
+                    "个文件！"
+                );
+                break;
+              case -110:
+                alert(
+                  "文件 [" +
+                    file.name +
+                    "] 大小超出系统限制的" +
+                    $("#uploadFile").uploadify("settings", "fileSizeLimit") +
+                    "大小！"
+                );
+                break;
+              case -120:
+                alert("文件 [" + file.name + "] 大小异常！");
+                break;
+              case -130:
+                alert("文件 [" + file.name + "] 类型不正确！");
+                break;
+            }
+          },
+        });
+      }
+      // });
+
+      function afterSuccess(data) {
+        if (data.IsSuccess == true) {
+          top.messageAlert("提醒", "保存成功", "info", function () {
+            top.closePanel(window.name, true);
+          });
+        } else {
+          top.messageAlert("提醒", data.msg, "error");
+        }
+      }
+
+      function closeWin() {
+        top.closePanel(window.name, false);
+      }
+
+      //删除文件
+      function deleteFile(ele) {
+        var guids = new Array();
+        guids.push(ele.id);
+        $.ajax({
+          async: true,
+          url: prUrl + "/sys/frameAttach/delete",
+          contentType: "application/json;charset=utf-8",
+          method: "post",
+          data: JSON.stringify(guids),
+          dataType: "JSON",
+          success: function (res) {
+            if (res.code == "0") {
+              //移除
+              // $("#uploadFile").uploadify(
+              //   "settings",
+              //   "uploadLimit",
+              //   ++uploadLimit
+              // );
+              //console.log(uploadLimit);
+              local_data_attachGuids.splice(
+                local_data_attachGuids.indexOf(ele.id),
+                1
+              );
+              ele.parentElement.setAttribute("style", "display: none;");
+              //$("#fileName").remove();
+              initUpload();
+            }
+            if (res.code == "500") {
+              layer.msg(res.msg);
+            }
+          },
+        });
+      }
+    </script>
+    <style>
+      .m-img {
+        width: 200px;
+        margin-left: 110px;
+        border: groove;
+      }
+
+      .layui-input-block1 {
+        min-height: 36px;
+        margin-left: 140px;
+      }
+    </style>
+  </body>
+</html>
