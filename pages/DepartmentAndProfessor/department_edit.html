@@ -133,7 +133,7 @@
       var form;
       var uploadLimit = 1;
       var local_data_attachGuids = new Array();
-      var prUrl = "http://localhost:8088";
+      var prUrl = 'https://p.zjgwsjk.com/2ysechosback';
       layui.use(["form", "table"], function () {
         form = layui.form;
         table = layui.table;
@@ -153,8 +153,8 @@
             form.render();
             uploadLimit = 0;
 
-            // var url = "https://p.zjgwsjk.com/2ysechosback/file/";
-            var url = "http://localhost:8088/file/";
+            var url = "https://p.zjgwsjk.com/2ysechosback/file/";
+            //var url = "http://localhost:8088/file/";
             $.ajax({
               async: false,
               url: m_url + "/sys/frameAttach/getAttachList",
@@ -270,7 +270,7 @@
         $("#some_file_queue").css("display", "");
         $("#uploadFile").uploadify({
           swf: "../../Content/uploadify/uploadify.swf",
-          uploader: prUrl + "/sys/common/uploadFile", //服务器端方法
+          uploader: "/2ysechosback/sys/common/uploadFile", //服务器端方法
           fileTypeExts: "*.jpg;*.jpge;*.png",
           buttonText: "选择图片",
           fileSizeLimit: "500KB", //接受一个单位（B,KB,MB,GB）。如果是数字则默认单位为KB。设置为0时表示不限制
