@@ -243,23 +243,23 @@
             if (/^\d+\d+\d$/.test(value)) {
               return "科室名称不能全为数字";
             }
-            SendAjax(
-              "/sys/sechosprofessor/checkDepartmentName?departmentName=" +
-                value +
-                "&rowGuid=" +
-                $("#rowGuid").val(),
-              null,
-              function (res) {
-                if (res.code == 500) {
-                  check = false
-                } else {
-                  check = true
-                }
-              }
-            );
-            if (!check) {
-              return "科室名称已经存在";
-            }
+            // SendAjax(
+            //   "/sys/sechosdepartment/checkDepartmentName?departmentName=" +
+            //     value +
+            //     "&rowGuid=" +
+            //     $("#rowGuid").val(),
+            //   null,
+            //   function (res) {
+            //     if (res.code == 500) {
+            //       check = false
+            //     } else {
+            //       check = true
+            //     }
+            //   }
+            // );
+            // if (!check) {
+            //   return "科室名称已经存在";
+            // }
           },
         });
       });
