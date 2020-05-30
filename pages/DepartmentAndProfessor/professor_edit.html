@@ -467,6 +467,22 @@
           },
         });
       }
+
+      $("#departmentName").on("click", function () {
+        layer.open({
+          type: 2,
+          title: "选择科室",
+          zIndex: "19891015",
+          maxmin: true,
+          shadeClose: true, //点击遮罩关闭层
+          area: ["300px", "400px"],
+          content: "departmentChoice.html",
+          success: function (layero, index) {},
+          end: function () {
+            
+          },
+        });
+      });
     </script>
     <style>
       .m-img {

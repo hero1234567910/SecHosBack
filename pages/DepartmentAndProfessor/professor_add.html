@@ -229,9 +229,9 @@
               null,
               function (res) {
                 if (res.code == 500) {
-                  check = false
+                  check = false;
                 } else {
-                  check = true
+                  check = true;
                 }
               }
             );
@@ -244,7 +244,7 @@
 
       var local_data_attachGuids = new Array();
       var uploadLimit = 1;
-      var prUrl = 'https://p.zjgwsjk.com/2ysechosback';
+      var prUrl = "https://p.zjgwsjk.com/2ysechosback";
       $(function () {
         $("#uploadFile").uploadify({
           swf: "../../Content/uploadify/uploadify.swf",
@@ -356,6 +356,23 @@
           },
         });
       }
+
+      //选择上级部门弹出层
+      $("#departmentName").on("click", function () {
+        layer.open({
+          type: 2,
+          title: "选择科室",
+          zIndex: "19891015",
+          maxmin: true,
+          shadeClose: true, //点击遮罩关闭层
+          area: ["300px", "400px"],
+          content: "departmentChoice.html",
+          success: function (layero, index) {},
+          end: function () {
+            
+          },
+        });
+      });
     </script>
     <style>
       .m-img {
